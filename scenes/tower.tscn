@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://duabru7jajvy8"]
+
+[ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_ay4al"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_ktxwe"]
+[ext_resource type="PackedScene" uid="uid://cm5l6lpro0j1j" path="res://scenes/bullet.tscn" id="2_qrbg1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+size = Vector2(22.5, 22.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktxwe"]
+radius = 52.43627
+
+[node name="Tower" type="StaticBody2D" unique_id=190908816]
+collision_layer = 4
+script = ExtResource("1_ay4al")
+bullet_scene = ExtResource("2_qrbg1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=449758929]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.18554688, 0.18554688)
+texture = ExtResource("2_ktxwe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105990232]
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=937334323]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=1102086692]
+position = Vector2(-2, 2)
+shape = SubResource("CircleShape2D_ktxwe")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=549957901]
+
+[connection signal="body_entered" from="RangeArea" to="." method="_on_range_area_body_entered"]
+[connection signal="body_exited" from="RangeArea" to="." method="_on_range_area_body_exited"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]

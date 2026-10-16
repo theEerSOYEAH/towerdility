@@ -1,0 +1,58 @@
+extends StaticBody2D
+
+
+@export var bullet_scene : PackedScene
+@export var fire_rate : float = 1.0
+@onready var range_area: Area2D = $RangeArea
+
+
+var enemies_in_range : Array = []
+@onready var fire_timer : Timer = $FireTimer
+
+func _ready() -> void:
+	
+	if range_area:
+		if range_area.body_entered.is_connected(_on_range_area_body_entered):
+			range_area.body_entered.disconnect(_on_range_area_body_entered)
+		if range_area.body_exited.is_connected(_on_range_area_body_exited):
+			range_area.body_exited.disconnect(_on_range_area_body_exited)
+		
+		range_area.body_entered.connect(_on_range_area_body_entered)
+		range_area.body_exited.connect(_on_range_area_body_exited)
+
+	
+	fire_timer.wait_time = fire_rate
+	fire_timer.one_shot = false
+	fire_timer.timeout.connect(_on_fire_timer_timeout)
+	fire_timer.start()
+
+
+
+
+
+func _on_range_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		enemies_in_range.append(body)
+		print("12341")
+
+func _on_range_area_body_exited(body: Node2D) -> void:
+	if body in enemies_in_range:
+		enemies_in_range.erase(body)
+
+
+func _on_fire_timer_timeout() -> void:
+	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
+	
+	if enemies_in_range.size() > 0:
+		shoot(enemies_in_range[0])
+
+func shoot(target: Node2D):
+	if not bullet_scene:
+		print("nobulletscene")
+		return
+	
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	bullet.target = target
+	
+	get_tree().root.add_child(bullet)

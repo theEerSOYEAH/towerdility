@@ -17,6 +17,10 @@ var speed_level = 0
 var range_level = 0
 var total_spent = 0
 
+var locked = false
+var awaiting_lock = false	
+var locked_position = Vector2.ZERO
+
 const MAX_LEVEL = 3
 const UPGRADE_COST = [1, 1, 1]
 

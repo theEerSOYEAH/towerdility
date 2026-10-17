@@ -12,7 +12,7 @@ func _ready():
 	area_2d.area_entered.connect(_on_area_2d_area_entered)
 	area_2d.area_exited.connect(_on_area_2d_area_exited)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_position = get_global_mouse_position()
 	
 	if overlaps.size() > 0:

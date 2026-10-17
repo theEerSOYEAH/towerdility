@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://n5vppo12dhp8"]
+
+[ext_resource type="Script" uid="uid://do0bf2shoyv4o" path="res://scripts/bomb_bullet.gd" id="1_88dw5"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_s8jyb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+size = Vector2(6, 6)
+
+[node name="Bomb_bullet" type="Area2D" unique_id=7965246]
+script = ExtResource("1_88dw5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=804603257]
+position = Vector2(2.75, -2.75)
+scale = Vector2(0.05078125, 0.05078125)
+texture = ExtResource("2_s8jyb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1157462398]
+position = Vector2(3, -3)
+shape = SubResource("RectangleShape2D_h621j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

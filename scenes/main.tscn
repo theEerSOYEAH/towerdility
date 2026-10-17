@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://6u4ev7t73sjt" path="res://scenes/ghost_tower.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c15v4yekekt3j" path="res://scenes/xbow.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://duabru7jajvy8" path="res://scenes/tower.tscn" id="6_tipki"]
+[ext_resource type="PackedScene" uid="uid://dfaw4u3nyjh40" path="res://scenes/sniper.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://c34glpj3gk3h3" path="res://scenes/Bomber.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://ce61f4k8q8y2j" path="res://scenes/sidebar.tscn" id="9_85g3d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -384,38 +386,63 @@ shape = SubResource("RectangleShape2D_iqr6v")
 position = Vector2(303, 134.75)
 shape = SubResource("RectangleShape2D_uqp36")
 
-[node name="spawntower" type="Button" parent="." unique_id=2099715458]
-offset_left = 325.0
-offset_top = 190.0
-offset_right = 387.0
-offset_bottom = 226.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=870141723]
+
+[node name="Sidebar" parent="CanvasLayer" unique_id=121770342 instance=ExtResource("9_85g3d")]
+clip_children = 1
+z_index = 1
+expanded_width = 120.0
+tween_duration = 0.4
+
+[node name="spawntower" type="Button" parent="CanvasLayer/Sidebar" unique_id=2099715458]
+layout_mode = 0
+offset_left = -29.0
+offset_top = 91.0
+offset_right = 25.0
+offset_bottom = 127.0
 text = "tower"
 script = ExtResource("5_tefeu")
 smiles = 10
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("6_tipki")
 
-[node name="spawnxbow" type="Button" parent="." unique_id=357773015]
-offset_left = 330.0
-offset_top = 156.0
-offset_right = 380.0
-offset_bottom = 187.0
+[node name="spawnsniper" type="Button" parent="CanvasLayer/Sidebar" unique_id=211689199]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 128.0
+offset_right = 24.0
+offset_bottom = 164.0
+text = "sniper
+"
+script = ExtResource("5_tefeu")
+smiles = 10
+ghost_tower_scene = ExtResource("6_o6xl0")
+real_tower_scene = ExtResource("8_choun")
+
+[node name="spawnxbow" type="Button" parent="CanvasLayer/Sidebar" unique_id=357773015]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 57.0
+offset_right = 26.0
+offset_bottom = 88.0
 text = "xbow"
 script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("6_tefeu")
 
-[node name="spawnbomber" type="Button" parent="." unique_id=125631018]
-offset_left = 327.0
-offset_top = 121.0
-offset_right = 380.0
-offset_bottom = 152.0
+[node name="spawnbomber" type="Button" parent="CanvasLayer/Sidebar" unique_id=125631018]
+layout_mode = 0
+offset_left = -27.0
+offset_top = 22.0
+offset_right = 26.0
+offset_bottom = 53.0
 text = "bomb"
 script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("8_tipki")
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
-[connection signal="pressed" from="spawntower" to="spawntower" method="_on_pressed"]
-[connection signal="pressed" from="spawnxbow" to="spawnxbow" method="_on_pressed"]
-[connection signal="pressed" from="spawnbomber" to="spawnbomber" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/spawntower" to="CanvasLayer/Sidebar/spawntower" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/spawnsniper" to="CanvasLayer/Sidebar/spawnsniper" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/spawnxbow" to="CanvasLayer/Sidebar/spawnxbow" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/spawnbomber" to="CanvasLayer/Sidebar/spawnbomber" method="_on_pressed"]

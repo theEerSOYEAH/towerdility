@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c34glpj3gk3h3"]
+
+[ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_t2w1a"]
+[ext_resource type="PackedScene" uid="uid://n5vppo12dhp8" path="res://scenes/bomb_bullet.tscn" id="2_aawvb"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_krnit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ma48p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h621j"]
+radius = 48.0
+
+[node name="Bomber" type="StaticBody2D" unique_id=1978504404]
+script = ExtResource("1_t2w1a")
+bullet_scene = ExtResource("2_aawvb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=501645870]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.18554688, 0.18554688)
+texture = ExtResource("3_krnit")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=130817041]
+shape = SubResource("RectangleShape2D_ma48p")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=465724871]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=542757342]
+shape = SubResource("CircleShape2D_h621j")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=989095426]

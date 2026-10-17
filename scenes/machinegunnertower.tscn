@@ -16,11 +16,8 @@ size = Vector2(24, 24)
 [node name="machinegunnertower" type="StaticBody2D" unique_id=1908431128]
 collision_layer = 4
 script = ExtResource("1_ywdcr")
-base_cost = null
 bullet_scene = ExtResource("2_ywdcr")
 fire_rate = 0.05
-can_see_camo = null
-damage_type = null
 follow_mouse = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=670690642]

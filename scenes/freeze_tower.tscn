@@ -10,6 +10,9 @@ size = Vector2(22.5, 22.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_rk82u"]
 radius = 52.43627
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iq78d"]
+size = Vector2(24, 24)
+
 [node name="freeze_tower" type="StaticBody2D" unique_id=1502496088]
 collision_layer = 4
 script = ExtResource("1_iq78d")
@@ -31,3 +34,8 @@ position = Vector2(-2, 2)
 shape = SubResource("CircleShape2D_rk82u")
 
 [node name="FireTimer" type="Timer" parent="." unique_id=1402069357]
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1373095891]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=316846876]
+shape = SubResource("RectangleShape2D_iq78d")

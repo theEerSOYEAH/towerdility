@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://dwlty4s3lljc1" path="res://scenes/spawntower.gd" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://6u4ev7t73sjt" path="res://scenes/ghost_tower.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c15v4yekekt3j" path="res://scenes/xbow.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://duabru7jajvy8" path="res://scenes/tower.tscn" id="6_tipki"]
+[ext_resource type="PackedScene" uid="uid://c34glpj3gk3h3" path="res://scenes/Bomber.tscn" id="8_tipki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -391,9 +393,29 @@ text = "tower"
 script = ExtResource("5_tefeu")
 smiles = 10
 ghost_tower_scene = ExtResource("6_o6xl0")
+real_tower_scene = ExtResource("6_tipki")
 
-[node name="xbow" parent="." unique_id=1091707751 instance=ExtResource("6_tefeu")]
-position = Vector2(168, 96)
+[node name="spawnxbow" type="Button" parent="." unique_id=357773015]
+offset_left = 330.0
+offset_top = 156.0
+offset_right = 380.0
+offset_bottom = 187.0
+text = "xbow"
+script = ExtResource("5_tefeu")
+ghost_tower_scene = ExtResource("6_o6xl0")
+real_tower_scene = ExtResource("6_tefeu")
+
+[node name="spawnbomber" type="Button" parent="." unique_id=125631018]
+offset_left = 327.0
+offset_top = 121.0
+offset_right = 380.0
+offset_bottom = 152.0
+text = "bomb"
+script = ExtResource("5_tefeu")
+ghost_tower_scene = ExtResource("6_o6xl0")
+real_tower_scene = ExtResource("8_tipki")
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="spawntower" to="spawntower" method="_on_pressed"]
+[connection signal="pressed" from="spawnxbow" to="spawnxbow" method="_on_pressed"]
+[connection signal="pressed" from="spawnbomber" to="spawnbomber" method="_on_pressed"]

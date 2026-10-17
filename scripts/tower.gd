@@ -3,6 +3,8 @@ extends StaticBody2D
 
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
+@export var can_see_camo = false
+@export var damage_type = "sharp"
 @onready var range_area: Area2D = $RangeArea
 @export var follow_mouse = false 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -44,6 +46,8 @@ func _ready() -> void:
 
 func _on_range_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
+		if body.is_camo and not can_see_camo:
+			return
 		enemies_in_range.append(body)
 		print("12341")
 
@@ -69,6 +73,7 @@ func shoot(target: Node2D):
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
 	bullet.target = target
+	bullet.damage_type = damage_type
 	
 	get_tree().root.add_child(bullet)
 

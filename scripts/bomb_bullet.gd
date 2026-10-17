@@ -4,6 +4,7 @@ extends Area2D
 @export var speed = 300
 @export var explosion_radius = 20
 @export var damage = 25
+@export var damage_type = "explosive"
 
 var target : Node2D = null
 var target_position : Vector2
@@ -36,6 +37,6 @@ func explode():
 		var body = result.collider
 		if body.is_in_group("enemies"):
 			if body.has_method("take_damage"):
-				body.take_damage(damage)
+				body.take_damage(damage, damage_type)
 			print("hit bomb enemie ", body.name)
 	queue_free()

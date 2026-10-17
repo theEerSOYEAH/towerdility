@@ -4,10 +4,22 @@ extends StaticBody2D
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
 @onready var range_area: Area2D = $RangeArea
+@export var follow_mouse = false 
+@onready var sprite: Sprite2D = $Sprite2D
 
 
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
+
+
+
+func _process(delta: float) -> void:
+	if follow_mouse:
+		var angle = (get_global_mouse_position() - global_position).angle()
+		sprite.rotation = angle
+		sprite.flip_v = abs(angle)
+	
+
 
 func _ready() -> void:
 	
@@ -44,7 +56,10 @@ func _on_fire_timer_timeout() -> void:
 	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
 	
 	if enemies_in_range.size() > 0:
-		shoot(enemies_in_range[0])
+		if follow_mouse:
+			shoot_at_mouse()
+		else:
+			shoot(enemies_in_range[0])
 
 func shoot(target: Node2D):
 	if not bullet_scene:
@@ -56,3 +71,14 @@ func shoot(target: Node2D):
 	bullet.target = target
 	
 	get_tree().root.add_child(bullet)
+
+func shoot_at_mouse():
+	if not bullet_scene:
+		return
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	bullet.direction = (get_global_mouse_position() - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+
+	
+	get_tree().root.add_child(bullet)
+	

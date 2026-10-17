@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dfaw4u3nyjh40"]
+
+[ext_resource type="Script" uid="uid://5m6tdi7wipj8" path="res://scripts/sniper.gd" id="1_wwo37"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_ev654"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+size = Vector2(22.5, 22.5)
+
+[node name="Tower" type="StaticBody2D" unique_id=190908816]
+collision_layer = 4
+script = ExtResource("1_wwo37")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=449758929]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.18554688, 0.18554688)
+texture = ExtResource("3_ev654")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105990232]
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=549957901]
+
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]

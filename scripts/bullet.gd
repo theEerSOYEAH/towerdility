@@ -2,6 +2,8 @@ extends Area2D
 
 @export var speed = 400
 @export var damage = 2
+@export_range(0.0, 1.0) var slow_factor:float = 1.0
+@export var slow_dur = 0.0
 var target : Node2D = null
 var last_position : Vector2
 
@@ -24,5 +26,7 @@ func _on_body_entered(body: Node2D) -> void:
 	print("enteredbullet1")
 	if body == target:
 		body.take_damage(damage)
+		if slow_dur > 0.0 and body.has_method("apply_slow"):
+			body.apply_slow(slow_factor, slow_dur)
 		queue_free()
 		

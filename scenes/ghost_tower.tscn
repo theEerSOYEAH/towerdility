@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://6u4ev7t73sjt"]
 
-[ext_resource type="Script" uid="uid://b40x8168qsdlr" path="res://ghost_tower.gd" id="1_l4prx"]
+[ext_resource type="Script" uid="uid://b40x8168qsdlr" path="res://scripts/ghost_tower.gd" id="1_l4prx"]
 [ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_xsv2s"]
 [ext_resource type="PackedScene" uid="uid://duabru7jajvy8" path="res://scenes/tower.tscn" id="2_yjuk8"]
 

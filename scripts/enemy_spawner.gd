@@ -16,7 +16,3 @@ func spawn_enemy():
 	new_path_follow.add_child(enemy_instance)
 	path_2d.add_child(new_path_follow)
 	
-
-
-func _on_enemy_spawn_button_pressed() -> void:
-	pass # Replace with function body.

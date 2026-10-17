@@ -13,7 +13,7 @@ radius = 204.02206
 collision_layer = 4
 script = ExtResource("1_5yb4y")
 bullet_scene = ExtResource("2_4q2h8")
-fire_rate = 10.0
+fire_rate = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=883230050]
 position = Vector2(9.536743e-07, 0)

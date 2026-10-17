@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 
+@export var base_cost = 0
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
 @export var can_see_camo = false
@@ -8,7 +9,16 @@ extends StaticBody2D
 @onready var range_area: Area2D = $RangeArea
 @export var follow_mouse = false 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var click_area = $ClickArea
 
+var damange_bonus = 0
+var damage_level = 0
+var speed_level = 0
+var range_level = 0
+var total_spent = 0
+
+const MAX_LEVEL = 3
+const UPGRADE_COST = [1, 1, 1]
 
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
@@ -22,8 +32,23 @@ func _process(delta: float) -> void:
 		sprite.flip_v = abs(angle)
 	
 
+var selected = false
+
+func _draw():
+	if selected:
+		var shape = range_area.get_node("CollisionShape2D").shape
+		var r = shape.radius * range_area.scale.x
+		draw_circle(Vector2.ZERO, r, Color(1,1,1, 0.15))
+		draw_arc(Vector2.ZERO, r, 0, TAU, 64, Color(1,1,1, 0.6), 1.0)
+
+func set_selected(value):
+	selected = value
+	queue_redraw()
 
 func _ready() -> void:
+	click_area.input_event.connect(_on_click_area_input_event)
+	
+	total_spent = base_cost
 	
 	if range_area:
 		if range_area.body_entered.is_connected(_on_range_area_body_entered):
@@ -74,6 +99,7 @@ func shoot(target: Node2D):
 	bullet.global_position = global_position
 	bullet.target = target
 	bullet.damage_type = damage_type
+	bullet.damage += damange_bonus
 	
 	get_tree().root.add_child(bullet)
 
@@ -87,3 +113,43 @@ func shoot_at_mouse():
 	
 	get_tree().root.add_child(bullet)
 	
+func _on_click_area_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("clicked")
+		var panel = get_tree().get_first_node_in_group("upgrade_panel")
+		print("panel is: ", panel)
+		if panel:
+			panel.show_for(self)
+
+func get_cost(level):
+	if level >= MAX_LEVEL:
+		return -1
+	return UPGRADE_COST[level]
+
+func upgrade_damage():
+	var cost = get_cost(damage_level)
+	if cost == -1 or not GameManager.spend_smiles(cost):
+		return
+	damage_level += 1
+	damange_bonus += 1
+	total_spent += cost
+
+func upgrade_speed():
+	var cost = get_cost(speed_level)
+	if cost == -1 or not GameManager.spend_smiles(cost):
+		return
+	speed_level += 1
+	fire_timer.wait_time *= 0.8
+	total_spent += cost
+
+func upgrade_range():
+	var cost = get_cost(range_level)
+	if cost == -1 or not GameManager.spend_smiles(cost):
+		return
+	range_level += 1
+	range_area.scale *= 1.2
+	total_spent += cost
+
+func sell():
+	GameManager.add_smiles(int(total_spent * 0.5))
+	queue_free()

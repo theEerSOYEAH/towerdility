@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="towerity"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="uid://dt84tolicft03"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,7 @@ GameManager="*uid://c1er8f53htn6i"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [editor_plugins]

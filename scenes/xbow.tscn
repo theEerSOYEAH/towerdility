@@ -9,6 +9,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_nnsmj"]
 radius = 204.02206
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yb4y"]
+size = Vector2(24, 24)
+
 [node name="xbow" type="StaticBody2D" unique_id=1722262639]
 collision_layer = 4
 script = ExtResource("1_5yb4y")
@@ -30,3 +33,10 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_nnsmj")
 
 [node name="FireTimer" type="Timer" parent="." unique_id=2098324788]
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=858294751]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1274351110]
+shape = SubResource("RectangleShape2D_5yb4y")
+
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]

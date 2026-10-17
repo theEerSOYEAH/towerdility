@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ce61f4k8q8y2j"]
+
+[ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="1_iqt6p"]
+[ext_resource type="Script" uid="uid://b6xkqbdjwpyfn" path="res://scripts/sidebar.gd" id="1_rx5q4"]
+
+[node name="Sidebar" type="Control" unique_id=121770342]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_rx5q4")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=965175119]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iqt6p")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect" unique_id=1705955826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer" unique_id=1396265439]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

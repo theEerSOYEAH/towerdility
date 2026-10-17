@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://bqwfhfixrlxng"]
 
-[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/enemy(idkwhichonefr).gd" id="1_qrb82"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_b5eot"]
+[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/enemy(idkwhichonefr).gd" id="1_6kb7q"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_05v41"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
 
-[node name="enemy(idkwhichonefr)" type="CharacterBody2D" unique_id=136464191 groups=["enemies"]]
+[node name="verity" type="CharacterBody2D" unique_id=136464191 groups=["enemies"]]
 collision_layer = 2
-script = ExtResource("1_qrb82")
+script = ExtResource("1_6kb7q")
+is_metal = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=969545060]
 scale = Vector2(0.1484375, 0.1484375)
-texture = ExtResource("2_b5eot")
+texture = ExtResource("2_05v41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=158663430]
 shape = SubResource("RectangleShape2D_h621j")

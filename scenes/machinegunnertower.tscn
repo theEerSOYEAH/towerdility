@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://4wgeqorwktoa"]
+
+[ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_ywdcr"]
+[ext_resource type="PackedScene" uid="uid://ljvnapj2b1fa" path="res://scenes/straight_bullet.tscn" id="2_ywdcr"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_snb8n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s08b1"]
+size = Vector2(22.5, 22.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m087t"]
+radius = 281.1779
+
+[node name="machinegunnertower" type="StaticBody2D" unique_id=1908431128]
+collision_layer = 4
+script = ExtResource("1_ywdcr")
+bullet_scene = ExtResource("2_ywdcr")
+fire_rate = 0.05
+follow_mouse = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=670690642]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.18554688, 0.18554688)
+texture = ExtResource("3_snb8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=210944130]
+shape = SubResource("RectangleShape2D_s08b1")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=476469650]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=131728717]
+position = Vector2(-2, 2)
+shape = SubResource("CircleShape2D_m087t")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=1125432691]

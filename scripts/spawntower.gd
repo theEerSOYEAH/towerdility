@@ -16,5 +16,5 @@ func _on_pressed() -> void:
 		ghost.real_tower_scene = real_tower_scene
 		
 		get_tree().root.add_child(ghost)
-		GameManager.extract_smiles(cost)
+		GameManager.spend_smiles(cost)
 	

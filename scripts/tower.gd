@@ -18,7 +18,7 @@ var range_level = 0
 var total_spent = 0
 
 var locked = false
-var awaiting_lock = false	
+var awaiting_lock = false
 var locked_position = Vector2.ZERO
 
 const MAX_LEVEL = 3
@@ -44,6 +44,14 @@ func _draw():
 		var r = shape.radius * range_area.scale.x
 		draw_circle(Vector2.ZERO, r, Color(1,1,1, 0.15))
 		draw_arc(Vector2.ZERO, r, 0, TAU, 64, Color(1,1,1, 0.6), 1.0)
+		
+	if locked:
+		var p = to_local(locked_position)
+		draw_line(p + Vector2(-6, 0), p + Vector2(6, 0), Color.RED, 1.5)
+		draw_line(p + Vector2(0, -6), p+ Vector2(0, 6), Color.RED, 1.5)
+		draw_arc(p, 5, 0, TAU, 16, Color.RED, 1.5)
+		
+
 
 func set_selected(value):
 	selected = value
@@ -70,8 +78,34 @@ func _ready() -> void:
 	fire_timer.start()
 
 
+func start_locking():
+	if not follow_mouse:
+		return
+	awaiting_lock = true
 
+func unlock():
+	locked = false
+	awaiting_lock = false
+	queue_redraw()
 
+func get_aim_position():
+	if locked:
+		return locked_position
+	return get_global_mouse_position()
+
+func _unhandled_input(event: ) -> void:
+	if not awaiting_lock:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			locked_position = get_global_mouse_position()
+			locked = true
+			awaiting_lock = false
+			get_viewport().set_input_as_handled()
+			queue_redraw()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			awaiting_lock = false
+			get_viewport().set_input_as_handled()
 
 func _on_range_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):

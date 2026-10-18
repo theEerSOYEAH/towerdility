@@ -52,7 +52,9 @@ func place_tower():
 	queue_free()
 	
 
-
+func _unhandled_input(event):
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_Q:
+		queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("body", body.name)

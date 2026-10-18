@@ -648,6 +648,7 @@ offset_bottom = 184.99994
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+cost = 30
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("6_tipki")
 hotkey = 49
@@ -659,7 +660,7 @@ offset_right = 191.00002
 offset_bottom = 239.99998
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 100
-text = "Cost: N"
+text = "Cost: 30"
 
 [node name="Sniper" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=976938416]
 position = Vector2(18, 185.25)
@@ -673,7 +674,7 @@ offset_right = 245.00002
 offset_bottom = 291.0
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 84
-text = "Cost: N"
+text = "Cost: 50"
 
 [node name="spawnsniper" type="Button" parent="CanvasLayer/Sidebar/Control/Sniper" unique_id=211689199]
 offset_left = -68.0
@@ -683,6 +684,7 @@ offset_bottom = 260.0
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+cost = 50
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("8_choun")
 hotkey = 52
@@ -699,7 +701,7 @@ offset_right = 153.00002
 offset_bottom = 295.0
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 84
-text = "Cost: N"
+text = "Cost: 150"
 
 [node name="spawnmachine" type="Button" parent="CanvasLayer/Sidebar/Control/Machine_gunner" unique_id=620482643]
 offset_left = -140.0
@@ -709,6 +711,7 @@ offset_bottom = 260.0
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+cost = 150
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("11_ya4ey")
 hotkey = 53
@@ -725,7 +728,7 @@ offset_right = 141.00002
 offset_bottom = 295.0
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 84
-text = "Cost: N"
+text = "Cost: 40"
 
 [node name="spawnfreezetower" type="Button" parent="CanvasLayer/Sidebar/Control/Freezer" unique_id=485671377]
 offset_left = -172.0
@@ -735,6 +738,7 @@ offset_bottom = 296.0
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+cost = 40
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("10_choun")
 hotkey = 54
@@ -751,7 +755,7 @@ offset_right = 141.00002
 offset_bottom = 295.0
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 84
-text = "Cost: N"
+text = "Cost: 100"
 
 [node name="spawnfarm" type="Button" parent="CanvasLayer/Sidebar/Control/Farm" unique_id=483939181]
 offset_left = -232.0
@@ -761,6 +765,7 @@ offset_bottom = 268.0
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+cost = 100
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("10_yc10j")
 hotkey = 54
@@ -777,7 +782,7 @@ offset_right = 171.00002
 offset_bottom = 239.99998
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 100
-text = "Cost: N"
+text = "Cost: 100"
 
 [node name="spawnbomber" type="Button" parent="CanvasLayer/Sidebar/Control/Bomber" unique_id=1903126615]
 offset_left = -129.99994
@@ -787,6 +792,7 @@ offset_bottom = 229.99995
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+cost = 100
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("8_tipki")
 hotkey = 50
@@ -803,7 +809,7 @@ offset_right = 201.00002
 offset_bottom = 214.99998
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 84
-text = "Cost: N"
+text = "Cost: 200"
 
 [node name="spawnxbow" type="Button" parent="CanvasLayer/Sidebar/Control/Xbow" unique_id=1348684009]
 offset_left = -124.99997
@@ -813,6 +819,7 @@ offset_bottom = 219.99995
 mouse_filter = 1
 flat = true
 script = ExtResource("5_tefeu")
+smiles = 200
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("6_tefeu")
 hotkey = 51

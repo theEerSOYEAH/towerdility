@@ -9,6 +9,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_h621j"]
 radius = 48.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aawvb"]
+size = Vector2(24, 24)
+
 [node name="Bomber" type="StaticBody2D" unique_id=1978504404]
 script = ExtResource("1_t2w1a")
 bullet_scene = ExtResource("2_aawvb")
@@ -29,3 +32,10 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_h621j")
 
 [node name="FireTimer" type="Timer" parent="." unique_id=989095426]
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1714761671]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1716832205]
+shape = SubResource("RectangleShape2D_aawvb")
+
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]

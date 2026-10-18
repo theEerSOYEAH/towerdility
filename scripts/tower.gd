@@ -8,12 +8,14 @@ extends StaticBody2D
 @export var damage_type = "sharp"
 @onready var range_area: Area2D = $RangeArea
 @onready var click_area = $ClickArea
+@onready var sprite = $Sprite2D
 
 var damange_bonus = 0
 var damage_level = 0
 var speed_level = 0
 var range_level = 0
 var total_spent = 0
+
 
 const MAX_LEVEL = 3
 const UPGRADE_COST = [1, 1, 1]
@@ -22,6 +24,8 @@ var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
 
 var selected = false
+var sprite_scale = Vector2.ONE
+var hover_tween: Tween
 
 func _draw():
 	if selected:
@@ -53,7 +57,12 @@ func _ready() -> void:
 	fire_timer.one_shot = false
 	fire_timer.timeout.connect(_on_fire_timer_timeout)
 	fire_timer.start()
-
+	
+	sprite_scale = sprite.scale
+	click_area.mouse_entered.connect(_on_hover.bind(true))
+	click_area.mouse_exited.connect(_on_hover.bind(false))
+	play_place_animation()
+	
 
 
 
@@ -129,3 +138,22 @@ func upgrade_range():
 func sell():
 	GameManager.add_smiles(int(total_spent * 0.5))
 	queue_free()
+
+func play_place_animation():
+	sprite.scale = sprite_scale * 0.3
+	var tw = create_tween()
+	tw.tween_property(sprite, "scale", sprite_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func _on_hover(is_hovering):
+	if hover_tween:
+		hover_tween.kill()
+	hover_tween = create_tween().set_parallel(true)
+	
+	var target_scale = sprite_scale
+	var target_color = Color.WHITE
+	if is_hovering:
+		target_scale = sprite_scale * 1.15
+		target_color = Color(1.3, 1.3, 1.3)
+	
+	hover_tween.tween_property(sprite, "scale", target_scale, 0.1)
+	hover_tween.tween_property(sprite, "modulate", target_color, 0.1)

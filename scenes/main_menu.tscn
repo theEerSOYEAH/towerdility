@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://dt84tolicft03"]
+
+[ext_resource type="Script" uid="uid://dgvsre3a1udh7" path="res://scripts/main_menu.gd" id="1_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="2_8ln24"]
+[ext_resource type="Texture2D" uid="uid://ispq7278b10b" path="res://assets/Green.png" id="2_tbmy8"]
+[ext_resource type="FontFile" uid="uid://btmeoec72ygkv" path="res://assets/LilitaOne-Regular.ttf" id="3_rtw2f"]
+[ext_resource type="Script" uid="uid://bic6afj013k8h" path="res://scripts/back_ground.gd" id="3_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="4_oa1go"]
+[ext_resource type="Texture2D" uid="uid://c6mteh6nyjj57" path="res://assets/basic green/button wide clicked.png" id="5_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://lnxruaxsr1n8" path="res://assets/basic green/button wide hover.png" id="6_oa1go"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6q6n"]
+texture = ExtResource("4_oa1go")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbmy8"]
+texture = ExtResource("5_rtw2f")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jk1qb"]
+texture = ExtResource("6_oa1go")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[node name="MainMenu" type="Control" unique_id=1150119754]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbmy8")
+
+[node name="BackGround" type="TextureRect" parent="." unique_id=472462159]
+modulate = Color(0.78431374, 0.9019608, 0.7529412, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tbmy8")
+stretch_mode = 1
+script = ExtResource("3_tbmy8")
+
+[node name="PatternClip" type="Control" parent="." unique_id=205228863]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="game_title_sprite" type="Sprite2D" parent="." unique_id=306121125]
+position = Vector2(573, 201)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_8ln24")
+
+[node name="game_title" type="Label" parent="game_title_sprite" unique_id=232294109]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -688.0
+offset_top = -165.0
+offset_right = -72.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 17
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 103
+text = "DEFENSITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="." unique_id=2095496862]
+texture_filter = 1
+layout_mode = 0
+offset_left = 442.0
+offset_top = 255.0
+offset_right = 689.0
+offset_bottom = 337.0
+theme_override_constants/outline_size = 8
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxTexture_e6q6n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tbmy8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jk1qb")
+
+[node name="Label" type="Label" parent="PlayButton" unique_id=1352933149]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 236.0
+offset_bottom = 78.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 62
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndlessButton" type="Button" parent="." unique_id=1217822454]
+texture_filter = 1
+layout_mode = 0
+offset_left = 442.0
+offset_top = 346.0
+offset_right = 689.0
+offset_bottom = 428.0
+theme_override_constants/outline_size = 8
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxTexture_e6q6n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tbmy8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jk1qb")
+
+[node name="Label" type="Label" parent="EndlessButton" unique_id=2013295156]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 236.0
+offset_bottom = 78.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 60
+text = "ENDLESS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="." unique_id=1962793941]
+texture_filter = 1
+layout_mode = 0
+offset_left = 442.0
+offset_top = 437.0
+offset_right = 689.0
+offset_bottom = 519.0
+theme_override_constants/outline_size = 8
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxTexture_e6q6n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tbmy8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jk1qb")
+
+[node name="Label" type="Label" parent="QuitButton" unique_id=694911857]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 236.0
+offset_bottom = 75.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 62
+text = "QUIT"
+horizontal_alignment = 1
+vertical_alignment = 1

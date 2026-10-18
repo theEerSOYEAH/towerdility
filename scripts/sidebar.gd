@@ -9,12 +9,16 @@ var tween: Tween
 func _ready() -> void:
 	offset_left = -collapsed_width
 
+
 func _on_mouse_entered() -> void:
 	animate_width(expanded_width)
+	$Control.visible = true
 
 func _on_mouse_exited() -> void:
+	
 	animate_width(collapsed_width)
-
+	$Control.visible = false
+	
 func animate_width(target_width: float) -> void:
 	if tween and tween.is_running():
 		tween.kill()

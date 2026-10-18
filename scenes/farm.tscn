@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cmmgdofqjr2b8"]
+
+[ext_resource type="Script" uid="uid://c6e0uwd84qnhl" path="res://scripts/farm.gd" id="1_kjpqf"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_jjgid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3ns2"]
+size = Vector2(22.5, 22.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjpqf"]
+size = Vector2(24, 24)
+
+[node name="farm" type="StaticBody2D" unique_id=520831333]
+collision_layer = 4
+script = ExtResource("1_kjpqf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=760673115]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.18554688, 0.18554688)
+texture = ExtResource("2_jjgid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1444983075]
+shape = SubResource("RectangleShape2D_k3ns2")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=743440081]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=2002378773]
+shape = SubResource("RectangleShape2D_kjpqf")

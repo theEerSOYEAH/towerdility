@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://xrwmeq5tqfpo"]
+
+[ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_iq78d"]
+[ext_resource type="PackedScene" uid="uid://crt1itnvavptr" path="res://scenes/freeze_bullet.tscn" id="2_3c4ux"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_nuncw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5331"]
+size = Vector2(22.5, 22.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rk82u"]
+radius = 52.43627
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iq78d"]
+size = Vector2(24, 24)
+
+[node name="freeze_tower" type="StaticBody2D" unique_id=1502496088]
+collision_layer = 4
+script = ExtResource("1_iq78d")
+bullet_scene = ExtResource("2_3c4ux")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=442311230]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.18554688, 0.18554688)
+texture = ExtResource("3_nuncw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1731868762]
+shape = SubResource("RectangleShape2D_j5331")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=1513806982]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=408816560]
+position = Vector2(-2, 2)
+shape = SubResource("CircleShape2D_rk82u")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=1402069357]
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1373095891]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=316846876]
+shape = SubResource("RectangleShape2D_iq78d")

@@ -7,6 +7,8 @@ extends StaticBody2D
 @export var can_see_camo = false
 @export var damage_type = "sharp"
 @onready var range_area: Area2D = $RangeArea
+@export var follow_mouse = false 
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var click_area = $ClickArea
 @onready var sprite = $Sprite2D
 
@@ -16,12 +18,24 @@ var speed_level = 0
 var range_level = 0
 var total_spent = 0
 
+var locked = false
+var awaiting_lock = false
+var locked_position = Vector2.ZERO
 
 const MAX_LEVEL = 3
 const UPGRADE_COST = [1, 1, 1]
 
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
+
+
+
+func _process(delta: float) -> void:
+	if follow_mouse:
+		var angle = (get_global_mouse_position() - global_position).angle()
+		sprite.rotation = angle
+		sprite.flip_v = abs(angle)
+	
 
 var selected = false
 var sprite_scale = Vector2.ONE
@@ -33,6 +47,14 @@ func _draw():
 		var r = shape.radius * range_area.scale.x
 		draw_circle(Vector2.ZERO, r, Color(1,1,1, 0.15))
 		draw_arc(Vector2.ZERO, r, 0, TAU, 64, Color(1,1,1, 0.6), 1.0)
+		
+	if locked:
+		var p = to_local(locked_position)
+		draw_line(p + Vector2(-6, 0), p + Vector2(6, 0), Color.RED, 1.5)
+		draw_line(p + Vector2(0, -6), p+ Vector2(0, 6), Color.RED, 1.5)
+		draw_arc(p, 5, 0, TAU, 16, Color.RED, 1.5)
+		
+
 
 func set_selected(value):
 	selected = value
@@ -64,8 +86,34 @@ func _ready() -> void:
 	play_place_animation()
 	
 
+func start_locking():
+	if not follow_mouse:
+		return
+	awaiting_lock = true
 
+func unlock():
+	locked = false
+	awaiting_lock = false
+	queue_redraw()
 
+func get_aim_position():
+	if locked:
+		return locked_position
+	return get_global_mouse_position()
+
+func _unhandled_input(event: ) -> void:
+	if not awaiting_lock:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			locked_position = get_global_mouse_position()
+			locked = true
+			awaiting_lock = false
+			get_viewport().set_input_as_handled()
+			queue_redraw()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			awaiting_lock = false
+			get_viewport().set_input_as_handled()
 
 func _on_range_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
@@ -83,7 +131,10 @@ func _on_fire_timer_timeout() -> void:
 	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
 	
 	if enemies_in_range.size() > 0:
-		shoot(enemies_in_range[0])
+		if follow_mouse:
+			shoot_at_mouse()
+		else:
+			shoot(enemies_in_range[0])
 
 func shoot(target: Node2D):
 	if not bullet_scene:
@@ -98,6 +149,16 @@ func shoot(target: Node2D):
 	
 	get_tree().root.add_child(bullet)
 
+func shoot_at_mouse():
+	if not bullet_scene:
+		return
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = global_position
+	bullet.direction = (get_global_mouse_position() - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+
+	
+	get_tree().root.add_child(bullet)
+	
 func _on_click_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("clicked")

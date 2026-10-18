@@ -7,6 +7,9 @@ extends CharacterBody2D
 @export var is_metal = false
 @export var is_camo = false
 
+var slow_factor :float = 1.0
+var slow_time :float = 0.0
+
 var current_health  : int
 var is_dying = false
 var path_follow : PathFollow2D = null
@@ -22,8 +25,10 @@ func _ready() -> void:
 		modulate.a = 0.5
 
 func _process(delta: float) -> void:
+	_update_slow(delta)
+	
 	if path_follow:
-		path_follow.progress += speed * delta
+		path_follow.progress += speed * slow_factor * delta
 		
 		if path_follow.progress_ratio >= 1.0:
 			reach_base()
@@ -39,6 +44,19 @@ func take_damage(amount, damage_type = "sharp"):
 	
 	if current_health <= 0:
 		die()
+
+func apply_slow(factor : float, duration : float):
+	slow_factor = factor
+	slow_time = duration
+	modulate = Color(0.5, 0.8, 1.0)
+
+func _update_slow(delta: float):
+	if slow_time > 0.0:
+		slow_time -= delta
+		if slow_time <= 0.0:
+			slow_factor = 1.0
+			modulate = Color(1, 1, 1)
+			
 
 func reach_base():
 	if is_dying:

@@ -13,6 +13,7 @@ radius = 48.0
 size = Vector2(24, 24)
 
 [node name="Bomber" type="StaticBody2D" unique_id=1978504404]
+collision_layer = 4
 script = ExtResource("1_t2w1a")
 bullet_scene = ExtResource("2_aawvb")
 damage_type = "explosive"

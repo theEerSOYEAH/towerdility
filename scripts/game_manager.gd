@@ -8,7 +8,7 @@ signal game_over
 var wave = 0
 var is_over = false
 
-var smiles = 0
+var smiles = 60
 var popup_layer = null
 
 
@@ -25,7 +25,7 @@ func spend_smiles(amount):
 	return false
 
 func reset():
-	smiles = 0
+	smiles = 60
 	health = 100
 	wave = 0
 	is_over = false

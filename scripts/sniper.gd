@@ -14,10 +14,10 @@ var damage_level = 0
 var speed_level = 0
 var total_spent = 0
 var metal_unlocked = false
-@export var metal_cost = 1
+@export var metal_cost = 10
 
 const MAX_LEVEL = 3
-const UPGRADE_COST = [100, 200, 300]
+const UPGRADE_COST = [30, 30, 300]
 
 var sprite_scale = Vector2.ONE
 var hover_tween: Tween

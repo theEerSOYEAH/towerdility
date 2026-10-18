@@ -23,7 +23,7 @@ var awaiting_lock = false
 var locked_position = Vector2.ZERO
 
 const MAX_LEVEL = 3
-const UPGRADE_COST = [1, 1, 1]
+const UPGRADE_COST = [20, 20, 20]
 
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer

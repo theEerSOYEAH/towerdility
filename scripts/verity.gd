@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var speed = 40
 @export var max_health = 10
-@export var reward = 1
+@export var reward = 10
 @export var is_metal = false
 @export var is_camo = false
 

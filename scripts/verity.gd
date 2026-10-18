@@ -41,6 +41,10 @@ func take_damage(amount, damage_type = "sharp"):
 		die()
 
 func reach_base():
+	if is_dying:
+		return
+	is_dying = true
+	GameManager.lose_health(current_health)
 	path_follow.queue_free()
 
 func die():

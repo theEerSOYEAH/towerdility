@@ -84,7 +84,7 @@ Any enemy can also be one of these, or even both at the same time
 
 ## Have Suggestions or need Help?
 
-If you have suggestions or need help then dm me on slack @<your slack name> Ill be happy to help you
+If you have suggestions or need help then dm me on slack @mubixd69 Ill be happy to help you
 
 ### This isn't the final project
 

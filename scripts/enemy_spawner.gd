@@ -43,6 +43,7 @@ func start_next_wave():
 			return
 		
 	wave_running = true
+	GameManager.wave = current_wave + 1
 	
 	for g in waves[current_wave]:
 		for i in g["count"]:

@@ -452,6 +452,7 @@ script = ExtResource("5_tefeu")
 smiles = 10
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("6_tipki")
+hotkey = 49
 
 [node name="spawnsniper" type="Button" parent="CanvasLayer/Sidebar" unique_id=211689199]
 layout_mode = 0
@@ -465,6 +466,7 @@ script = ExtResource("5_tefeu")
 smiles = 10
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("8_choun")
+hotkey = 52
 
 [node name="spawnxbow" type="Button" parent="CanvasLayer/Sidebar" unique_id=357773015]
 layout_mode = 0
@@ -476,6 +478,7 @@ text = "xbow"
 script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("6_tefeu")
+hotkey = 51
 
 [node name="spawnbomber" type="Button" parent="CanvasLayer/Sidebar" unique_id=125631018]
 layout_mode = 0
@@ -487,6 +490,7 @@ text = "bomb"
 script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("8_tipki")
+hotkey = 50
 
 [node name="upgrade_panel" type="PanelContainer" parent="CanvasLayer" unique_id=2118667269 groups=["upgrade_panel"]]
 offset_right = 40.0
@@ -516,7 +520,6 @@ layout_mode = 2
 [node name="CloseButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=81990143]
 unique_name_in_owner = true
 layout_mode = 2
-text = "CLOSE"
 
 [node name="SniperUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1317363246 groups=["sniper_upgrade_panel"]]
 offset_right = 40.0

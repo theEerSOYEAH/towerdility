@@ -12,10 +12,34 @@ func _ready():
 	area_2d.body_exited.connect(_on_area_2d_body_exited)
 	area_2d.area_entered.connect(_on_area_2d_area_entered)
 	area_2d.area_exited.connect(_on_area_2d_area_exited)
+	
 	var temp = real_tower_scene.instantiate()
+	
 	var range_node = temp.get_node_or_null("RangeArea/CollisionShape2D")
 	if range_node and range_node.shape is CircleShape2D:
 		range_radius = range_node.shape.radius * temp.get_node("RangeArea").scale.x
+	
+	var real_sprite = temp.get_node_or_null("AnimatedSprite2D")
+	if real_sprite is AnimatedSprite2D:
+		var ghost_sprite = AnimatedSprite2D.new()
+		ghost_sprite.sprite_frames = real_sprite.sprite_frames
+		ghost_sprite.position = real_sprite.position
+		ghost_sprite.scale = real_sprite.scale
+		ghost_sprite.offset = real_sprite.offset
+		ghost_sprite.centered = real_sprite.centered
+		ghost_sprite.flip_h = real_sprite.flip_h
+		ghost_sprite.flip_v = real_sprite.flip_v
+		ghost_sprite.texture_filter = real_sprite.texture_filter
+		add_child(ghost_sprite)
+		ghost_sprite.play(real_sprite.animation)
+		
+		
+		
+	
+	
+	
+	
+	
 	temp.queue_free()
 	queue_redraw()
 	

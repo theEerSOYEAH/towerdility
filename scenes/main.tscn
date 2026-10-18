@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dcj6oar15ytrd" path="res://assets/roads2W.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://jqgtvuuhyc1s" path="res://scenes/enemy_spawner.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bqwfhfixrlxng" path="res://scenes/verity.tscn" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://dtulur36fsnd4" path="res://scenes/enemy_spawn_button.gd" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://dwlty4s3lljc1" path="res://scenes/spawntower.gd" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://6u4ev7t73sjt" path="res://scenes/ghost_tower.tscn" id="6_o6xl0"]
@@ -10,6 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://dfaw4u3nyjh40" path="res://scenes/sniper.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://c34glpj3gk3h3" path="res://scenes/Bomber.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://ce61f4k8q8y2j" path="res://scenes/sidebar.tscn" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="12_a8y0u"]
+[ext_resource type="Script" uid="uid://bs77p2qks1ga1" path="res://scripts/upgrade_panel.gd" id="12_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://cyurwdac5oqnk" path="res://assets/basic green/button wider hover.png" id="12_jkv2x"]
+[ext_resource type="FontFile" uid="uid://btmeoec72ygkv" path="res://assets/LilitaOne-Regular.ttf" id="12_muem4"]
+[ext_resource type="Texture2D" uid="uid://c6mteh6nyjj57" path="res://assets/basic green/button wide clicked.png" id="13_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://coifemcqhk0ea" path="res://assets/basic green/pop up window.png" id="15_jbj1t"]
+[ext_resource type="Script" uid="uid://db5m0gc1gyg8x" path="res://scripts/sniper_upgrade_panel.gd" id="18_dp3eg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -332,6 +340,43 @@ size = Vector2(23.5, 120.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqp36"]
 size = Vector2(22, 84.5)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8y0u"]
+texture = ExtResource("12_jkv2x")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jbj1t"]
+texture = ExtResource("12_a8y0u")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jkv2x"]
+texture = ExtResource("13_jkv2x")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_muem4"]
+texture = ExtResource("15_jbj1t")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="Theme" id="Theme_trceg"]
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("12_muem4")
+Button/styles/hover = SubResource("StyleBoxTexture_a8y0u")
+Button/styles/normal = SubResource("StyleBoxTexture_jbj1t")
+Button/styles/pressed = SubResource("StyleBoxTexture_jkv2x")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_muem4")
+
 [node name="main" type="Node2D" unique_id=612649347]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=676590187]
@@ -348,6 +393,8 @@ curve = SubResource("Curve2D_o5qli")
 
 [node name="EnemySpawner" parent="." unique_id=297624967 node_paths=PackedStringArray("path_2d") instance=ExtResource("2_0wfyh")]
 path_2d = NodePath("../Path2D")
+enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("3_ya4ey"), ExtResource("3_ya4ey")])
+auto_next_wave = true
 
 [node name="enemy spawn button" type="Button" parent="." unique_id=684955736]
 offset_left = 325.0
@@ -440,6 +487,61 @@ text = "bomb"
 script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("8_tipki")
+
+[node name="upgrade_panel" type="PanelContainer" parent="CanvasLayer" unique_id=2118667269 groups=["upgrade_panel"]]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("12_eb6dy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/upgrade_panel" unique_id=1029195598]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=218175793]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=1351016094]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=584060924]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RangeButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=1793441474]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=81990143]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CLOSE"
+
+[node name="SniperUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1317363246 groups=["sniper_upgrade_panel"]]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("18_dp3eg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SniperUpgradePanel" unique_id=1535331837]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1046679825]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1123743746]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1313700274]
+layout_mode = 2
+
+[node name="MetalButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1685927711]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=636747153]
+layout_mode = 2
+text = "CLOSE"
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawntower" to="CanvasLayer/Sidebar/spawntower" method="_on_pressed"]

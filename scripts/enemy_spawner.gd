@@ -13,6 +13,8 @@ const OBESITY = 2
 var waves = []
 var current_wave = 0
 var wave_running = false
+var handmade_count = 0
+var hp_multiplier = 1.0
 
 func _ready() -> void:
 	waves = [
@@ -20,7 +22,9 @@ func _ready() -> void:
 		[group(VERITY, 5), group(FALSITY, 5)],
 		[group(VERITY, 5), group(OBESITY, 5, true, true, 0.3)],
 	]
-
+	
+	handmade_count = waves.size()
+	
 func group(type, count, camo = false, metal = false, delay = 0.5):
 	return {"type": type, "count": count, "camo": camo, "metal": metal, "delay": delay}
 
@@ -31,8 +35,12 @@ func start_next_wave():
 		print("kill all enemioes first")
 		return
 	if current_wave >= waves.size():
-		print("all waves finished")
-		return
+		if GameManager.endless_mode:
+			var n = current_wave - handmade_count + 1
+			waves.append(make_endless_waves(n))
+		else:
+			print("all waves finished")
+			return
 		
 	wave_running = true
 	
@@ -54,12 +62,31 @@ func spawn_enemy(g):
 	new_path_follow.rotates = true
 	
 	var enemy_instance = enemy_types[g["type"]].instantiate()
+	enemy_instance.max_health = int(enemy_instance.max_health * hp_multiplier)
 	enemy_instance.is_camo = g["camo"]
 	enemy_instance.is_metal = g["metal"]
 	
 	new_path_follow.add_child(enemy_instance)
 	path_2d.add_child(new_path_follow)
 
+func make_endless_waves(n):
+	hp_multiplier = 1.0 + n * 0.15
+	
+	var delay = max(0.15, 0.5 - n * 0.02)
+	var wave = []
+	
+	wave.append(group(VERITY, 5 + n * 2, false, false, delay))
+	
+	if n >= 2:
+		wave.append(group(FALSITY, n * 2, false, false, delay))
+	if n >= 4:
+		wave.append(group(VERITY, n, true, false, delay))
+	if n >= 6:
+		wave.append(group(FALSITY, n, false, true, delay))
+	if n >= 8:
+		wave.append(group(OBESITY, n / 2, true, true, delay))
+	
+	return wave
 func _on_enemy_spawn_button_pressed():
 	start_next_wave()
 	

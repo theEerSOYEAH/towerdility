@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ce61f4k8q8y2j"]
 
-[ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="1_iqt6p"]
 [ext_resource type="Script" uid="uid://b6xkqbdjwpyfn" path="res://scripts/sidebar.gd" id="1_rx5q4"]
+[ext_resource type="Texture2D" uid="uid://cj05l8eqpt7y" path="res://assets/basic green/icon panel small.png" id="2_rx5q4"]
 
 [node name="Sidebar" type="Control" unique_id=121770342]
 layout_mode = 3
@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_iqt6p")
+texture = ExtResource("2_rx5q4")
 patch_margin_left = 24
 patch_margin_top = 24
 patch_margin_right = 24

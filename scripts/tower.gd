@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	if follow_mouse:
 		var angle = (get_global_mouse_position() - global_position).angle()
 		sprite.rotation = angle
-		sprite.flip_v = abs(angle)
+		sprite.flip_v = abs(angle) > PI / 2
 	
 
 var selected = false
@@ -94,6 +94,7 @@ func shoot(target: Node2D):
 	if not bullet_scene:
 		print("nobulletscene")
 		return
+	
 	
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position

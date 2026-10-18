@@ -8,7 +8,8 @@ extends StaticBody2D
 @export var damage_type = "sharp"
 @onready var range_area: Area2D = $RangeArea
 @export var follow_mouse = false 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var click_area = $ClickArea
 
 var damange_bonus = 0
@@ -28,12 +29,20 @@ var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
 
 
+func play_throw_anim():
+	if not sprite.sprite_frames or not sprite.sprite_frames.has_animation("empty"):
+		return
+	sprite.play("empty")
+	await get_tree().create_timer(fire_timer.wait_time * 0.8).timeout
+	if is_inside_tree():
+		sprite.play("holding")
+
 
 func _process(delta: float) -> void:
 	if follow_mouse:
-		var angle = (get_global_mouse_position() - global_position).angle()
+		var angle = (get_aim_position() - global_position).angle()
 		sprite.rotation = angle
-		sprite.flip_v = abs(angle)
+		sprite.flip_v = abs(angle) > PI / 2
 	
 
 var selected = false
@@ -55,6 +64,10 @@ func _draw():
 
 func set_selected(value):
 	selected = value
+	if value:
+		add_to_group("selected_tower")
+	else:
+		remove_from_group("selected_tower")
 	queue_redraw()
 
 func _ready() -> void:
@@ -93,7 +106,7 @@ func get_aim_position():
 		return locked_position
 	return get_global_mouse_position()
 
-func _unhandled_input(event: ) -> void:
+func _unhandled_input(event) -> void:
 	if not awaiting_lock:
 		return
 	if event is InputEventMouseButton and event.pressed:
@@ -135,18 +148,27 @@ func shoot(target: Node2D):
 	
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	bullet.target = target
 	bullet.damage_type = damage_type
 	bullet.damage += damange_bonus
 	
+	if "target" in bullet:
+		bullet.target = target
+	else:
+		bullet.direction = (target.global_position - global_position).normalized()
+	
 	get_tree().root.add_child(bullet)
+	play_throw_anim()
 
 func shoot_at_mouse():
 	if not bullet_scene:
 		return
+	var aim = get_aim_position()
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	bullet.direction = (get_global_mouse_position() - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+	bullet.direction = (aim - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+	bullet.damage_type = damage_type
+	bullet.damage += damange_bonus
+
 
 	
 	get_tree().root.add_child(bullet)
@@ -154,6 +176,10 @@ func shoot_at_mouse():
 func _on_click_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("clicked")
+		if follow_mouse:
+			for t in get_tree().get_nodes_in_group("lock_target"):
+				t.remove_from_group("lock_target")
+			add_to_group("lock_target")
 		var panel = get_tree().get_first_node_in_group("upgrade_panel")
 		print("panel is: ", panel)
 		if panel:

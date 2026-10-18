@@ -53,6 +53,7 @@ func start_next_wave():
 			var n = current_wave - handmade_count + 1
 			waves.append(make_endless_waves(n))
 		else:
+			GameManager.game_over.emit()
 			print("all waves finished")
 			return
 		

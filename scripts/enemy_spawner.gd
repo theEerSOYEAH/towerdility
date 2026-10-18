@@ -9,20 +9,36 @@ extends Node2D
 const VERITY = 0
 const FALSITY = 1
 const OBESITY = 2
+const LOVITY = 3
+const MOGGITY = 4
+const CRUELITY = 5
 
 var waves = []
 var current_wave = 0
 var wave_running = false
+var handmade_count = 0
+var hp_multiplier = 1.0
 
 func _ready() -> void:
 	waves = [
 		[group(VERITY, 5)],
 		[group(VERITY, 5), group(FALSITY, 5)],
-		[group(VERITY, 5), group(OBESITY, 5, true, true, 0.3)],
+		[group(VERITY, 5), group(OBESITY, 1)],
+		[group(VERITY, 15)],
+		[group(LOVITY, 25)],
+		[group(VERITY, 10),group(FALSITY, 10), group(OBESITY, 3)],
+		[]
 	]
+	
+	if GameManager.endless_mode:
+		waves = []
+	handmade_count = waves.size()
 
-func group(type, count, camo = false, metal = false, delay = 0.5):
-	return {"type": type, "count": count, "camo": camo, "metal": metal, "delay": delay}
+func group(type, count, camo = false, metal = false, delay = 0.5, pack_size = 1):
+	return{"type": type, "count": count, "camo": camo, "metal": metal, "delay": delay, "pack_size": pack_size}
+
+func pack(type, packs, camo = false, metal = false, delay = 1.5):
+	return group(type, packs, camo, metal, delay, 5)
 
 func start_next_wave():
 	if wave_running:
@@ -38,7 +54,10 @@ func start_next_wave():
 	
 	for g in waves[current_wave]:
 		for i in g["count"]:
-			spawn_enemy(g)
+			for j in g["pack_size"]:
+				spawn_enemy(g)
+				if g["pack_size"] > 1:
+					await  get_tree().create_timer(0.12).timeout
 			await get_tree().create_timer(g["delay"]).timeout
 	
 	current_wave += 1
@@ -63,3 +82,7 @@ func spawn_enemy(g):
 func _on_enemy_spawn_button_pressed():
 	start_next_wave()
 	
+
+
+func _on_button_pressed() -> void:
+	pass # Replace with function body.

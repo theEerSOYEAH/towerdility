@@ -13,7 +13,7 @@ func _ready():
 	damage_button.pressed.connect(_on_damage_pressed)
 	speed_button.pressed.connect(_on_speed_pressed)
 	range_button.pressed.connect(_on_range_pressed)
-	close_button.pressed.connect(close)
+	close_button.pressed.connect(_on_sell_pressed)
 
 func _unhandled_input(event):
 	if not visible:
@@ -63,6 +63,8 @@ func refresh():
 	damage_button.disabled = not can_buy(tower.damage_level)
 	speed_button.disabled = not can_buy(tower.speed_level)
 	range_button.disabled = not can_buy(tower.range_level)
+	
+	close_button.text = "Sell +" + str(int(tower.total_spent * 0.5))
 func button_text(upgrade_name, level):
 	var cost = tower.get_cost(level)
 	if cost == -1:
@@ -85,7 +87,14 @@ func can_buy(level):
 	var cost = tower.get_cost(level)
 	return cost != -1 and GameManager.smiles >= cost
 	
-	
+
+func _on_sell_pressed():
+	if not is_instance_valid(tower):
+		return
+	var t = tower
+	close()
+	t.sell()
+
 func _process(_delta):
 	if visible:
 		refresh()

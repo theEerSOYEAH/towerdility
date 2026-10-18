@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 
+@export var base_cost = 0
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
 @export var can_see_camo = false
@@ -12,6 +13,7 @@ var damange_bonus = 0
 var damage_level = 0
 var speed_level = 0
 var range_level = 0
+var total_spent = 0
 
 const MAX_LEVEL = 3
 const UPGRADE_COST = [1, 1, 1]
@@ -34,6 +36,8 @@ func set_selected(value):
 
 func _ready() -> void:
 	click_area.input_event.connect(_on_click_area_input_event)
+	
+	total_spent = base_cost
 	
 	if range_area:
 		if range_area.body_entered.is_connected(_on_range_area_body_entered):
@@ -104,6 +108,7 @@ func upgrade_damage():
 		return
 	damage_level += 1
 	damange_bonus += 1
+	total_spent += cost
 
 func upgrade_speed():
 	var cost = get_cost(speed_level)
@@ -111,6 +116,7 @@ func upgrade_speed():
 		return
 	speed_level += 1
 	fire_timer.wait_time *= 0.8
+	total_spent += cost
 
 func upgrade_range():
 	var cost = get_cost(range_level)
@@ -118,3 +124,8 @@ func upgrade_range():
 		return
 	range_level += 1
 	range_area.scale *= 1.2
+	total_spent += cost
+
+func sell():
+	GameManager.add_smiles(int(total_spent * 0.5))
+	queue_free()

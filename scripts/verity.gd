@@ -67,5 +67,5 @@ func reach_base():
 
 func die():
 	is_dying = true
-	GameManager.add_smiles(reward)
+	GameManager.add_smiles(reward, global_position)
 	path_follow.queue_free()

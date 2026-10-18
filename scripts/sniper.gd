@@ -22,16 +22,24 @@ const UPGRADE_COST = [100, 200, 300]
 var sprite_scale = Vector2.ONE
 var hover_tween: Tween
 
+
 func _ready() -> void:
 	click_area.input_event.connect(_on_click_area_input_event)
 	total_spent = base_cost
-	
+
+	# find the sprite even if it isn't named "Sprite2D"
+	if sprite == null:
+		for c in get_children():
+			if c is Sprite2D or c is AnimatedSprite2D:
+				sprite = c
+				break
+
 	fire_timer.wait_time = fire_rate
 	fire_timer.one_shot = false
 	fire_timer.timeout.connect(_on_fire_timer_timeout)
 	fire_timer.start()
-	
-	sprite_scale = sprite.scale 
+
+	sprite_scale = sprite.scale
 	click_area.mouse_entered.connect(_on_hover.bind(true))
 	click_area.mouse_exited.connect(_on_hover.bind(false))
 	play_place_animation()

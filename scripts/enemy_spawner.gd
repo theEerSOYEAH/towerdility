@@ -40,6 +40,7 @@ func group(type, count, camo = false, metal = false, delay = 0.5, pack_size = 1)
 func pack(type, packs, camo = false, metal = false, delay = 1.5):
 	return group(type, packs, camo, metal, delay, 5)
 	handmade_count = waves.size()
+	
 
 func start_next_wave():
 	if wave_running:

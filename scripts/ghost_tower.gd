@@ -4,6 +4,7 @@ extends Node2D
 var is_valid_placement : bool = true
 var overlaps : Array = []
 var range_radius = 0.0
+var cost = 0	
 
 @onready var area_2d = $Area2D
 
@@ -69,10 +70,12 @@ func _draw():
 		
 		
 func place_tower():
+	if not GameManager.spend_smiles(cost):
+		return
 	var new_tower = real_tower_scene.instantiate()
 	new_tower.global_position = global_position
 	get_tree().root.add_child(new_tower)
-	
+
 	queue_free()
 	
 

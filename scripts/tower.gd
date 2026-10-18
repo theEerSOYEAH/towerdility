@@ -10,13 +10,16 @@ extends StaticBody2D
 @export var follow_mouse = false 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var click_area = $ClickArea
-@onready var sprite = $Sprite2D
+
+
 
 var damange_bonus = 0
 var damage_level = 0
 var speed_level = 0
 var range_level = 0
 var total_spent = 0
+var accuracy_level = 0
+var spread = 0.12
 
 var locked = false
 var awaiting_lock = false
@@ -154,7 +157,7 @@ func shoot_at_mouse():
 		return
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	bullet.direction = (get_global_mouse_position() - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+	bullet.direction = (get_global_mouse_position() - global_position).normalized().rotated(randf_range(-spread, spread))
 
 	
 	get_tree().root.add_child(bullet)
@@ -163,6 +166,8 @@ func _on_click_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("clicked")
 		var panel = get_tree().get_first_node_in_group("upgrade_panel")
+		if follow_mouse:
+			panel = get_tree().get_first_node_in_group("mg_upgrade_panel")
 		print("panel is: ", panel)
 		if panel:
 			panel.show_for(self)
@@ -218,3 +223,11 @@ func _on_hover(is_hovering):
 	
 	hover_tween.tween_property(sprite, "scale", target_scale, 0.1)
 	hover_tween.tween_property(sprite, "modulate", target_color, 0.1)
+
+func upgrade_accuracy():
+	var cost = get_cost(accuracy_level)
+	if cost == -1 or not GameManager.spend_smiles(cost):
+		return
+	accuracy_level += 1
+	spread *= 0.6
+	total_spent += cost

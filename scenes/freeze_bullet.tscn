@@ -1,22 +1,38 @@
 [gd_scene format=3 uid="uid://crt1itnvavptr"]
 
 [ext_resource type="Script" uid="uid://ct5agnuw2ae7l" path="res://scripts/bullet.gd" id="1_62057"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_qbq7w"]
+[ext_resource type="Texture2D" uid="uid://ct0drhdn6tv1c" path="res://fttt-removebg-preview.png" id="2_62057"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p48nn"]
-size = Vector2(6, 6)
+size = Vector2(8, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbq7w"]
+atlas = ExtResource("2_62057")
+region = Rect2(375, 0, 125, 499)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p48nn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbq7w")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="freeze_bullet" type="Area2D" unique_id=2051759888]
+scale = Vector2(0.45428172, 0.45428172)
 collision_mask = 2
 script = ExtResource("1_62057")
 slow_factor = 0.5
 slow_dur = 1.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1810092630]
-position = Vector2(2.75, -2.75)
-scale = Vector2(0.05078125, 0.05078125)
-texture = ExtResource("2_qbq7w")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1058233260]
-position = Vector2(3, -3)
+position = Vector2(2, -6)
 shape = SubResource("RectangleShape2D_p48nn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=308485235]
+position = Vector2(1.7187501, -4.9401)
+scale = Vector2(0.052499995, 0.0378)
+sprite_frames = SubResource("SpriteFrames_p48nn")

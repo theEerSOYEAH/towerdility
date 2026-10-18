@@ -1,7 +1,22 @@
 [gd_scene format=3 uid="uid://dfaw4u3nyjh40"]
 
 [ext_resource type="Script" uid="uid://5m6tdi7wipj8" path="res://scripts/sniper.gd" id="1_wwo37"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_ev654"]
+[ext_resource type="Texture2D" uid="uid://bl3dl2h4eakgm" path="res://sniper-removebg-preview.png" id="2_wwo37"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cnfi"]
+atlas = ExtResource("2_wwo37")
+region = Rect2(0, 0, 371, 494)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cnfi")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
 size = Vector2(22.5, 22.5)
@@ -13,10 +28,10 @@ size = Vector2(24, 24)
 collision_layer = 4
 script = ExtResource("1_wwo37")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=449758929]
-position = Vector2(9.536743e-07, 0)
-scale = Vector2(0.18554688, 0.18554688)
-texture = ExtResource("3_ev654")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1213168097]
+position = Vector2(-6, 3)
+scale = Vector2(0.080020204, 0.080020204)
+sprite_frames = SubResource("SpriteFrames_h621j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105990232]
 shape = SubResource("RectangleShape2D_h621j")

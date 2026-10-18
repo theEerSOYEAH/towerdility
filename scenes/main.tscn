@@ -4,11 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://jqgtvuuhyc1s" path="res://scenes/enemy_spawner.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bqwfhfixrlxng" path="res://scenes/verity.tscn" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://dtulur36fsnd4" path="res://scripts/enemy_spawn_button.gd" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://fliox5m84lr1" path="res://scenes/falsity.tscn" id="4_vxglm"]
+[ext_resource type="PackedScene" uid="uid://dsk53h8u834u8" path="res://scenes/obesity.tscn" id="5_2f3dj"]
 [ext_resource type="Script" uid="uid://dwlty4s3lljc1" path="res://scripts/spawntower.gd" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://6u4ev7t73sjt" path="res://scenes/ghost_tower.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c15v4yekekt3j" path="res://scenes/xbow.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://duabru7jajvy8" path="res://scenes/tower.tscn" id="6_tipki"]
+[ext_resource type="PackedScene" uid="uid://cumwgh5xyhaer" path="res://scenes/lovity.tscn" id="6_yq6so"]
+[ext_resource type="PackedScene" uid="uid://cf16g7vca6xw4" path="res://scenes/moggity.tscn" id="7_fv21b"]
 [ext_resource type="PackedScene" uid="uid://dfaw4u3nyjh40" path="res://scenes/sniper.tscn" id="8_choun"]
+[ext_resource type="PackedScene" uid="uid://b541lqwii34ab" path="res://scenes/cruelity.tscn" id="8_tel4y"]
 [ext_resource type="PackedScene" uid="uid://c34glpj3gk3h3" path="res://scenes/Bomber.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://ce61f4k8q8y2j" path="res://scenes/sidebar.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://xrwmeq5tqfpo" path="res://scenes/freeze_tower.tscn" id="10_choun"]
@@ -21,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://c6mteh6nyjj57" path="res://assets/basic green/button wide clicked.png" id="13_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://coifemcqhk0ea" path="res://assets/basic green/pop up window.png" id="15_jbj1t"]
 [ext_resource type="Script" uid="uid://db5m0gc1gyg8x" path="res://scripts/sniper_upgrade_panel.gd" id="18_dp3eg"]
+[ext_resource type="Script" uid="uid://dmwxmxraf1trq" path="res://scenes/button.gd" id="22_jscy8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -396,7 +402,7 @@ curve = SubResource("Curve2D_o5qli")
 
 [node name="EnemySpawner" parent="." unique_id=297624967 node_paths=PackedStringArray("path_2d") instance=ExtResource("2_0wfyh")]
 path_2d = NodePath("../Path2D")
-enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("3_ya4ey"), ExtResource("3_ya4ey")])
+enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("4_vxglm"), ExtResource("5_2f3dj"), ExtResource("6_yq6so"), ExtResource("7_fv21b"), ExtResource("8_tel4y")])
 auto_next_wave = true
 
 [node name="enemy spawn button" type="Button" parent="." unique_id=684955736]
@@ -661,6 +667,13 @@ layout_mode = 2
 layout_mode = 2
 text = "CLOSE"
 
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1740655050]
+offset_left = 193.0
+offset_top = 98.0
+offset_right = 308.0
+offset_bottom = 118.0
+script = ExtResource("22_jscy8")
+
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="tower spawners/spawntower" to="tower spawners/spawntower" method="_on_pressed"]
 [connection signal="pressed" from="tower spawners/spawntower2" to="tower spawners/spawntower2" method="_on_pressed"]
@@ -678,3 +691,4 @@ text = "CLOSE"
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnsniper" to="CanvasLayer/Sidebar/spawnsniper" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnxbow" to="CanvasLayer/Sidebar/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnbomber" to="CanvasLayer/Sidebar/spawnbomber" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

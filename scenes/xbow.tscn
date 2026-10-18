@@ -1,8 +1,23 @@
 [gd_scene format=3 uid="uid://c15v4yekekt3j"]
 
 [ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_5yb4y"]
-[ext_resource type="PackedScene" uid="uid://cm5l6lpro0j1j" path="res://scenes/bullet.tscn" id="2_4q2h8"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_6l4c5"]
+[ext_resource type="PackedScene" uid="uid://bo6vi20nve45v" path="res://scenes/arrow.tscn" id="2_5yb4y"]
+[ext_resource type="Texture2D" uid="uid://42illptfpex1" path="res://xbow-removebg-preview.png" id="3_5yb4y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q2h8"]
+atlas = ExtResource("3_5yb4y")
+region = Rect2(0, 0, 397, 498)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3stb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q2h8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_po753"]
 
@@ -15,13 +30,13 @@ size = Vector2(24, 24)
 [node name="xbow" type="StaticBody2D" unique_id=1722262639]
 collision_layer = 4
 script = ExtResource("1_5yb4y")
-bullet_scene = ExtResource("2_4q2h8")
+bullet_scene = ExtResource("2_5yb4y")
 fire_rate = 0.1
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=883230050]
-position = Vector2(9.536743e-07, 0)
-scale = Vector2(0.18554688, 0.18554688)
-texture = ExtResource("3_6l4c5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706371770]
+position = Vector2(-3.999999, 1.999999)
+scale = Vector2(0.097607054, 0.097607054)
+sprite_frames = SubResource("SpriteFrames_3stb3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1552475199]
 shape = SubResource("RectangleShape2D_po753")

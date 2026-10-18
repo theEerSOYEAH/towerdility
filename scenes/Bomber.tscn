@@ -2,7 +2,22 @@
 
 [ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_t2w1a"]
 [ext_resource type="PackedScene" uid="uid://n5vppo12dhp8" path="res://scenes/bomb_bullet.tscn" id="2_aawvb"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="3_krnit"]
+[ext_resource type="Texture2D" uid="uid://dif3ge66pql4v" path="res://bomber-removebg-preview.png" id="3_aawvb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ienpx"]
+atlas = ExtResource("3_aawvb")
+region = Rect2(0, 0, 360, 497)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ienpx")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ma48p"]
 
@@ -18,10 +33,10 @@ script = ExtResource("1_t2w1a")
 bullet_scene = ExtResource("2_aawvb")
 damage_type = "explosive"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=501645870]
-position = Vector2(9.536743e-07, 0)
-scale = Vector2(0.18554688, 0.18554688)
-texture = ExtResource("3_krnit")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1573041259]
+position = Vector2(-2, 2.0000005)
+scale = Vector2(0.07083333, 0.070833325)
+sprite_frames = SubResource("SpriteFrames_h621j")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=130817041]
 shape = SubResource("RectangleShape2D_ma48p")

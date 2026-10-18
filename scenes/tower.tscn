@@ -1,8 +1,36 @@
 [gd_scene format=3 uid="uid://duabru7jajvy8"]
 
 [ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_ay4al"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_ktxwe"]
 [ext_resource type="PackedScene" uid="uid://cm5l6lpro0j1j" path="res://scenes/bullet.tscn" id="2_qrbg1"]
+[ext_resource type="Texture2D" uid="uid://d4kil1h55ddhn" path="res://ttt2-removebg-preview.png" id="3_qrbg1"]
+[ext_resource type="Texture2D" uid="uid://bmb8ln8m3uhvh" path="res://ttt-removebg-preview.png" id="4_jfguu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85u2j"]
+atlas = ExtResource("3_qrbg1")
+region = Rect2(0, 0, 400, 507)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl0gn"]
+atlas = ExtResource("4_jfguu")
+region = Rect2(0, 0, 412, 490)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85u2j")
+}],
+"loop": 1,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl0gn")
+}],
+"loop": 1,
+"name": &"holding",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
 size = Vector2(22.5, 22.5)
@@ -18,10 +46,12 @@ collision_layer = 4
 script = ExtResource("1_ay4al")
 bullet_scene = ExtResource("2_qrbg1")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=449758929]
-position = Vector2(9.536743e-07, 0)
-scale = Vector2(0.18554688, 0.18554688)
-texture = ExtResource("2_ktxwe")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1890673458]
+position = Vector2(-3, 3)
+scale = Vector2(0.0782767, 0.07827671)
+sprite_frames = SubResource("SpriteFrames_h621j")
+animation = &"empty"
+autoplay = "holding"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105990232]
 shape = SubResource("RectangleShape2D_h621j")

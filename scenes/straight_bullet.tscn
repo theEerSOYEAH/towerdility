@@ -1,23 +1,39 @@
 [gd_scene format=3 uid="uid://ljvnapj2b1fa"]
 
 [ext_resource type="Script" uid="uid://bq5fvscejfawb" path="res://scripts/straight_bullet.gd" id="1_t6upw"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_jb1o2"]
+[ext_resource type="Texture2D" uid="uid://bmb8ln8m3uhvh" path="res://ttt-removebg-preview.png" id="2_t6upw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_akaae"]
-size = Vector2(6, 6)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb1o2"]
+size = Vector2(10, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akaae"]
+atlas = ExtResource("2_t6upw")
+region = Rect2(404, 0, 101, 490)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nloko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akaae")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="straight_bullet" type="Area2D" unique_id=691682624]
+scale = Vector2(0.5212759, 0.5212759)
 collision_mask = 2
 script = ExtResource("1_t6upw")
 speed = 700
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1090932999]
-position = Vector2(2.75, -2.75)
-scale = Vector2(0.05078125, 0.05078125)
-texture = ExtResource("2_jb1o2")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2089560737]
+position = Vector2(5, -13)
+shape = SubResource("RectangleShape2D_jb1o2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1395529721]
-position = Vector2(3, -3)
-shape = SubResource("RectangleShape2D_akaae")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1070431574]
+position = Vector2(5.21875, -13.764234)
+scale = Vector2(0.07487624, 0.07487624)
+sprite_frames = SubResource("SpriteFrames_nloko")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

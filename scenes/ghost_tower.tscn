@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://6u4ev7t73sjt"]
 
 [ext_resource type="Script" uid="uid://b40x8168qsdlr" path="res://scripts/ghost_tower.gd" id="1_l4prx"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_xsv2s"]
 [ext_resource type="PackedScene" uid="uid://duabru7jajvy8" path="res://scenes/tower.tscn" id="2_yjuk8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h621j"]
@@ -10,11 +9,6 @@ radius = 16.0
 [node name="GhostTower" type="Node2D" unique_id=2072011087]
 script = ExtResource("1_l4prx")
 real_tower_scene = ExtResource("2_yjuk8")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1564265014]
-position = Vector2(9.536743e-07, 0)
-scale = Vector2(0.18554688, 0.18554688)
-texture = ExtResource("2_xsv2s")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=48396165]
 collision_layer = 2

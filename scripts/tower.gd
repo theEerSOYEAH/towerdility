@@ -8,7 +8,8 @@ extends StaticBody2D
 @export var damage_type = "sharp"
 @onready var range_area: Area2D = $RangeArea
 @export var follow_mouse = false 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var click_area = $ClickArea
 
 var damange_bonus = 0
@@ -17,32 +18,56 @@ var speed_level = 0
 var range_level = 0
 var total_spent = 0
 
+var locked = false
+var awaiting_lock = false
+var locked_position = Vector2.ZERO
+
 const MAX_LEVEL = 3
 const UPGRADE_COST = [1, 1, 1]
 
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
 
-
+func play_throw_anim():
+	if not sprite.sprite_frames or not sprite.sprite_frames.has_animation("empty"):
+		return
+	sprite.play("empty")
+	await get_tree().create_timer(fire_timer.wait_time * 0.8).timeout
+	if is_inside_tree():
+		sprite.play("holding")
 
 func _process(delta: float) -> void:
 	if follow_mouse:
-		var angle = (get_global_mouse_position() - global_position).angle()
+		var angle = (get_aim_position() - global_position).angle()
 		sprite.rotation = angle
-		sprite.flip_v = abs(angle)
+		sprite.flip_v = abs(angle) > PI / 2
 	
 
 var selected = false
+
 
 func _draw():
 	if selected:
 		var shape = range_area.get_node("CollisionShape2D").shape
 		var r = shape.radius * range_area.scale.x
-		draw_circle(Vector2.ZERO, r, Color(1,1,1, 0.15))
-		draw_arc(Vector2.ZERO, r, 0, TAU, 64, Color(1,1,1, 0.6), 1.0)
+		draw_circle(Vector2.ZERO, r, Color(1, 1, 1, 0.15))
+		draw_arc(Vector2.ZERO, r, 0, TAU, 64, Color(1, 1, 1, 0.6), 1.0)
 
+	if locked:
+		var p = to_local(locked_position)
+		draw_line(p + Vector2(-6, 0), p + Vector2(6, 0), Color.RED, 1.5)
+		draw_line(p + Vector2(0, -6), p + Vector2(0, 6), Color.RED, 1.5)
+		draw_arc(p, 5, 0, TAU, 16, Color.RED, 1.5)
+	
+	
+	
+	
 func set_selected(value):
 	selected = value
+	if value:
+		add_to_group("selected_towers")
+	else:
+		remove_from_group("selected_towers")
 	queue_redraw()
 
 func _ready() -> void:
@@ -66,7 +91,36 @@ func _ready() -> void:
 	fire_timer.start()
 
 
+func start_locking():
+	if not follow_mouse:
+		return
+	awaiting_lock = true
 
+func _unlock():
+	locked = false
+	awaiting_lock = false
+	queue_redraw()
+
+func get_aim_position():
+	if locked:
+		return locked_position
+	return get_global_mouse_position()
+
+func _unhandled_input(event) -> void:
+	if not awaiting_lock:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			locked_position = get_global_mouse_position()
+			locked = true
+			awaiting_lock = false
+			get_viewport().set_input_as_handled()
+			queue_redraw()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			awaiting_lock = false
+			get_viewport().set_input_as_handled()
+			
+		
 
 
 func _on_range_area_body_entered(body: Node2D) -> void:
@@ -79,7 +133,6 @@ func _on_range_area_body_entered(body: Node2D) -> void:
 func _on_range_area_body_exited(body: Node2D) -> void:
 	if body in enemies_in_range:
 		enemies_in_range.erase(body)
-
 
 func _on_fire_timer_timeout() -> void:
 	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
@@ -97,25 +150,38 @@ func shoot(target: Node2D):
 	
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	bullet.target = target
 	bullet.damage_type = damage_type
 	bullet.damage += damange_bonus
 	
+	if "target" in bullet:
+		bullet.target = target
+	else:
+		bullet.direction = (target.global_position - global_position).normalized()
+	
+	
 	get_tree().root.add_child(bullet)
+	play_throw_anim()
 
 func shoot_at_mouse():
 	if not bullet_scene:
 		return
+
+	var aim = get_aim_position()
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position
-	bullet.direction = (get_global_mouse_position() - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+	bullet.direction = (aim - global_position).normalized().rotated(randf_range(-0.06, 0.06))
+	bullet.damage_type = damage_type
+	bullet.damage += damange_bonus
 
-	
 	get_tree().root.add_child(bullet)
-	
+
 func _on_click_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("clicked")
+		if follow_mouse:
+			for t in get_tree().get_nodes_in_group("lock_target"):
+				t.remove_from_group("lock_target")
+			add_to_group("lock_target")
 		var panel = get_tree().get_first_node_in_group("upgrade_panel")
 		print("panel is: ", panel)
 		if panel:

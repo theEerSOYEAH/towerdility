@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://dtulur36fsnd4" path="res://scripts/enemy_spawn_button.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://fliox5m84lr1" path="res://scenes/falsity.tscn" id="4_vxglm"]
 [ext_resource type="PackedScene" uid="uid://dsk53h8u834u8" path="res://scenes/obesity.tscn" id="5_2f3dj"]
-[ext_resource type="Script" uid="uid://dwlty4s3lljc1" path="res://scripts/spawntower.gd" id="5_tefeu"]
 [ext_resource type="Script" uid="uid://irkl2fuxlyfa" path="res://scripts/spawntower.gd" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://6u4ev7t73sjt" path="res://scenes/ghost_tower.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c15v4yekekt3j" path="res://scenes/xbow.tscn" id="6_tefeu"]
@@ -688,6 +687,7 @@ offset_top = 98.0
 offset_right = 308.0
 offset_bottom = 118.0
 script = ExtResource("22_jscy8")
+
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=704441761]
 offset_top = 1.0
 offset_right = 232.0
@@ -823,7 +823,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawntower" to="CanvasLayer/Sidebar/spawntower" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnxbow" to="CanvasLayer/Sidebar/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnbomber" to="CanvasLayer/Sidebar/spawnbomber" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnfarm" to="CanvasLayer/Sidebar/spawnfarm" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnmachine" to="CanvasLayer/Sidebar/spawnmachine" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/spawnfreezetower" to="CanvasLayer/Sidebar/spawnfreezetower" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

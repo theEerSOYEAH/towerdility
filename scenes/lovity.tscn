@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cumwgh5xyhaer"]
+
+[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_5mffs"]
+[ext_resource type="Texture2D" uid="uid://d0bvvsfsv8yrg" path="res://lovity-removebg-preview.png" id="2_5mffs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wh7tl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw0b3"]
+atlas = ExtResource("2_5mffs")
+region = Rect2(0, 0, 523, 477)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wh7tl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw0b3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="lovity" type="CharacterBody2D" unique_id=497770828 groups=["enemies"]]
+collision_layer = 2
+script = ExtResource("1_5mffs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=644059260]
+shape = SubResource("RectangleShape2D_wh7tl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=11918968]
+position = Vector2(0, 1)
+scale = Vector2(0.051821288, 0.051821273)
+sprite_frames = SubResource("SpriteFrames_wh7tl")

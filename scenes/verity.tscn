@@ -1,18 +1,34 @@
 [gd_scene format=3 uid="uid://bqwfhfixrlxng"]
 
 [ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_6kb7q"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_05v41"]
+[ext_resource type="Texture2D" uid="uid://dqwdjjkpijfdb" path="res://verity-removebg-preview.png" id="2_6kb7q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05v41"]
+atlas = ExtResource("2_6kb7q")
+region = Rect2(0, 0, 487, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8hlnv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05v41")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="verity" type="CharacterBody2D" unique_id=136464191 groups=["enemies"]]
 collision_layer = 2
 script = ExtResource("1_6kb7q")
 is_metal = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=969545060]
-scale = Vector2(0.1484375, 0.1484375)
-texture = ExtResource("2_05v41")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=158663430]
 shape = SubResource("RectangleShape2D_h621j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1970182293]
+position = Vector2(-2.3841858e-07, 1)
+scale = Vector2(0.056211513, 0.056211513)
+sprite_frames = SubResource("SpriteFrames_8hlnv")

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dsk53h8u834u8"]
+
+[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_nwf8a"]
+[ext_resource type="Texture2D" uid="uid://dqwdjjkpijfdb" path="res://verity-removebg-preview.png" id="2_nwf8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vnik"]
+atlas = ExtResource("2_nwf8a")
+region = Rect2(0, 0, 487, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vnik")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx82q"]
+size = Vector2(29, 29)
+
+[node name="obesity" type="CharacterBody2D" unique_id=859524659 groups=["enemies"]]
+collision_layer = 2
+script = ExtResource("1_nwf8a")
+speed = 25
+max_health = 60
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2069582450]
+scale = Vector2(0.0929158, 0.09291581)
+sprite_frames = SubResource("SpriteFrames_h621j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1366821670]
+shape = SubResource("RectangleShape2D_sx82q")

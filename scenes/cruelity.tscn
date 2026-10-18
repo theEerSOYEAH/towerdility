@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b541lqwii34ab"]
+
+[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_4ga6c"]
+[ext_resource type="Texture2D" uid="uid://dcav4h0tgkbmj" path="res://curelity-removebg-preview.png" id="2_4ga6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkq8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlaff"]
+atlas = ExtResource("2_4ga6c")
+region = Rect2(0, 0, 524, 476)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkq8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlaff")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="cruelity" type="CharacterBody2D" unique_id=787063590 groups=["enemies"]]
+collision_layer = 2
+script = ExtResource("1_4ga6c")
+speed = 65
+max_health = 50
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=574290827]
+shape = SubResource("RectangleShape2D_mkq8a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1482295205]
+position = Vector2(1, 1)
+scale = Vector2(0.06302521, 0.0630252)
+sprite_frames = SubResource("SpriteFrames_mkq8a")

@@ -13,7 +13,8 @@ func _ready():
 	damage_button.pressed.connect(_on_damage_pressed)
 	speed_button.pressed.connect(_on_speed_pressed)
 	metal_button.pressed.connect(_on_metal_pressed)
-	close_button.pressed.connect(close)
+	close_button.pressed.connect(_on_sell_pressed)
+	
 
 func _unhandled_input(event):
 	if not visible:
@@ -65,7 +66,8 @@ func refresh():
 	else:
 		metal_button.text = "Piercing - " + str(tower.metal_cost) + " smiles"
 		metal_button.disabled = GameManager.smiles < tower.metal_cost
-		
+	
+	close_button.text = "Sell +" + str(int(tower.total_spent * 0.5))
 func button_text(upgrade_name, level):
 	var cost = tower.get_cost(level)
 	if cost == -1:
@@ -87,6 +89,13 @@ func _on_speed_pressed():
 func _on_metal_pressed():
 	tower.upgrade_metal()
 	refresh()
+
+func _on_sell_pressed():
+	if not is_instance_valid(tower):
+		return
+	var t = tower
+	close()
+	t.sell()
 
 func _process(_delta):
 	if visible:

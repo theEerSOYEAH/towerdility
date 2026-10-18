@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://0de6ack683eu"]
+
+[ext_resource type="Script" uid="uid://dtjrv4kcvjmrm" path="res://scripts/spikes.gd" id="1_ljd5v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6q6n"]
+radius = 5.3851647
+
+[node name="Spike" type="Area2D" unique_id=1060777740]
+collision_mask = 3
+script = ExtResource("1_ljd5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1287688391]
+shape = SubResource("CircleShape2D_e6q6n")

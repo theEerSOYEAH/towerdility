@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqwfhfixrlxng"]
 
-[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/enemy(idkwhichonefr).gd" id="1_6kb7q"]
+[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_6kb7q"]
 [ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="2_05v41"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]

@@ -22,17 +22,19 @@ animations = [{
 }]
 
 [node name="freeze_bullet" type="Area2D" unique_id=2051759888]
+rotation = 1.5828284
 scale = Vector2(0.45428172, 0.45428172)
 collision_mask = 2
 script = ExtResource("1_62057")
 slow_factor = 0.5
 slow_dur = 1.0
+rotation_offset_degrees = 90.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1058233260]
-position = Vector2(2, -6)
+position = Vector2(3.5624995, -9.239019)
 shape = SubResource("RectangleShape2D_p48nn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=308485235]
-position = Vector2(1.7187501, -4.9401)
+position = Vector2(3.2812495, -8.179119)
 scale = Vector2(0.052499995, 0.0378)
 sprite_frames = SubResource("SpriteFrames_p48nn")

@@ -32,6 +32,8 @@ collision_layer = 4
 script = ExtResource("1_t2w1a")
 bullet_scene = ExtResource("2_aawvb")
 damage_type = "explosive"
+sprite_offset_degrees = 90.0
+rotate_to_enemy = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1573041259]
 position = Vector2(-2, 2.0000005)

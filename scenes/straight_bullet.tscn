@@ -22,10 +22,12 @@ animations = [{
 }]
 
 [node name="straight_bullet" type="Area2D" unique_id=691682624]
+rotation = 1.5737809
 scale = Vector2(0.5212759, 0.5212759)
 collision_mask = 2
 script = ExtResource("1_t6upw")
 speed = 700
+rotation_offest_degrees = 90
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2089560737]
 position = Vector2(5, -13)

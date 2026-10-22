@@ -28,10 +28,13 @@ radius = 204.02206
 size = Vector2(24, 24)
 
 [node name="xbow" type="StaticBody2D" unique_id=1722262639]
+position = Vector2(-13, -12)
 collision_layer = 4
 script = ExtResource("1_5yb4y")
 bullet_scene = ExtResource("2_5yb4y")
 fire_rate = 0.1
+sprite_offset_degrees = 90.0
+rotate_to_enemy = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706371770]
 position = Vector2(-3.999999, 1.999999)

@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://pla2ivlbg5g8" path="res://assets/basic green/button square clicked.png" id="28_tel4y"]
 [ext_resource type="Texture2D" uid="uid://bcos4rfu4pnyg" path="res://assets/basic green/button square hover.png" id="29_qkpxi"]
 [ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="30_5q0nq"]
+[ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -1041,6 +1042,20 @@ text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="machinegunnertower" parent="." unique_id=1908431128 instance=ExtResource("11_ya4ey")]
+position = Vector2(334, 105)
+
+[node name="xbow" parent="." unique_id=1722262639 instance=ExtResource("6_tefeu")]
+position = Vector2(164, 182)
+
+[node name="first" type="Button" parent="." unique_id=332458765]
+offset_left = 9.0
+offset_top = 186.0
+offset_right = 80.0
+offset_bottom = 217.0
+text = "wasadw"
+script = ExtResource("44_cjqg0")
+
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Tower/spawntower" to="CanvasLayer/Sidebar/Control/Tower/spawntower" method="_on_pressed"]
@@ -1051,3 +1066,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" to="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" to="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[connection signal="pressed" from="first" to="first" method="_on_pressed"]

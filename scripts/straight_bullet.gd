@@ -4,6 +4,7 @@ extends Area2D
 @export var speed = 500
 @export var damage = 1
 @export var max_distance = 300
+@export var rotation_offest_degrees = 0
 
 var damage_type = "sharp"
 var direction = Vector2.ZERO
@@ -11,12 +12,18 @@ var travelled = 0.0
 
 func _ready():
 	body_entered.connect(_on_body_entered)
-	rotation = direction.angle()
-	
+	face_direction()
+
+func face_direction():
+	if direction.length() > 0.01:
+		rotation = direction.angle() + deg_to_rad(rotation_offest_degrees)
+
+
 func _physics_process(delta):
 	var step = direction * speed * delta
 	global_position += step
-	travelled = step.length()
+	travelled += step.length()
+	
 	
 	if travelled >= max_distance:
 		queue_free()

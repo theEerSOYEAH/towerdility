@@ -5,6 +5,7 @@ extends Area2D
 @export_range(0.0, 1.0) var slow_factor:float = 1.0
 @export var slow_dur = 0.0
 var damage_type = "sharp"
+@export var rotation_offset_degrees = 0.01
 
 var target : Node2D = null
 var last_position : Vector2
@@ -13,6 +14,13 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	if is_instance_valid(target):
 		last_position = target.global_position
+	face_target()
+	print("bulletready, targe:", target,"rotation", rotation_degrees)
+	
+func face_target():
+	var dir = last_position - global_position
+	if dir.length() > 0.01:
+		rotation = dir.angle() + deg_to_rad(rotation_offset_degrees)
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(target):
@@ -20,6 +28,8 @@ func _physics_process(delta: float) -> void:
 	
 	var direction = (last_position - global_position).normalized()
 	global_position += direction * speed * delta
+	
+	
 	
 	if global_position.distance_to(last_position) < 5:
 		queue_free()

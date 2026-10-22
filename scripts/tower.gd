@@ -1,6 +1,14 @@
 extends StaticBody2D
 
 
+
+enum TargetMode {FIRST, LAST, STRONGEST, WEAKEST}
+const MODE_NAMES =["First", "Last", "Strongest", "Weakist"]
+var target_mode = TargetMode.FIRST
+@export var flip_when_left = true
+@export var turn_speed = 12.0
+var aim_angle = 0.0
+var selected = false
 @export var base_cost = 0
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
@@ -9,6 +17,8 @@ extends StaticBody2D
 @onready var range_area: Area2D = $RangeArea
 @export var follow_mouse = false 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@export var sprite_offset_degrees = 0.0
+@export var rotate_to_enemy = false
 
 @onready var click_area = $ClickArea
 
@@ -28,6 +38,46 @@ const UPGRADE_COST = [20, 20, 20]
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
 
+
+func cycle_target_mode():
+	target_mode = (target_mode + 1) % MODE_NAMES.size()
+
+func get_target_mode_name():
+	return MODE_NAMES[target_mode]
+
+func get_progress(e: Node2D):
+	var pf = e.get_parent()
+	if pf is PathFollow2D:
+		return pf.progress
+	return 0.0
+
+func get_health(e: Node2D):
+	var hp = e.get("health")
+	return float(hp) if hp != null else 0.0
+
+func get_target():
+	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
+	var best: Node2D = null
+	var best_score := -INF
+	for e in enemies_in_range:
+		var score := 0.0
+		match target_mode:
+			TargetMode.FIRST:
+				score = get_progress(e)
+			TargetMode.LAST:
+				score = -get_progress(e)
+			TargetMode.STRONGEST:
+				score = get_health(e) + get_progress(e) * 0.0001
+			TargetMode.WEAKEST:
+				score = -get_health(e) + get_progress(e) * 0.0001
+		if score > best_score:
+			best_score = score
+			best = e 
+	return best
+
+
+
+
 func play_throw_anim():
 	if not sprite.sprite_frames or not sprite.sprite_frames.has_animation("empty"):
 		return
@@ -41,9 +91,36 @@ func _process(delta: float) -> void:
 		var angle = (get_aim_position() - global_position).angle()
 		sprite.rotation = angle
 		sprite.flip_v = abs(angle) > PI / 2
-	
+	elif rotate_to_enemy:
+		aim_at_enemy()
+		var goal = aim_angle + deg_to_rad(sprite_offset_degrees)
+		sprite.rotation = lerp_angle(sprite.rotation, goal, 1.0 - exp(-turn_speed * delta))
+		update_flip()
 
-var selected = false
+
+
+
+func face(target_pos: Vector2, snap:= false):
+	aim_angle = (target_pos - global_position).angle()
+	if snap:
+		sprite.rotation = aim_angle + deg_to_rad(sprite_offset_degrees)
+		update_flip()
+
+func update_flip():
+	if not flip_when_left:
+		return
+	var a = wrapf(sprite.rotation - deg_to_rad(sprite_offset_degrees), -PI, PI)
+	sprite.flip_v = abs(a) > PI / 2
+
+
+
+
+func aim_at_enemy():
+	
+	var t = get_target()
+	if t:
+		face(t.global_position)
+
 
 
 func _draw():
@@ -96,7 +173,7 @@ func start_locking():
 		return
 	awaiting_lock = true
 
-func _unlock():
+func unlock():
 	locked = false
 	awaiting_lock = false
 	queue_redraw()
@@ -135,19 +212,27 @@ func _on_range_area_body_exited(body: Node2D) -> void:
 		enemies_in_range.erase(body)
 
 func _on_fire_timer_timeout() -> void:
-	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
+	if follow_mouse:
+		
 	
-	if enemies_in_range.size() > 0:
-		if follow_mouse:
+	
+		enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
+	
+		if enemies_in_range.size() > 0:
 			shoot_at_mouse()
-		else:
-			shoot(enemies_in_range[0])
+		return
+	var t = get_target()
+	if t:
+		shoot(t)
 
 func shoot(target: Node2D):
+	
 	if not bullet_scene:
 		print("nobulletscene")
 		return
 	
+	if rotate_to_enemy:
+		face(target.global_position, true)
 	
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = global_position

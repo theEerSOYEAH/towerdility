@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-
+var buffs : Dictionary = {}
 
 enum TargetMode {FIRST, LAST, STRONGEST, WEAKEST}
 const MODE_NAMES =["First", "Last", "Strongest", "Weakist"]
@@ -38,6 +38,22 @@ const UPGRADE_COST = [20, 20, 20]
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
 
+func set_buff(source_id: int, speed_mult: float, damage_add: int):
+	buffs [source_id] = {"speed": speed_mult, "damage": damage_add}
+	refresh_fire_rate()
+
+func clear_buff(source_id: int):
+	if buffs.erase(source_id):
+		refresh_fire_rate()
+
+func get_buff_speed():
+	var best := 1.0
+	for b in buffs.values():
+		best = max(best, b["speed"])
+	return best
+
+func refresh_fire_rate():
+	fire_timer.wait_time = fire_rate * pow(0.8, speed_level)/ get_buff_speed()
 
 func cycle_target_mode():
 	target_mode = (target_mode + 1) % MODE_NAMES.size()
@@ -56,10 +72,18 @@ func get_health(e: Node2D):
 	return float(hp) if hp != null else 0.0
 
 func get_target():
-	enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
+	var candidates : Array
+	if target_mode == TargetMode.LAST:
+		candidates = get_tree().get_nodes_in_group("enemies").filter(
+			func(e): return is_instance_valid(e) and (can_see_camo or not e.is_camo)
+		)
+	else:
+		enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
+		candidates = enemies_in_range
+
 	var best: Node2D = null
 	var best_score := -INF
-	for e in enemies_in_range:
+	for e in candidates:
 		var score := 0.0
 		match target_mode:
 			TargetMode.FIRST:
@@ -72,8 +96,11 @@ func get_target():
 				score = -get_health(e) + get_progress(e) * 0.0001
 		if score > best_score:
 			best_score = score
-			best = e 
+			best = e
+	
+	
 	return best
+	
 
 
 
@@ -148,6 +175,7 @@ func set_selected(value):
 	queue_redraw()
 
 func _ready() -> void:
+	add_to_group("towers")
 	click_area.input_event.connect(_on_click_area_input_event)
 	
 	total_spent = base_cost
@@ -235,9 +263,13 @@ func shoot(target: Node2D):
 		face(target.global_position, true)
 	
 	var bullet = bullet_scene.instantiate()
+	
+	if "max_distance" in bullet:
+		var dist = global_position.distance_to(target.global_position)
+		bullet.max_distance = max(bullet.max_distance, dist + 100)
 	bullet.global_position = global_position
 	bullet.damage_type = damage_type
-	bullet.damage += damange_bonus
+	bullet.damage += damange_bonus + get_buff_speed()
 	
 	if "target" in bullet:
 		bullet.target = target
@@ -257,7 +289,7 @@ func shoot_at_mouse():
 	bullet.global_position = global_position
 	bullet.direction = (aim - global_position).normalized().rotated(randf_range(-0.06, 0.06))
 	bullet.damage_type = damage_type
-	bullet.damage += damange_bonus
+	bullet.damage += damange_bonus + get_buff_speed()
 
 	get_tree().root.add_child(bullet)
 
@@ -291,7 +323,7 @@ func upgrade_speed():
 	if cost == -1 or not GameManager.spend_smiles(cost):
 		return
 	speed_level += 1
-	fire_timer.wait_time *= 0.8
+	refresh_fire_rate()
 	total_spent += cost
 
 func upgrade_range():

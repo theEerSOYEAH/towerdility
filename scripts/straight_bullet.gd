@@ -9,6 +9,7 @@ extends Area2D
 var damage_type = "sharp"
 var direction = Vector2.ZERO
 var travelled = 0.0
+var target: Node2D = null
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -20,6 +21,12 @@ func face_direction():
 
 
 func _physics_process(delta):
+	
+	if is_instance_valid(target):
+		direction = (target.global_position - global_position).normalized()
+		face_direction()
+	
+	
 	var step = direction * speed * delta
 	global_position += step
 	travelled += step.length()
@@ -30,6 +37,8 @@ func _physics_process(delta):
 		
 func _on_body_entered(body) -> void:
 	if not body.is_in_group("enemies"):
+		return
+	if is_instance_valid(target) and body != target:
 		return
 	body.take_damage(damage, damage_type)
 	queue_free()

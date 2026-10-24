@@ -22,18 +22,21 @@ animations = [{
 size = Vector2(8, 18)
 
 [node name="arrow" type="Area2D" unique_id=691682624]
+rotation = 6.2743073
 scale = Vector2(2.7292573, 1.2760005)
 collision_mask = 2
 script = ExtResource("1_23jat")
 speed = 700
+rotation_offest_degrees = 90
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=937091194]
-position = Vector2(6.033107, -10.099896)
-scale = Vector2(0.063470304, 0.063470304)
+position = Vector2(0.68886137, 1.3444872)
+scale = Vector2(0.0308524, 0.034036063)
 sprite_frames = SubResource("SpriteFrames_hmv1p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=142103125]
-position = Vector2(5, -11)
+position = Vector2(-0.34424496, 0.44438267)
+scale = Vector2(0.48609185, 0.53625184)
 shape = SubResource("RectangleShape2D_uvnur")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

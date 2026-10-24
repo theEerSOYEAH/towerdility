@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c4g56utpuwvx6"]
+
+[ext_resource type="Script" uid="uid://ghkc6kuei3j" path="res://minion.gd" id="1_y8etf"]
+[ext_resource type="Texture2D" uid="uid://dqwdjjkpijfdb" path="res://verity-removebg-preview.png" id="2_b4arb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05v41"]
+atlas = ExtResource("2_b4arb")
+region = Rect2(0, 0, 487, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ddg2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05v41")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="minion" type="Node2D" unique_id=1225329036]
+script = ExtResource("1_y8etf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=76434090]
+position = Vector2(-2.3841858e-07, 1)
+scale = Vector2(0.056211513, 0.056211513)
+sprite_frames = SubResource("SpriteFrames_1ddg2")

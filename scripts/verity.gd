@@ -10,6 +10,8 @@ extends CharacterBody2D
 var slow_factor :float = 1.0
 var slow_time :float = 0.0
 
+var last_source = null
+
 var current_health  : int
 var is_dying = false
 var path_follow : PathFollow2D = null
@@ -33,13 +35,14 @@ func _process(delta: float) -> void:
 		if path_follow.progress_ratio >= 1.0:
 			reach_base()
 
-func take_damage(amount, damage_type = "sharp"):
+func take_damage(amount, damage_type = "sharp", source = null):
 	if is_dying:
 		return
 		
 	if is_metal and damage_type == "sharp":
 		return
 	
+	last_source = source
 	current_health -= amount
 	
 	if current_health <= 0:
@@ -68,4 +71,6 @@ func reach_base():
 func die():
 	is_dying = true
 	GameManager.add_smiles(reward, global_position)
+	if is_instance_valid(last_source) and last_source.has_method("on_enemy_killed"):
+		last_source.on_enemy_killed(global_position)
 	path_follow.queue_free()

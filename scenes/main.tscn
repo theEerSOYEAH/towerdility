@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b541lqwii34ab" path="res://scenes/cruelity.tscn" id="8_tel4y"]
 [ext_resource type="PackedScene" uid="uid://c34glpj3gk3h3" path="res://scenes/Bomber.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://ce61f4k8q8y2j" path="res://scenes/sidebar.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dmouibs8wb3sx" path="res://scenes/ferity.tscn" id="9_txyw0"]
 [ext_resource type="PackedScene" uid="uid://g60cdt3m7om8" path="res://scenes/spike_tower.tscn" id="10_0ld40"]
 [ext_resource type="PackedScene" uid="uid://xrwmeq5tqfpo" path="res://scenes/freeze_tower.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://cmmgdofqjr2b8" path="res://scenes/farm.tscn" id="10_yc10j"]
@@ -43,6 +44,10 @@
 [ext_resource type="Texture2D" uid="uid://pla2ivlbg5g8" path="res://assets/basic green/button square clicked.png" id="28_tel4y"]
 [ext_resource type="Texture2D" uid="uid://bcos4rfu4pnyg" path="res://assets/basic green/button square hover.png" id="29_qkpxi"]
 [ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="30_5q0nq"]
+[ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
+[ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
+[ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_nvyfr"]
+[ext_resource type="PackedScene" uid="uid://c4g56utpuwvx6" path="res://scenes/minion.tscn" id="48_ty1g6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -565,7 +570,7 @@ curve = SubResource("Curve2D_o5qli")
 
 [node name="EnemySpawner" parent="." unique_id=297624967 node_paths=PackedStringArray("path_2d") instance=ExtResource("2_0wfyh")]
 path_2d = NodePath("../Path2D")
-enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("4_vxglm"), ExtResource("5_2f3dj"), ExtResource("6_yq6so"), ExtResource("7_fv21b"), ExtResource("8_tel4y")])
+enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("4_vxglm"), ExtResource("5_2f3dj"), ExtResource("6_yq6so"), ExtResource("7_fv21b"), ExtResource("8_tel4y"), ExtResource("9_txyw0")])
 auto_next_wave = true
 
 [node name="enemy spawn button" type="Button" parent="." unique_id=684955736]
@@ -1041,6 +1046,34 @@ text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="machinegunnertower" parent="." unique_id=1908431128 instance=ExtResource("11_ya4ey")]
+position = Vector2(334, 105)
+
+[node name="xbow" parent="." unique_id=1722262639 instance=ExtResource("6_tefeu")]
+position = Vector2(164, 182)
+
+[node name="first" type="Button" parent="." unique_id=332458765]
+offset_left = 9.0
+offset_top = 186.0
+offset_right = 80.0
+offset_bottom = 217.0
+text = "wasadw"
+script = ExtResource("44_cjqg0")
+
+[node name="Button" type="Button" parent="." unique_id=1838354523]
+offset_left = 8.0
+offset_top = 150.0
+offset_right = 52.0
+offset_bottom = 181.0
+text = "wasf"
+script = ExtResource("5_tefeu")
+ghost_tower_scene = ExtResource("6_o6xl0")
+real_tower_scene = ExtResource("45_vchkt")
+
+[node name="wizard" parent="." unique_id=190908816 instance=ExtResource("47_nvyfr")]
+position = Vector2(77, 92)
+minion_scene = ExtResource("48_ty1g6")
+
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Tower/spawntower" to="CanvasLayer/Sidebar/Control/Tower/spawntower" method="_on_pressed"]
@@ -1051,3 +1084,5 @@ vertical_alignment = 1
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" to="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" to="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[connection signal="pressed" from="first" to="first" method="_on_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

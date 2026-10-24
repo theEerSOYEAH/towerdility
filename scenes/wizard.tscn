@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://c8he6sn7vw5au"]
+
+[ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_nmnu7"]
+[ext_resource type="PackedScene" uid="uid://cm5l6lpro0j1j" path="res://scenes/bullet.tscn" id="2_5ipgv"]
+[ext_resource type="Texture2D" uid="uid://d4kil1h55ddhn" path="res://ttt2-removebg-preview.png" id="3_8qlyk"]
+[ext_resource type="Texture2D" uid="uid://bmb8ln8m3uhvh" path="res://ttt-removebg-preview.png" id="4_4jkov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85u2j"]
+atlas = ExtResource("3_8qlyk")
+region = Rect2(0, 0, 400, 507)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl0gn"]
+atlas = ExtResource("4_4jkov")
+region = Rect2(0, 0, 412, 490)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85u2j")
+}],
+"loop": 1,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl0gn")
+}],
+"loop": 1,
+"name": &"holding",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+size = Vector2(22.5, 22.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktxwe"]
+radius = 52.43627
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6q6n"]
+size = Vector2(24, 24)
+
+[node name="wizard" type="StaticBody2D" unique_id=190908816]
+collision_layer = 4
+script = ExtResource("1_nmnu7")
+bullet_scene = ExtResource("2_5ipgv")
+is_necromancer = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1890673458]
+position = Vector2(-3, 3)
+scale = Vector2(0.0782767, 0.07827671)
+sprite_frames = SubResource("SpriteFrames_h621j")
+animation = &"empty"
+autoplay = "holding"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105990232]
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=937334323]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=1102086692]
+position = Vector2(-2, 2)
+shape = SubResource("CircleShape2D_ktxwe")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=549957901]
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1700311056]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=45676704]
+shape = SubResource("RectangleShape2D_e6q6n")
+
+[connection signal="body_entered" from="RangeArea" to="." method="_on_range_area_body_entered"]
+[connection signal="body_exited" from="RangeArea" to="." method="_on_range_area_body_exited"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]

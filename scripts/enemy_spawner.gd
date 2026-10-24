@@ -21,6 +21,8 @@ var handmade_count = 0
 var hp_multiplier = 1.0
 
 func _ready() -> void:
+	path_2d.add_to_group("enemy_path")
+	
 	waves = [
 		[group(VERITY, 5)],
 		[group(VERITY, 5), group(FALSITY, 5)],

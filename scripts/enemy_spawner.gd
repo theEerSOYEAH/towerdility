@@ -12,6 +12,7 @@ const OBESITY = 2
 const LOVITY = 3
 const MOGGITY = 4
 const CRUELITY = 5
+const FERITY = 6
 
 var waves = []
 var current_wave = 0

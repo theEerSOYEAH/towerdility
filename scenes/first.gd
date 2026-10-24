@@ -17,5 +17,5 @@ func _process(delta: float) -> void:
 
 func _on_pressed() -> void:
 	var t = get_tree().get_first_node_in_group("selected_towers")
-	if t and has_method("cycle_target_mode"):
+	if t and t .has_method("cycle_target_mode"):
 		t.cycle_target_mode()

@@ -7,6 +7,7 @@ extends Area2D
 var damage_type = "sharp"
 @export var rotation_offset_degrees = 0.01
 
+var source_tower = null
 var target : Node2D = null
 var last_position : Vector2
 
@@ -37,9 +38,8 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	print("enteredbullet1")
 	if body == target:
-		body.take_damage(damage)
+		body.take_damage(damage, damage_type, source_tower)
 		if slow_dur > 0.0 and body.has_method("apply_slow"):
 			body.apply_slow(slow_factor, slow_dur)
-		body.take_damage(damage, damage_type)
 		queue_free()
 		

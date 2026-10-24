@@ -6,10 +6,10 @@ enum TargetMode {FIRST, LAST, STRONGEST, WEAKEST}
 const MODE_NAMES =["First", "Last", "Strongest", "Weakist"]
 var target_mode = TargetMode.FIRST
 @export var flip_when_left = true
-@export var turn_speed = 12.0
+@export var turn_speed: float = 12.0
 var aim_angle = 0.0
 var selected = false
-@export var base_cost = 0
+@export var base_cost : int = 0
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
 @export var can_see_camo = false
@@ -19,6 +19,14 @@ var selected = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var sprite_offset_degrees = 0.0
 @export var rotate_to_enemy = false
+@export var is_necromancer = false
+@export var minion_scene : PackedScene
+@export var max_minions = 3
+@export var minion_lifetime = 12
+var minions : Array = []
+
+
+@export var minion_leash = 120
 
 @onready var click_area = $ClickArea
 
@@ -38,19 +46,71 @@ const UPGRADE_COST = [20, 20, 20]
 var enemies_in_range : Array = []
 @onready var fire_timer : Timer = $FireTimer
 
+
+func on_enemy_killed(pos: Vector2):
+	if not is_necromancer:
+		return
+	spawn_minion(get_path_end())
+
+func get_path_end() -> Vector2:
+	var p = get_tree().get_first_node_in_group("enemy_path")
+	if p == null or p.curve == null or p.curve.point_count == 0:
+		print("noenemypathfound")
+		return global_position
+	return p.to_global(p.curve.get_point_position(p.curve.point_count - 1))
+
+func spawn_minion(pos: Vector2):
+		if not minion_scene:
+			return
+		minions = minions.filter(func(m): return is_instance_valid(m))
+		if minions.size() >= max_minions:
+			return
+		var m = minion_scene.instantiate()
+		m.home = pos
+		m.damage = 1 + damange_bonus + get_buff_damage()
+		m.damage_type = damage_type
+		m.can_see_camo = can_see_camo
+		m.lifetime = minion_lifetime
+		m.leash = range_area.get_node("CollisionShape2D").shape.radius * range_area.scale.x
+		get_tree().root.add_child(m)
+		m.global_position = pos
+		minions.append(m)
+
+func _exit_tree() -> void:
+	for m in minions:
+		if is_instance_valid(m):
+			m.queue_free()
+
+
 func set_buff(source_id: int, speed_mult: float, damage_add: int):
-	buffs [source_id] = {"speed": speed_mult, "damage": damage_add}
+	var new_buff = {"speed": speed_mult, "damage": damage_add}
+	if buffs.get(source_id) == new_buff:
+		return
+	buffs[source_id] = new_buff
 	refresh_fire_rate()
+	print(name, "buffed: wait_time=", fire_timer.wait_time, "damage_bonus=", get_buff_damage())
+
+
+
 
 func clear_buff(source_id: int):
 	if buffs.erase(source_id):
 		refresh_fire_rate()
+		print(name, "buff removed wait_time=", fire_timer.wait_time)
 
 func get_buff_speed():
 	var best := 1.0
 	for b in buffs.values():
 		best = max(best, b["speed"])
 	return best
+
+func get_buff_damage():
+	var best := 0
+	for b in buffs.values():
+		best = max(best, b["damage"])
+	return best
+
+
 
 func refresh_fire_rate():
 	fire_timer.wait_time = fire_rate * pow(0.8, speed_level)/ get_buff_speed()
@@ -62,12 +122,14 @@ func get_target_mode_name():
 	return MODE_NAMES[target_mode]
 
 func get_progress(e: Node2D):
+	if not is_instance_valid(e):
+		return 0.0
 	var pf = e.get_parent()
 	if pf is PathFollow2D:
-		return pf.progress
+		return float(pf.progress)
 	return 0.0
 
-func get_health(e: Node2D):
+func get_health(e: Node2D) -> float:
 	var hp = e.get("health")
 	return float(hp) if hp != null else 0.0
 
@@ -269,7 +331,9 @@ func shoot(target: Node2D):
 		bullet.max_distance = max(bullet.max_distance, dist + 100)
 	bullet.global_position = global_position
 	bullet.damage_type = damage_type
-	bullet.damage += damange_bonus + get_buff_speed()
+	if "source_tower" in bullet:
+		bullet.source_tower = self
+	bullet.damage += damange_bonus + get_buff_damage()
 	
 	if "target" in bullet:
 		bullet.target = target

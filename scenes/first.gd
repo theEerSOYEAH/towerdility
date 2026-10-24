@@ -7,9 +7,9 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	var t = get_tree().get_first_node_in_group("selected_towers")
-	visible = t != null and not t.follow_mouse
+	visible = t != null and t.has_method("cycle_target_mode") and not t.follow_mouse
 	if visible:
-		text = "target" +  t.get_target_mode_name()
+		text = "target " +  t.get_target_mode_name()
 	
 	
 
@@ -17,5 +17,5 @@ func _process(delta: float) -> void:
 
 func _on_pressed() -> void:
 	var t = get_tree().get_first_node_in_group("selected_towers")
-	if t:
+	if t and has_method("cycle_target_mode"):
 		t.cycle_target_mode()

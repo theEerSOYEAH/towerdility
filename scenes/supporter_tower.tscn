@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://chk1t5lxmdejb"]
+
+[ext_resource type="Script" uid="uid://ov6fu8af2k1f" path="res://scripts/supporter_tower.gd" id="1_8ywro"]
+[ext_resource type="Texture2D" uid="uid://42illptfpex1" path="res://xbow-removebg-preview.png" id="2_i7lgj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q2h8"]
+atlas = ExtResource("2_i7lgj")
+region = Rect2(0, 0, 397, 498)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0e10q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q2h8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkugm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_doqqp"]
+radius = 49.09175
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmefs"]
+size = Vector2(24, 24)
+
+[node name="SupporterTower" type="StaticBody2D" unique_id=1482339123]
+collision_layer = 4
+script = ExtResource("1_8ywro")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=235518348]
+position = Vector2(-3.999999, 1.999999)
+scale = Vector2(0.097607054, 0.097607054)
+sprite_frames = SubResource("SpriteFrames_0e10q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1049225539]
+shape = SubResource("RectangleShape2D_lkugm")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=448110675]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=1801280427]
+shape = SubResource("CircleShape2D_doqqp")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=1335812889]
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=292452130]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=757137870]
+shape = SubResource("RectangleShape2D_pmefs")

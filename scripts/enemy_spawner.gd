@@ -14,6 +14,11 @@ const LOVITY = 3
 const MOGGITY = 4
 const CRUELITY = 5
 const FERITY = 6
+const C_VERITY = 7
+const C_FALSITY = 8
+const C_LOVITY = 9
+const C_MOGGITY = 10
+const C_CRUELITY = 11
 
 var waves = []
 var current_wave = 0
@@ -26,6 +31,7 @@ func _ready() -> void:
 	(second_path if second_path else path_2d).add_to_group("enemy_path")
 	
 	waves = [
+		[group(C_VERITY, 10)],
 		[group(VERITY, 5)],
 		[group(VERITY, 5), group(FALSITY, 5)],
 		[group(VERITY, 5), group(OBESITY, 1)],
@@ -88,7 +94,7 @@ func spawn_enemy(g):
 	var enemy_instance = enemy_types[g["type"]].instantiate()
 	enemy_instance.max_health = int(enemy_instance.max_health * hp_multiplier)
 	enemy_instance.is_camo = g["camo"]
-	enemy_instance.is_metal = g["metal"]
+	enemy_instance.is_metal = enemy_instance.is_metal or g["metal"]
 	
 	enemy_instance.next_path = second_path
 	

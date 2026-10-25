@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://c4g56utpuwvx6"]
 
 [ext_resource type="Script" uid="uid://ghkc6kuei3j" path="res://minion.gd" id="1_y8etf"]
-[ext_resource type="Texture2D" uid="uid://dqwdjjkpijfdb" path="res://verity-removebg-preview.png" id="2_b4arb"]
+[ext_resource type="Texture2D" uid="uid://o1x46lr772hs" path="res://assets/feirty-removebg-preview.png" id="2_y8etf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8etf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_05v41"]
-atlas = ExtResource("2_b4arb")
-region = Rect2(0, 0, 487, 512)
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4arb"]
+atlas = ExtResource("2_y8etf")
+region = Rect2(0, 0, 501, 498)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4arb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_05v41")
+"texture": SubResource("AtlasTexture_b4arb")
 }],
 "loop": 1,
 "name": &"default",
@@ -28,6 +28,7 @@ max_health = 15
 shape = SubResource("RectangleShape2D_y8etf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724432275]
-position = Vector2(-2.3841858e-07, 1)
-scale = Vector2(0.056211513, 0.056211513)
+position = Vector2(0, 1)
+rotation = 3.1415927
+scale = Vector2(0.040153947, 0.040153947)
 sprite_frames = SubResource("SpriteFrames_b4arb")

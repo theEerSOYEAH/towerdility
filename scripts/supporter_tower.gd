@@ -33,7 +33,7 @@ func apply_buffs():
 		if not is_instance_valid(t):
 			continue
 		if global_position.distance_to(t.global_position) <= radius:
-			t.set_buff(get_instance_id(),1.0 + speed_bonus, damage_bonus)
+			t.set_buff(get_instance_id(), 1.0 + speed_bonus, damage_bonus)
 			now_in_range.append(t)
 	for t in buffed:
 		if is_instance_valid(t) and not now_in_range.has(t):

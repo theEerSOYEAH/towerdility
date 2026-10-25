@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_4ga6c"]
 [ext_resource type="Texture2D" uid="uid://dcav4h0tgkbmj" path="res://curelity-removebg-preview.png" id="2_4ga6c"]
+[ext_resource type="FontFile" uid="uid://btmeoec72ygkv" path="res://assets/LilitaOne-Regular.ttf" id="3_tlaff"]
+[ext_resource type="AudioStream" uid="uid://b655jcprur6dp" path="res://assets/goody/goody/enemy_hurt.ogg" id="4_mkq8a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkq8a"]
 
@@ -33,3 +35,17 @@ shape = SubResource("RectangleShape2D_mkq8a")
 position = Vector2(1, 1)
 scale = Vector2(0.06302521, 0.0630252)
 sprite_frames = SubResource("SpriteFrames_mkq8a")
+
+[node name="Label" type="Label" parent="." unique_id=1726704428]
+texture_filter = 2
+offset_left = -26.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -1.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_tlaff")
+theme_override_font_sizes/font_size = 13
+text = "Health:"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1676895874]
+stream = ExtResource("4_mkq8a")

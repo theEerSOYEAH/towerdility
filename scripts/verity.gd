@@ -8,6 +8,10 @@ var path_offset = 0.0
 @export var reward = 10
 @export var is_metal = false
 @export var is_camo = false
+@export var label_offset = Vector2(-10, -30)
+
+@onready var health_label: Label = $Label
+
 
 @export var minion_damage = 1
 var blocked = false
@@ -23,6 +27,9 @@ var path_follow : PathFollow2D = null
 
 func _ready() -> void:
 	current_health = max_health
+	if health_label:
+		health_label.top_level = true
+	update_health_label()
 	if get_parent() is PathFollow2D:
 		path_follow = get_parent()
 	
@@ -39,6 +46,8 @@ func _process(delta: float) -> void:
 		
 		if path_follow.progress_ratio >= 1.0:
 			reach_base()
+	if health_label:
+		health_label.global_position = global_position + label_offset
 
 func take_damage(amount, damage_type = "sharp", source = null):
 	if is_dying:
@@ -49,10 +58,11 @@ func take_damage(amount, damage_type = "sharp", source = null):
 	
 	last_source = source
 	current_health -= amount
+	$AudioStreamPlayer2D.play()
+	update_health_label()
 	
 	if current_health <= 0:
 		die()
-
 func apply_slow(factor : float, duration : float):
 	slow_factor = factor
 	slow_time = duration
@@ -100,3 +110,7 @@ func switch_path():
 	np.add_child(new_pf)
 	path_follow = new_pf
 	old_pf.queue_free()
+
+func update_health_label():
+	if health_label:
+		health_label.text = str(max(current_health, 0))

@@ -21,6 +21,7 @@ var handmade_count = 0
 var hp_multiplier = 1.0
 
 func _ready() -> void:
+	add_to_group("spawner")
 	path_2d.add_to_group("enemy_path")
 	
 	waves = [

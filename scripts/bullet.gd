@@ -25,7 +25,10 @@ func face_target():
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(target):
-		last_position = target.global_position
+		if target.global_position.distance_to(last_position) > 100:
+			target = null
+		else:
+			last_position = target.global_position
 	
 	var direction = (last_position - global_position).normalized()
 	global_position += direction * speed * delta

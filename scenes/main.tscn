@@ -55,8 +55,6 @@
 [ext_resource type="Script" uid="uid://wnlt146njgq7" path="res://scripts/tung_upgrade_panel.gd" id="35_ty1g6"]
 [ext_resource type="Script" uid="uid://b8xqh66vei1uo" path="res://scripts/ace_upgrade_panel.gd" id="37_j2jfr"]
 [ext_resource type="Script" uid="uid://7lm6gwhs7pla" path="res://scripts/bomb_upgrade_panel.gd" id="39_ty1g6"]
-[ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
-[ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
 [ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_nvyfr"]
 [ext_resource type="Script" uid="uid://ccv5e0he16kmy" path="res://scripts/label.gd" id="48_bjg73"]
 [ext_resource type="Script" uid="uid://kewuwfi7aiwk" path="res://scenes/button_2.gd" id="48_nvyfr"]
@@ -818,7 +816,7 @@ script = ExtResource("5_tefeu")
 cost = 100
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("10_yc10j")
-hotkey = 54
+hotkey = 55
 
 [node name="Wizard" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=2069003780]
 position = Vector2(259, 335)
@@ -845,7 +843,7 @@ script = ExtResource("5_tefeu")
 cost = 100
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("47_nvyfr")
-hotkey = 54
+hotkey = 56
 
 [node name="Ace" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=1254883413]
 position = Vector2(45, 473)
@@ -872,7 +870,7 @@ script = ExtResource("5_tefeu")
 cost = 100
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("49_ty1g6")
-hotkey = 54
+hotkey = 57
 
 [node name="Spiker" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=507729026]
 position = Vector2(40, 337)
@@ -1301,38 +1299,14 @@ offset_bottom = 48.0
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("12_muem4")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("24_y6deb")
-
-[node name="first" type="Button" parent="." unique_id=332458765]
-offset_left = 9.0
-offset_top = 186.0
-offset_right = 80.0
-offset_bottom = 217.0
-text = "wasadw"
-script = ExtResource("44_cjqg0")
-
-[node name="Button" type="Button" parent="." unique_id=1838354523]
-offset_left = 8.0
-offset_top = 150.0
-offset_right = 52.0
-offset_bottom = 181.0
-text = "wasf"
-script = ExtResource("5_tefeu")
-ghost_tower_scene = ExtResource("6_o6xl0")
-real_tower_scene = ExtResource("45_vchkt")
 
 [node name="hirefarmer" type="Button" parent="." unique_id=72035270]
 offset_right = 8.0
 offset_bottom = 8.0
 script = ExtResource("48_nvyfr")
-
-[node name="farm" parent="." unique_id=520831333 instance=ExtResource("10_yc10j")]
-position = Vector2(100, 164)
-farmer_range = 30
-
-[node name="AceTower" parent="." unique_id=1551870440 instance=ExtResource("49_ty1g6")]
-position = Vector2(163, 182.00002)
-scale = Vector2(0.063, 0.063)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1546037644]
 stream = ExtResource("57_1v6qk")
@@ -1350,6 +1324,4 @@ autoplay = true
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" to="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" to="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
-[connection signal="pressed" from="first" to="first" method="_on_pressed"]
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="hirefarmer" to="hirefarmer" method="_on_pressed"]

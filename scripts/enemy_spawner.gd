@@ -34,13 +34,23 @@ func _ready() -> void:
 	(second_path if second_path else path_2d).add_to_group("enemy_path")
 	
 	waves = [
-		[group(C_VERITY, 10)],
 		[group(VERITY, 5)],
 		[group(VERITY, 5), group(FALSITY, 5)],
 		[group(VERITY, 5), group(OBESITY, 1)],
 		[group(VERITY, 15)],
 		[group(LOVITY, 25)],
 		[group(VERITY, 10),group(FALSITY, 10), group(OBESITY, 3)],
+		[group(CRUELITY, 5)],
+		[group(MOGGITY, 5)],
+		
+		[group(C_VERITY, 10)],
+		[group(C_VERITY, 5), group(C_FALSITY, 5)],
+		[group(C_VERITY, 5), group(OBESITY, 1)],
+		[group(C_VERITY, 15)],
+		[group(C_LOVITY, 25)],
+		[group(C_VERITY, 10),group(FALSITY, 10), group(OBESITY, 3)],
+		[group(C_CRUELITY, 5)],
+		[group(C_MOGGITY, 5)],
 		[]
 	]
 	

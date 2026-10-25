@@ -1151,6 +1151,18 @@ real_tower_scene = ExtResource("45_vchkt")
 [node name="Bomber" parent="." unique_id=1978504404 instance=ExtResource("8_tipki")]
 position = Vector2(162, 150)
 
+[node name="wizard2" parent="." unique_id=1845536826 instance=ExtResource("47_nvyfr")]
+position = Vector2(152, 91)
+
+[node name="wizard3" parent="." unique_id=205156948 instance=ExtResource("47_nvyfr")]
+position = Vector2(182, 90)
+
+[node name="wizard4" parent="." unique_id=1594520634 instance=ExtResource("47_nvyfr")]
+position = Vector2(241, 90)
+
+[node name="wizard5" parent="." unique_id=922807842 instance=ExtResource("47_nvyfr")]
+position = Vector2(173, 16)
+
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Tower/spawntower" to="CanvasLayer/Sidebar/Control/Tower/spawntower" method="_on_pressed"]

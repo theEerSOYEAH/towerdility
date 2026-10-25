@@ -7,6 +7,9 @@ extends CharacterBody2D
 @export var is_metal = false
 @export var is_camo = false
 
+@export var minion_damage = 1
+var blocked = false
+
 var slow_factor :float = 1.0
 var slow_time :float = 0.0
 
@@ -29,7 +32,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_update_slow(delta)
 	
-	if path_follow:
+	if path_follow and not blocked:
 		path_follow.progress += speed * slow_factor * delta
 		
 		if path_follow.progress_ratio >= 1.0:

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://1ptaruej1auy"]
+
+[ext_resource type="Script" uid="uid://dq2s5kbhudh4i" path="res://smilepickup.gd" id="1_n1jfm"]
+[ext_resource type="Texture2D" uid="uid://8p3dr33kildb" path="res://assets/farm-removebg-preview.png" id="2_byuu5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjgid"]
+atlas = ExtResource("2_byuu5")
+region = Rect2(0, 0, 496, 503)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8d0tw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjgid")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h621j"]
+radius = 9.0
+
+[node name="smilepickup" type="Area2D" unique_id=620663479]
+z_index = 5
+script = ExtResource("1_n1jfm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1881383459]
+position = Vector2(-1.0000005, 2.0000005)
+scale = Vector2(0.04233872, 0.042338725)
+sprite_frames = SubResource("SpriteFrames_8d0tw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=931174166]
+position = Vector2(-1, 2)
+shape = SubResource("CircleShape2D_h621j")

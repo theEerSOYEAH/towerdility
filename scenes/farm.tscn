@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cmmgdofqjr2b8"]
 
 [ext_resource type="Script" uid="uid://c6e0uwd84qnhl" path="res://scripts/farm.gd" id="1_kjpqf"]
+[ext_resource type="PackedScene" uid="uid://1ptaruej1auy" path="res://scenes/smilepickup.tscn" id="2_jjgid"]
 [ext_resource type="Texture2D" uid="uid://8p3dr33kildb" path="res://assets/farm-removebg-preview.png" id="2_kjpqf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jjgid"]
@@ -27,6 +28,10 @@ size = Vector2(24, 24)
 [node name="farm" type="StaticBody2D" unique_id=520831333]
 collision_layer = 4
 script = ExtResource("1_kjpqf")
+smilles_per_tick = 10
+interval = 4.0
+pick_up_scene = ExtResource("2_jjgid")
+max_pickups = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1916892196]
 position = Vector2(0, 1)

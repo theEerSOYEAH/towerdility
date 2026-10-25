@@ -34,7 +34,7 @@ panel_group = "bomb_upgrade_panel"
 bullet_scene = ExtResource("2_aawvb")
 is_bomber = true
 damage_type = "explosive"
-sprite_offset_degrees = 90.0
+sprite_offset_degrees = -90.0
 rotate_to_enemy = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1573041259]

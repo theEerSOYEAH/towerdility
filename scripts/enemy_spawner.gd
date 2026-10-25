@@ -24,8 +24,9 @@ var save_timer = 0.0
 var finished = false
 
 func _ready() -> void:
-	if GameManager.load_pending:
-		GameManager.apply_save.call_deferred(self)
+	add_to_group("spawner")
+	path_2d.add_to_group("enemy_path")
+	
 	waves = [
 		[group(VERITY, 5)],
 		[group(VERITY, 5), group(FALSITY, 5)],

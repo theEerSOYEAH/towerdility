@@ -58,6 +58,7 @@ var enemies_in_range : Array = []
 
 
 func on_enemy_killed(pos: Vector2):
+	print("kill reported, necro = ", is_necromancer)
 	if not is_necromancer:
 		return
 	spawn_minion(get_path_end())
@@ -67,23 +68,32 @@ func get_path_end() -> Vector2:
 	if p == null or p.curve == null or p.curve.point_count == 0:
 		print("noenemypathfound")
 		return global_position
-	return p.to_global(p.curve.get_point_position(p.curve.point_count - 1))
+	return p.to_global(p.curve.get_point_position(p.curve.point_count - 0))
 
 func spawn_minion(pos: Vector2):
 		if not minion_scene:
+			print("2341")
 			return
 		minions = minions.filter(func(m): return is_instance_valid(m))
 		if minions.size() >= max_minions:
 			return
 		var m = minion_scene.instantiate()
-		m.home = pos
-		m.damage = 1 + damange_bonus + get_buff_damage()
+
+		m.damage = 5 + damange_bonus + get_buff_damage()
 		m.damage_type = damage_type
 		m.can_see_camo = can_see_camo
 		m.lifetime = minion_lifetime
-		m.leash = range_area.get_node("CollisionShape2D").shape.radius * range_area.scale.x
-		get_tree().root.add_child(m)
-		m.global_position = pos
+		var path = get_tree().get_first_node_in_group("enemy_path")
+		var pf = PathFollow2D.new()
+		pf.loop = false
+		pf.rotates = false
+		path.add_child(pf)
+		pf.progress = path.curve.get_baked_length()
+		pf.add_child(m)
+
+
+
+		print("29990")
 		minions.append(m)
 
 func _exit_tree() -> void:

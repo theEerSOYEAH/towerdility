@@ -1,0 +1,782 @@
+[gd_scene format=3 uid="uid://ctqe44k48xvpd"]
+
+[ext_resource type="PackedScene" uid="uid://c115e8i6qkr26" path="res://scenes/map2.tscn" id="1_8orhx"]
+[ext_resource type="PackedScene" uid="uid://jqgtvuuhyc1s" path="res://scenes/enemy_spawner.tscn" id="2_r5f8p"]
+[ext_resource type="PackedScene" uid="uid://bqwfhfixrlxng" path="res://scenes/verity.tscn" id="3_uybgx"]
+[ext_resource type="PackedScene" uid="uid://fliox5m84lr1" path="res://scenes/falsity.tscn" id="4_mcrco"]
+[ext_resource type="PackedScene" uid="uid://dsk53h8u834u8" path="res://scenes/obesity.tscn" id="5_42gi7"]
+[ext_resource type="PackedScene" uid="uid://cumwgh5xyhaer" path="res://scenes/lovity.tscn" id="6_8xfqg"]
+[ext_resource type="PackedScene" uid="uid://cf16g7vca6xw4" path="res://scenes/moggity.tscn" id="7_x4qps"]
+[ext_resource type="PackedScene" uid="uid://b541lqwii34ab" path="res://scenes/cruelity.tscn" id="8_860xc"]
+[ext_resource type="PackedScene" uid="uid://dmouibs8wb3sx" path="res://scenes/ferity.tscn" id="9_6g3hf"]
+[ext_resource type="Script" uid="uid://dtulur36fsnd4" path="res://scripts/enemy_spawn_button.gd" id="10_kxhy8"]
+[ext_resource type="PackedScene" uid="uid://ce61f4k8q8y2j" path="res://scenes/sidebar.tscn" id="11_jvw6i"]
+[ext_resource type="Script" uid="uid://irkl2fuxlyfa" path="res://scripts/spawntower.gd" id="12_pqaf0"]
+[ext_resource type="PackedScene" uid="uid://6u4ev7t73sjt" path="res://scenes/ghost_tower.tscn" id="13_ewarj"]
+[ext_resource type="PackedScene" uid="uid://g60cdt3m7om8" path="res://scenes/spike_tower.tscn" id="14_8qj0i"]
+[ext_resource type="Texture2D" uid="uid://c5ljnrxdbdna3" path="res://assets/ttt-removebg-preview.png" id="15_jajca"]
+[ext_resource type="PackedScene" uid="uid://duabru7jajvy8" path="res://scenes/tower.tscn" id="16_x5fdg"]
+[ext_resource type="FontFile" uid="uid://btmeoec72ygkv" path="res://assets/LilitaOne-Regular.ttf" id="17_p4kqa"]
+[ext_resource type="Texture2D" uid="uid://d26v45htebnjj" path="res://assets/sniper-removebg-preview.png" id="18_g6qgf"]
+[ext_resource type="PackedScene" uid="uid://dfaw4u3nyjh40" path="res://scenes/sniper.tscn" id="19_yqm44"]
+[ext_resource type="Texture2D" uid="uid://cnd3yc3pu4xrr" path="res://assets/machinettt-removebg-preview.png" id="20_buh85"]
+[ext_resource type="PackedScene" uid="uid://4wgeqorwktoa" path="res://scenes/machinegunnertower.tscn" id="21_k1lrw"]
+[ext_resource type="Texture2D" uid="uid://dn6jmouxcbfx3" path="res://assets/fttt-removebg-preview.png" id="22_01gla"]
+[ext_resource type="PackedScene" uid="uid://xrwmeq5tqfpo" path="res://scenes/freeze_tower.tscn" id="23_av81t"]
+[ext_resource type="Texture2D" uid="uid://8p3dr33kildb" path="res://assets/farm-removebg-preview.png" id="24_71clg"]
+[ext_resource type="PackedScene" uid="uid://cmmgdofqjr2b8" path="res://scenes/farm.tscn" id="25_iivu8"]
+[ext_resource type="Texture2D" uid="uid://dda8vo4egm8yc" path="res://assets/bomber-removebg-preview.png" id="26_kgrv8"]
+[ext_resource type="PackedScene" uid="uid://c34glpj3gk3h3" path="res://scenes/Bomber.tscn" id="27_bonnq"]
+[ext_resource type="Texture2D" uid="uid://cg4201ebtiltr" path="res://assets/xbow-removebg-preview.png" id="28_pxgqi"]
+[ext_resource type="PackedScene" uid="uid://c15v4yekekt3j" path="res://scenes/xbow.tscn" id="29_ei8et"]
+[ext_resource type="Texture2D" uid="uid://cyurwdac5oqnk" path="res://assets/basic green/button wider hover.png" id="30_3xyfk"]
+[ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="31_u7jwh"]
+[ext_resource type="Texture2D" uid="uid://c6mteh6nyjj57" path="res://assets/basic green/button wide clicked.png" id="32_dykri"]
+[ext_resource type="Texture2D" uid="uid://coifemcqhk0ea" path="res://assets/basic green/pop up window.png" id="33_sgu7j"]
+[ext_resource type="Script" uid="uid://bs77p2qks1ga1" path="res://scripts/upgrade_panel.gd" id="34_4ynuh"]
+[ext_resource type="Script" uid="uid://nehmj0m5gf8h" path="res://scripts/mg_upgrade_panel.gd" id="35_6md8y"]
+[ext_resource type="Script" uid="uid://db5m0gc1gyg8x" path="res://scripts/sniper_upgrade_panel.gd" id="36_xbodv"]
+[ext_resource type="Script" uid="uid://dmwxmxraf1trq" path="res://scenes/button.gd" id="37_p2s48"]
+[ext_resource type="Texture2D" uid="uid://cj05l8eqpt7y" path="res://assets/basic green/icon panel small.png" id="38_pnwyu"]
+[ext_resource type="Script" uid="uid://boktgprj2or6c" path="res://scripts/smile_counter.gd" id="39_usoxk"]
+[ext_resource type="Script" uid="uid://n3tfpk2htqm1" path="res://scripts/game_over.gd" id="40_ltxdl"]
+[ext_resource type="Texture2D" uid="uid://bwimetobjlugt" path="res://assets/basic green/button square idle.png" id="41_bxcdd"]
+[ext_resource type="Texture2D" uid="uid://pla2ivlbg5g8" path="res://assets/basic green/button square clicked.png" id="42_1sl8j"]
+[ext_resource type="Texture2D" uid="uid://bcos4rfu4pnyg" path="res://assets/basic green/button square hover.png" id="43_3w6mx"]
+[ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="44_adqkm"]
+[ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="45_7vp6j"]
+[ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="46_iyusa"]
+[ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_2hpb2"]
+[ext_resource type="Script" uid="uid://kewuwfi7aiwk" path="res://scenes/button_2.gd" id="48_fyqft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+size = Vector2(20, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_po753"]
+size = Vector2(69.5, 25.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjqg0"]
+atlas = ExtResource("15_jajca")
+region = Rect2(0, 0, 413, 490)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e6q6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjqg0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vchkt"]
+atlas = ExtResource("18_g6qgf")
+region = Rect2(0, 0, 368, 483)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_txyw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vchkt")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cjbq"]
+atlas = ExtResource("20_buh85")
+region = Rect2(0, 0, 493, 506)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bjg73"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cjbq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txyw0"]
+atlas = ExtResource("22_01gla")
+region = Rect2(0, 0, 395, 499)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vc5cj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txyw0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvyfr"]
+atlas = ExtResource("24_71clg")
+region = Rect2(0, 0, 496, 503)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ty1g6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvyfr")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc5cj"]
+atlas = ExtResource("26_kgrv8")
+region = Rect2(0, 0, 353, 497)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvyfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc5cj")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty1g6"]
+atlas = ExtResource("28_pxgqi")
+region = Rect2(0, 0, 406, 498)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j2jfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty1g6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8y0u"]
+texture = ExtResource("30_3xyfk")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jbj1t"]
+texture = ExtResource("31_u7jwh")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jkv2x"]
+texture = ExtResource("32_dykri")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_muem4"]
+texture = ExtResource("33_sgu7j")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="Theme" id="Theme_trceg"]
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("17_p4kqa")
+Button/styles/hover = SubResource("StyleBoxTexture_a8y0u")
+Button/styles/normal = SubResource("StyleBoxTexture_jbj1t")
+Button/styles/pressed = SubResource("StyleBoxTexture_jkv2x")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_muem4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6q6n"]
+texture = ExtResource("41_bxcdd")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8fc75"]
+texture = ExtResource("42_1sl8j")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3gb63"]
+texture = ExtResource("43_3w6mx")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hg1o6"]
+texture = ExtResource("41_bxcdd")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lnn63"]
+texture = ExtResource("42_1sl8j")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o1axo"]
+texture = ExtResource("43_3w6mx")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="Curve2D" id="Curve2D_8orhx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 64, 2, 0, 0, 0, 0, 66, 160, 0, 0, 0, 0, 114, 159, 0, 0, 0, 0, 115, 3)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_r5f8p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 288, 221, 0, 0, 0, 0, 288, 67, 0, 0, 0, 0, 335, 68, 0, 0, 0, 0, 335, 222)
+}
+point_count = 4
+
+[node name="main" type="Node2D" unique_id=612649347]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=676590187]
+position = Vector2(192, 108)
+zoom = Vector2(3, 3)
+
+[node name="map2" parent="." unique_id=761738251 instance=ExtResource("1_8orhx")]
+
+[node name="EnemySpawner" parent="." unique_id=297624967 node_paths=PackedStringArray("path_2d", "second_path") instance=ExtResource("2_r5f8p")]
+path_2d = NodePath("../Path2D")
+second_path = NodePath("../second Path2D")
+enemy_types = Array[PackedScene]([ExtResource("3_uybgx"), ExtResource("4_mcrco"), ExtResource("5_42gi7"), ExtResource("6_8xfqg"), ExtResource("7_x4qps"), ExtResource("8_860xc"), ExtResource("9_6g3hf")])
+auto_next_wave = true
+
+[node name="enemy spawn button" type="Button" parent="." unique_id=684955736]
+visible = false
+offset_left = 325.0
+offset_top = 2.0
+offset_right = 381.0
+offset_bottom = 35.0
+script = ExtResource("10_kxhy8")
+
+[node name="PathBlocker" type="Area2D" parent="." unique_id=681111174]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathBlocker" unique_id=482451243]
+position = Vector2(63, 74)
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="PathBlocker" unique_id=968580678]
+position = Vector2(338, 150)
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="PathBlocker" unique_id=1175684406]
+position = Vector2(288, 152)
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="PathBlocker" unique_id=905037392]
+position = Vector2(114, 74)
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PathBlocker" unique_id=1264631940]
+position = Vector2(88.75, 158.25)
+shape = SubResource("RectangleShape2D_po753")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="PathBlocker" unique_id=1843437002]
+position = Vector2(312, 65.5)
+shape = SubResource("RectangleShape2D_po753")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=870141723]
+
+[node name="Sidebar" parent="CanvasLayer" unique_id=121770342 instance=ExtResource("11_jvw6i")]
+clip_children = 1
+z_index = 1
+collapsed_width = 10.0
+expanded_width = 300.0
+tween_duration = 0.4
+
+[node name="Control" type="Control" parent="CanvasLayer/Sidebar" unique_id=686509211]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="spawnspiker" type="Button" parent="CanvasLayer/Sidebar/Control" unique_id=1432889511]
+visible = false
+layout_mode = 0
+offset_left = -29.0
+offset_top = 247.0
+offset_right = 28.0
+offset_bottom = 283.0
+text = "Spiker
+"
+script = ExtResource("12_pqaf0")
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("14_8qj0i")
+hotkey = 56
+
+[node name="Tower" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=967264267]
+position = Vector2(25.99997, 65.25)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_e6q6n")
+
+[node name="spawntower" type="Button" parent="CanvasLayer/Sidebar/Control/Tower" unique_id=2030805837]
+offset_left = -144.99988
+offset_top = -225.0
+offset_right = 135.00012
+offset_bottom = 184.99994
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+cost = 30
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("16_x5fdg")
+hotkey = 49
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Tower" unique_id=1817899347]
+offset_left = -109.999985
+offset_top = 124.999985
+offset_right = 191.00002
+offset_bottom = 239.99998
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 100
+text = "Cost: 30"
+
+[node name="Sniper" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=976938416]
+position = Vector2(18, 185.25)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_txyw0")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Sniper" unique_id=1069874311]
+offset_left = -55.999985
+offset_top = 175.99998
+offset_right = 245.00002
+offset_bottom = 291.0
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 84
+text = "Cost: 50"
+
+[node name="spawnsniper" type="Button" parent="CanvasLayer/Sidebar/Control/Sniper" unique_id=211689199]
+offset_left = -68.0
+offset_top = -244.0
+offset_right = 224.0
+offset_bottom = 260.0
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+cost = 50
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("19_yqm44")
+hotkey = 52
+
+[node name="Machine_gunner" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=785730418]
+position = Vector2(134, 185.25)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_bjg73")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Machine_gunner" unique_id=1881462172]
+offset_left = -147.99998
+offset_top = 179.99998
+offset_right = 153.00002
+offset_bottom = 295.0
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 84
+text = "Cost: 150"
+
+[node name="spawnmachine" type="Button" parent="CanvasLayer/Sidebar/Control/Machine_gunner" unique_id=620482643]
+offset_left = -140.0
+offset_top = -236.0
+offset_right = 184.0
+offset_bottom = 260.0
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+cost = 150
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("21_k1lrw")
+hotkey = 53
+
+[node name="Freezer" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=1324920372]
+position = Vector2(238, 187.25)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_vc5cj")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Freezer" unique_id=513711497]
+offset_left = -159.99998
+offset_top = 179.99998
+offset_right = 141.00002
+offset_bottom = 295.0
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 84
+text = "Cost: 40"
+
+[node name="spawnfreezetower" type="Button" parent="CanvasLayer/Sidebar/Control/Freezer" unique_id=485671377]
+offset_left = -172.0
+offset_top = -248.0
+offset_right = 228.0
+offset_bottom = 296.0
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+cost = 40
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("23_av81t")
+hotkey = 54
+
+[node name="Farm" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=70543223]
+position = Vector2(139, 337.25)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_ty1g6")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Farm" unique_id=1036027345]
+offset_left = -159.99998
+offset_top = 179.99998
+offset_right = 141.00002
+offset_bottom = 295.0
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 84
+text = "Cost: 100"
+
+[node name="spawnfarm" type="Button" parent="CanvasLayer/Sidebar/Control/Farm" unique_id=483939181]
+offset_left = -232.0
+offset_top = -216.0
+offset_right = 219.0
+offset_bottom = 268.0
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+cost = 100
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("25_iivu8")
+hotkey = 54
+
+[node name="Bomber" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=16933746]
+position = Vector2(113.99997, 65.25)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_nvyfr")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Bomber" unique_id=1554019911]
+offset_left = -129.99998
+offset_top = 124.999985
+offset_right = 171.00002
+offset_bottom = 239.99998
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 100
+text = "Cost: 100"
+
+[node name="spawnbomber" type="Button" parent="CanvasLayer/Sidebar/Control/Bomber" unique_id=1903126615]
+offset_left = -129.99994
+offset_top = -194.99998
+offset_right = 180.00006
+offset_bottom = 229.99995
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+cost = 100
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("27_bonnq")
+hotkey = 50
+
+[node name="Xbow" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=914724489]
+position = Vector2(202, 61.25)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_j2jfr")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Xbow" unique_id=650017971]
+offset_left = -99.999985
+offset_top = 99.999985
+offset_right = 201.00002
+offset_bottom = 214.99998
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 84
+text = "Cost: 200"
+
+[node name="spawnxbow" type="Button" parent="CanvasLayer/Sidebar/Control/Xbow" unique_id=1348684009]
+offset_left = -124.99997
+offset_top = -179.99998
+offset_right = 195.00003
+offset_bottom = 219.99995
+mouse_filter = 1
+flat = true
+script = ExtResource("12_pqaf0")
+smiles = 200
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("29_ei8et")
+hotkey = 51
+
+[node name="upgrade_panel" type="PanelContainer" parent="CanvasLayer" unique_id=2118667269 groups=["upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("34_4ynuh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/upgrade_panel" unique_id=1029195598]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=218175793]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=1351016094]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=584060924]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RangeButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=1793441474]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/upgrade_panel/VBoxContainer" unique_id=81990143]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="mg_upgrade_panel" type="PanelContainer" parent="CanvasLayer" unique_id=2137588827 groups=["mg_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("35_6md8y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/mg_upgrade_panel" unique_id=1674072920]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/mg_upgrade_panel/VBoxContainer" unique_id=241772782]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/mg_upgrade_panel/VBoxContainer" unique_id=625204780]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/mg_upgrade_panel/VBoxContainer" unique_id=1417211153]
+layout_mode = 2
+
+[node name="AccuracyButton" type="Button" parent="CanvasLayer/mg_upgrade_panel/VBoxContainer" unique_id=207403705]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/mg_upgrade_panel/VBoxContainer" unique_id=179673558]
+layout_mode = 2
+
+[node name="SniperUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1317363246 groups=["sniper_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("36_xbodv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SniperUpgradePanel" unique_id=1535331837]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1046679825]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1123743746]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1313700274]
+layout_mode = 2
+
+[node name="MetalButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=1685927711]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=636747153]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1740655050]
+offset_left = 193.0
+offset_top = 98.0
+offset_right = 308.0
+offset_bottom = 118.0
+script = ExtResource("37_p2s48")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=704441761]
+offset_top = 1.0
+offset_right = 232.0
+offset_bottom = 69.0
+texture = ExtResource("38_pnwyu")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+
+[node name="smile_counter" type="Label" parent="CanvasLayer/NinePatchRect" unique_id=1122628724]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 9.0
+offset_right = 221.0
+offset_bottom = 60.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 44
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("39_usoxk")
+
+[node name="GameOver" type="Control" parent="CanvasLayer" unique_id=1905418200]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("40_ltxdl")
+
+[node name="Dim" type="ColorRect" parent="CanvasLayer/GameOver" unique_id=1359400083]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/GameOver" unique_id=829216601]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 257.0
+offset_right = 726.5
+offset_bottom = 323.0
+texture = ExtResource("41_bxcdd")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+
+[node name="WaveLabel" type="Label" parent="CanvasLayer/GameOver" unique_id=460397522]
+layout_mode = 0
+offset_left = 450.5
+offset_top = 271.0
+offset_right = 717.5
+offset_bottom = 309.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 30
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOver" unique_id=1783507128]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 350.0
+offset_right = 692.0
+offset_bottom = 413.0
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_styles/normal = SubResource("StyleBoxTexture_e6q6n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8fc75")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3gb63")
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOver/RestartButton" unique_id=1346309137]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 221.0
+offset_bottom = 51.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 33
+text = "RESTART"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/GameOver" unique_id=1732587455]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 420.0
+offset_right = 694.0
+offset_bottom = 488.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_hg1o6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_lnn63")
+theme_override_styles/hover = SubResource("StyleBoxTexture_o1axo")
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOver/MenuButton" unique_id=681360568]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 223.0
+offset_bottom = 57.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 32
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/GameOver" unique_id=342083029]
+position = Vector2(578, 223)
+scale = Vector2(0.6078948, 0.6399999)
+texture = ExtResource("44_adqkm")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/GameOver/Sprite2D" unique_id=1282887938]
+offset_left = -306.0177
+offset_top = -70.1613
+offset_right = 309.3806
+offset_bottom = 42.8387
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 98
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="first" type="Button" parent="." unique_id=332458765]
+offset_left = 9.0
+offset_top = 186.0
+offset_right = 80.0
+offset_bottom = 217.0
+text = "wasadw"
+script = ExtResource("45_7vp6j")
+
+[node name="Button" type="Button" parent="." unique_id=1838354523]
+offset_left = 8.0
+offset_top = 150.0
+offset_right = 52.0
+offset_bottom = 181.0
+text = "wasf"
+script = ExtResource("12_pqaf0")
+ghost_tower_scene = ExtResource("13_ewarj")
+real_tower_scene = ExtResource("46_iyusa")
+
+[node name="wizard5" parent="." unique_id=922807842 instance=ExtResource("47_2hpb2")]
+position = Vector2(173, 16)
+
+[node name="hirefarmer" type="Button" parent="." unique_id=72035270]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("48_fyqft")
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1512279017]
+curve = SubResource("Curve2D_8orhx")
+
+[node name="second Path2D" type="Path2D" parent="." unique_id=32049735]
+curve = SubResource("Curve2D_r5f8p")
+
+[connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Tower/spawntower" to="CanvasLayer/Sidebar/Control/Tower/spawntower" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Sniper/spawnsniper" to="CanvasLayer/Sidebar/Control/Sniper/spawnsniper" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Machine_gunner/spawnmachine" to="CanvasLayer/Sidebar/Control/Machine_gunner/spawnmachine" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Freezer/spawnfreezetower" to="CanvasLayer/Sidebar/Control/Freezer/spawnfreezetower" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Farm/spawnfarm" to="CanvasLayer/Sidebar/Control/Farm/spawnfarm" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" to="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" to="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
+[connection signal="pressed" from="first" to="first" method="_on_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="hirefarmer" to="hirefarmer" method="_on_pressed"]

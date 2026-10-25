@@ -43,11 +43,9 @@
 [ext_resource type="Texture2D" uid="uid://bwimetobjlugt" path="res://assets/basic green/button square idle.png" id="41_bxcdd"]
 [ext_resource type="Texture2D" uid="uid://pla2ivlbg5g8" path="res://assets/basic green/button square clicked.png" id="42_1sl8j"]
 [ext_resource type="Texture2D" uid="uid://bcos4rfu4pnyg" path="res://assets/basic green/button square hover.png" id="43_3w6mx"]
+[ext_resource type="Script" uid="uid://ccv5e0he16kmy" path="res://scripts/label.gd" id="44_711ui"]
 [ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="44_adqkm"]
-[ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="45_7vp6j"]
-[ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="46_iyusa"]
-[ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_2hpb2"]
-[ext_resource type="Script" uid="uid://kewuwfi7aiwk" path="res://scenes/button_2.gd" id="48_fyqft"]
+[ext_resource type="AudioStream" uid="uid://bn2myeydfhbn0" path="res://assets/goody/goody/blossom.wav" id="49_r5f8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
 size = Vector2(20, 146)
@@ -606,29 +604,6 @@ offset_right = 308.0
 offset_bottom = 118.0
 script = ExtResource("37_p2s48")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=704441761]
-offset_top = 1.0
-offset_right = 232.0
-offset_bottom = 69.0
-texture = ExtResource("38_pnwyu")
-patch_margin_left = 24
-patch_margin_top = 24
-patch_margin_right = 24
-patch_margin_bottom = 24
-
-[node name="smile_counter" type="Label" parent="CanvasLayer/NinePatchRect" unique_id=1122628724]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 9.0
-offset_right = 221.0
-offset_bottom = 60.0
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("17_p4kqa")
-theme_override_font_sizes/font_size = 44
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("39_usoxk")
-
 [node name="GameOver" type="Control" parent="CanvasLayer" unique_id=1905418200]
 process_mode = 3
 visible = false
@@ -735,37 +710,62 @@ text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="first" type="Button" parent="." unique_id=332458765]
-offset_left = 9.0
-offset_top = 186.0
-offset_right = 80.0
-offset_bottom = 217.0
-text = "wasadw"
-script = ExtResource("45_7vp6j")
+[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer" unique_id=1524292929]
+offset_left = 1.0
+offset_right = 222.0
+offset_bottom = 56.0
+texture = ExtResource("38_pnwyu")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 
-[node name="Button" type="Button" parent="." unique_id=1838354523]
-offset_left = 8.0
-offset_top = 150.0
-offset_right = 52.0
-offset_bottom = 181.0
-text = "wasf"
-script = ExtResource("12_pqaf0")
-ghost_tower_scene = ExtResource("13_ewarj")
-real_tower_scene = ExtResource("46_iyusa")
+[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect2" unique_id=600554122]
+layout_mode = 0
+offset_left = -52.0
+offset_top = 7.0
+offset_right = 275.0
+offset_bottom = 49.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 36
+text = "Base HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("44_711ui")
 
-[node name="wizard5" parent="." unique_id=922807842 instance=ExtResource("47_2hpb2")]
-position = Vector2(173, 16)
+[node name="NinePatchRect3" type="NinePatchRect" parent="CanvasLayer" unique_id=1890726511]
+offset_top = 63.0
+offset_right = 264.0
+offset_bottom = 123.0
+texture = ExtResource("38_pnwyu")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 
-[node name="hirefarmer" type="Button" parent="." unique_id=72035270]
-offset_right = 8.0
-offset_bottom = 8.0
-script = ExtResource("48_fyqft")
+[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect3" unique_id=1845642996]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 252.0
+offset_bottom = 48.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("17_p4kqa")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("39_usoxk")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1512279017]
 curve = SubResource("Curve2D_8orhx")
 
 [node name="second Path2D" type="Path2D" parent="." unique_id=32049735]
 curve = SubResource("Curve2D_r5f8p")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1729990332]
+stream = ExtResource("49_r5f8p")
+autoplay = true
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
@@ -777,6 +777,3 @@ curve = SubResource("Curve2D_r5f8p")
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" to="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" to="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
-[connection signal="pressed" from="first" to="first" method="_on_pressed"]
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
-[connection signal="pressed" from="hirefarmer" to="hirefarmer" method="_on_pressed"]

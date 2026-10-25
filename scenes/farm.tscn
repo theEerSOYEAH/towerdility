@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c6e0uwd84qnhl" path="res://scripts/farm.gd" id="1_kjpqf"]
 [ext_resource type="PackedScene" uid="uid://1ptaruej1auy" path="res://scenes/smilepickup.tscn" id="2_jjgid"]
 [ext_resource type="Texture2D" uid="uid://8p3dr33kildb" path="res://assets/farm-removebg-preview.png" id="2_kjpqf"]
+[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="4_k3ns2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jjgid"]
 atlas = ExtResource("2_kjpqf")
@@ -30,6 +31,7 @@ collision_layer = 4
 script = ExtResource("1_kjpqf")
 smilles_per_tick = 10
 interval = 4.0
+farmer_range = 35
 pick_up_scene = ExtResource("2_jjgid")
 max_pickups = 4
 
@@ -45,3 +47,8 @@ shape = SubResource("RectangleShape2D_k3ns2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=2002378773]
 shape = SubResource("RectangleShape2D_kjpqf")
+
+[node name="farmer" type="Sprite2D" parent="." unique_id=1134135503]
+position = Vector2(24, 1.0000038)
+scale = Vector2(0.1171875, 0.1171875)
+texture = ExtResource("4_k3ns2")

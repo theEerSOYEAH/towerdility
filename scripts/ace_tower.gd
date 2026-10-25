@@ -5,8 +5,8 @@ extends StaticBody2D
 @export var damage_type = "sharp"
 @export var can_see_camo = false
 @export var base_cost = 0
-@export var darts_per_volley = 3
-@export var dart_spread = 0.25
+@export var darts_per_volley = 12
+@export var dart_spread = 1.0
 @export var flight_speed = 1.6
 @export var metal_cost = 150
 
@@ -14,7 +14,7 @@ extends StaticBody2D
 @onready var range_area = $RangeArea
 @onready var click_area = $ClickArea
 @onready var fire_timer = $FireTimer
-@onready var sprite = $Sprite2D
+@onready var sprite = $Plane/AnimatedSprite2D
 
 var range_radius = 0.0
 var orbit_radius = 0.0

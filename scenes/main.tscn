@@ -46,9 +46,9 @@
 [ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="30_5q0nq"]
 [ext_resource type="Script" uid="uid://wnlt146njgq7" path="res://scripts/tung_upgrade_panel.gd" id="35_ty1g6"]
 [ext_resource type="Script" uid="uid://b8xqh66vei1uo" path="res://scripts/ace_upgrade_panel.gd" id="37_j2jfr"]
+[ext_resource type="Script" uid="uid://7lm6gwhs7pla" path="res://scripts/bomb_upgrade_panel.gd" id="39_ty1g6"]
 [ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
 [ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
-[ext_resource type="PackedScene" uid="uid://dmps8gxqjntxd" path="res://scenes/ace_tower.tscn" id="49_ty1g6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -965,6 +965,35 @@ layout_mode = 2
 layout_mode = 2
 text = "CLOSE"
 
+[node name="BombUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1337962738 groups=["bomb_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("39_ty1g6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BombUpgradePanel" unique_id=1296202367]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=782615299]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=862665001]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=2141340805]
+layout_mode = 2
+
+[node name="RangeButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=1888099962]
+layout_mode = 2
+
+[node name="BounceButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=359228733]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=1274542358]
+layout_mode = 2
+text = "CLOSE"
+
 [node name="Button" type="Button" parent="CanvasLayer" unique_id=1740655050]
 offset_left = 193.0
 offset_top = 98.0
@@ -1119,10 +1148,8 @@ script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("45_vchkt")
 
-[node name="AceTower" parent="." unique_id=1551870440 instance=ExtResource("49_ty1g6")]
-position = Vector2(161, 153)
-darts_per_volley = 10
-dart_spread = 0.5
+[node name="Bomber" parent="." unique_id=1978504404 instance=ExtResource("8_tipki")]
+position = Vector2(162, 150)
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]

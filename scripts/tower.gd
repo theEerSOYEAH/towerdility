@@ -14,6 +14,10 @@ var selected = false
 @export var base_cost : int = 0
 @export var bullet_scene : PackedScene
 @export var fire_rate : float = 1.0
+@export var max_bombs = 3
+var active_bombs = []
+@export var is_bomber = false
+var bounce_level = 0
 @export var can_see_camo = false
 @export var damage_type = "sharp"
 @onready var range_area: Area2D = $RangeArea
@@ -136,7 +140,7 @@ func get_progress(e: Node2D):
 	return 0.0
 
 func get_health(e: Node2D) -> float:
-	var hp = e.get("health")
+	var hp = e.get("current_health")
 	return float(hp) if hp != null else 0.0
 
 func get_score(e: Node2D) -> float:
@@ -269,7 +273,7 @@ func _ready() -> void:
 
 
 func start_locking():
-	if not follow_mouse:
+	if not can_lock():
 		return
 	awaiting_lock = true
 
@@ -338,6 +342,12 @@ func shoot(target: Node2D, index := 0, total := 1):
 		print("no bullet scene")
 		return
 	
+	if is_bomber and bounce_level > 0:
+		active_bombs = active_bombs.filter(func(b): return is_instance_valid(b))
+		if active_bombs.size() >= max_bombs:
+			return
+		
+	
 	if rotate_to_enemy:
 		face(target.global_position, true)
 	
@@ -362,6 +372,13 @@ func shoot(target: Node2D, index := 0, total := 1):
 	else:
 		bullet.direction = dir
 	
+	if is_bomber:
+		bullet.keeps_bouncing = bounce_level > 0
+		bullet.lifetime = 4.0 + bounce_level * 2.0
+		if locked:
+			bullet.fixed_target = locked_position
+		active_bombs.append(bullet)
+	
 	get_tree().root.add_child(bullet)
 	play_throw_anim()
 	
@@ -382,7 +399,7 @@ func shoot_at_mouse():
 func _on_click_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		print("clicked")
-		if follow_mouse:
+		if follow_mouse or is_bomber:
 			for t in get_tree().get_nodes_in_group("lock_target"):
 				t.remove_from_group("lock_target")
 			add_to_group("lock_target")
@@ -428,7 +445,13 @@ func upgrade_multishot():
 	multishot_unlocked = true
 	total_spent += multishot_cost
 
-
+func upgrade_bounce():
+	var cost = get_cost(bounce_level)
+	if cost == -1 or not GameManager.spend_smiles(cost):
+		return
+	bounce_level += 1
+	total_spent += cost
+	
 func sell():
 	GameManager.add_smiles(int(total_spent * 0.5))
 	queue_free()
@@ -439,6 +462,7 @@ func get_save_data():
 		"speed_level": speed_level,
 		"range_level": range_level,
 		"multishot": multishot_unlocked,
+		"bounce_level": bounce_level,
 		"damage_bonus": damange_bonus,
 		"total_spent": total_spent,
 		"range_scale": range_area.scale.x,
@@ -453,6 +477,7 @@ func apply_save_data(d):
 	speed_level = int(d.get("speed_level", 0))
 	range_level = int(d.get("range_level", 0))
 	damange_bonus = int(d.get("damage_bonus", 0))
+	bounce_level = int(d.get("bounce_level", 0))
 	total_spent = int(d.get("total_spent", base_cost))
 	multishot_unlocked = bool(d.get("multishot", false))
 	target_mode = int(d.get("target_mode", 0))
@@ -464,3 +489,6 @@ func apply_save_data(d):
 	locked = bool(d.get("locked", false))
 	locked_position = Vector2(float(d.get("locked_x", 0)), float(d.get("locked_y", 0)))
 	queue_redraw()
+
+func can_lock():
+	return follow_mouse or (is_bomber and bounce_level > 0)

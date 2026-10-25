@@ -16,7 +16,7 @@ func _ready():
 func _on_play_pressed():
 	GameManager.reset()
 	GameManager.endless_mode = false
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/map_selector.tscn")
 
 func _on_endless_pressed():
 	GameManager.reset()

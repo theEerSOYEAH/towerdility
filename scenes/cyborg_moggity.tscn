@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dr0q16ek64hau"]
+
+[ext_resource type="Script" uid="uid://cj3h1q83rewop" path="res://scripts/verity.gd" id="1_dnt7d"]
+[ext_resource type="Texture2D" uid="uid://bdqfdpbna5l7j" path="res://assets/migtyyyyyy-removebg-preview.png" id="2_y1ppu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h621j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnt7d"]
+atlas = ExtResource("2_y1ppu")
+region = Rect2(0, 0, 470, 531)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnt7d")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="cyborg moggity" type="CharacterBody2D" unique_id=136464191 groups=["enemies"]]
+collision_layer = 2
+script = ExtResource("1_dnt7d")
+speed = 4
+max_health = 80
+is_metal = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=158663430]
+shape = SubResource("RectangleShape2D_h621j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2098637328]
+scale = Vector2(0.04655172, 0.04655172)
+sprite_frames = SubResource("SpriteFrames_h621j")

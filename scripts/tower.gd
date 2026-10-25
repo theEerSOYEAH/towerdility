@@ -401,3 +401,33 @@ func upgrade_range():
 func sell():
 	GameManager.add_smiles(int(total_spent * 0.5))
 	queue_free()
+
+func get_save_data():
+	return {
+		"damage_level": damage_level,
+		"speed_level": speed_level,
+		"range_level": range_level,
+		"damage_bonus": damange_bonus,
+		"total_spent": total_spent,
+		"range_scale": range_area.scale.x,
+		"target_mode": target_mode,
+		"locked": locked,
+		"locked_x": locked_position.x,
+		"locked_y": locked_position.y,
+	}
+
+func apply_save_data(d):
+	damage_level = int(d.get("damage_level", 0))
+	speed_level = int(d.get("speed_level", 0))
+	range_level = int(d.get("range_level", 0))
+	damange_bonus = int(d.get("damage_bonus", 0))
+	total_spent = int(d.get("total_spent", base_cost))
+	target_mode = int(d.get("target_mode", 0))
+	
+	var s = float(d.get("range_scale", range_area.scale.x))
+	range_area.scale = Vector2(s, s)
+	refresh_fire_rate()
+	
+	locked = bool(d.get("locked", false))
+	locked_position = Vector2(float(d.get("locked_x", 0)), float(d.get("locked_y", 0)))
+	queue_redraw()

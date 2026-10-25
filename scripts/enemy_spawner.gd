@@ -20,7 +20,12 @@ var wave_running = false
 var handmade_count = 0
 var hp_multiplier = 1.0
 
+var save_timer = 0.0
+var finished = false
+
 func _ready() -> void:
+	if GameManager.load_pending:
+		GameManager.apply_save.call_deferred(self)
 	waves = [
 		[group(VERITY, 5)],
 		[group(VERITY, 5), group(FALSITY, 5)],
@@ -56,6 +61,8 @@ func start_next_wave():
 		else:
 			GameManager.game_over.emit()
 			print("all waves finished")
+			finished = true
+			GameManager.delete_save()
 			return
 		
 	wave_running = true
@@ -111,6 +118,17 @@ func _on_enemy_spawn_button_pressed():
 	start_next_wave()
 	
 
+func _process(delta):
+	save_timer += delta
+	if save_timer >= 1.5:
+		save_timer = 0.0
+		try_autosave()
 
-func _on_button_pressed() -> void:
-	pass # Replace with function body.
+func try_autosave():
+	if finished or GameManager.is_over or wave_running:
+		return
+	if get_tree().get_nodes_in_group("enemies").size() > 1:
+		return
+	if current_wave == 0 and get_tree().get_nodes_in_group("towers").is_empty():
+		return
+	GameManager.save_game(self)

@@ -21,7 +21,7 @@ const UPGRADE_COST = [20, 20, 20]
 var has_farmer = false
 var selected = false
 @onready var click_area: Area2D = $ClickArea
-@onready var farmer: Sprite2D = $farmer
+@onready var farmer: AnimatedSprite2D = $farmer
 
 @export var pick_up_scene: PackedScene
 @export var max_pickups = 5

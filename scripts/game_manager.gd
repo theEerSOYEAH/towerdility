@@ -151,6 +151,9 @@ func apply_save(spawner):
 	while spawner.waves.size() < spawner.current_wave:
 		spawner.waves.append([])
 	
+	for old in get_tree().get_nodes_in_group("towers"):
+		old.queue_free()
+	
 	for entry in loaded_data.get("towers", []):
 		var scene = load(entry["scene"])
 		if scene == null:

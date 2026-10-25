@@ -2,6 +2,8 @@ extends StaticBody2D
 
 var buffs : Dictionary = {}
 
+@export var panel_group = "upgrade_panel"
+
 enum TargetMode {FIRST, LAST, STRONGEST, WEAKEST}
 const MODE_NAMES =["First", "Last", "Strongest", "Weakist"]
 var target_mode = TargetMode.FIRST
@@ -25,6 +27,10 @@ var selected = false
 @export var minion_lifetime = 12
 var minions : Array = []
 
+@export var multishot_capable = false
+@export var multishot_cost = 60
+@export var multishot_extra = 2
+var multishot_unlocked = false
 
 @export var minion_leash = 120
 
@@ -133,39 +139,43 @@ func get_health(e: Node2D) -> float:
 	var hp = e.get("health")
 	return float(hp) if hp != null else 0.0
 
-func get_target():
-	var candidates : Array
+func get_score(e: Node2D) -> float:
+	match target_mode:
+		TargetMode.FIRST:
+			return get_progress(e)
+		TargetMode.LAST:
+			return -get_progress(e)
+		TargetMode.STRONGEST:
+			return get_health(e) + get_progress(e) * 0.0001
+		TargetMode.WEAKEST:
+			return -get_health(e) + get_progress(e) * 0.0001
+	return 0.0
+
+func get_targets(count: int) -> Array:
+	var canditates: Array
 	if target_mode == TargetMode.LAST:
-		candidates = get_tree().get_nodes_in_group("enemies").filter(
-			func(e): return is_instance_valid(e) and (can_see_camo or not e.is_camo)
+		canditates = get_tree().get_nodes_in_group("enemies").filter(
+			func (e): return is_instance_valid(e) and (can_see_camo or not e.is_camo)
 		)
 	else:
 		enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
-		candidates = enemies_in_range
+		canditates = enemies_in_range
+	
+	var scored: Array = []
+	for e in canditates:
+		scored.append({"e": e, "s": get_score(e)})
+	scored.sort_custom(func(a, b):return a["s"] > b["s"])
+	
+	var result: Array = []
+	for i in min(count, scored.size()):
+		result.append(scored[i]["e"])
+	return result
 
-	var best: Node2D = null
-	var best_score := -INF
-	for e in candidates:
-		var score := 0.0
-		match target_mode:
-			TargetMode.FIRST:
-				score = get_progress(e)
-			TargetMode.LAST:
-				score = -get_progress(e)
-			TargetMode.STRONGEST:
-				score = get_health(e) + get_progress(e) * 0.0001
-			TargetMode.WEAKEST:
-				score = -get_health(e) + get_progress(e) * 0.0001
-		if score > best_score:
-			best_score = score
-			best = e
+func get_target():
+	var t = get_targets(1)
+	return t[0] if t.size() > 0 else null
 	
 	
-	return best
-	
-
-
-
 
 func play_throw_anim():
 	if not sprite.sprite_frames or not sprite.sprite_frames.has_animation("empty"):
@@ -301,24 +311,31 @@ func _on_range_area_body_exited(body: Node2D) -> void:
 	if body in enemies_in_range:
 		enemies_in_range.erase(body)
 
+func get_shot_count() -> int:
+	return 1 + (multishot_extra if multishot_unlocked else 0)
+
 func _on_fire_timer_timeout() -> void:
 	if follow_mouse:
-		
-	
-	
 		enemies_in_range = enemies_in_range.filter(func(e): return is_instance_valid(e))
-	
 		if enemies_in_range.size() > 0:
 			shoot_at_mouse()
 		return
-	var t = get_target()
-	if t:
-		shoot(t)
-
-func shoot(target: Node2D):
 	
+	var shots = get_shot_count()
+	var targets = get_targets(shots)
+	if targets.is_empty():
+		return
+	
+	for i in shots:
+		var t = targets[i % targets.size()]
+		if is_instance_valid(t):
+			shoot(t, i, shots)
+
+const MULTISHOT_SPACING = 14.0
+
+func shoot(target: Node2D, index := 0, total := 1):
 	if not bullet_scene:
-		print("nobulletscene")
+		print("no bullet scene")
 		return
 	
 	if rotate_to_enemy:
@@ -329,7 +346,12 @@ func shoot(target: Node2D):
 	if "max_distance" in bullet:
 		var dist = global_position.distance_to(target.global_position)
 		bullet.max_distance = max(bullet.max_distance, dist + 100)
-	bullet.global_position = global_position
+	
+	var dir = (target.global_position - global_position).normalized()
+	var side = dir.orthogonal()
+	var offset = (index - (total - 1) / 2.0) * MULTISHOT_SPACING
+	bullet.global_position = global_position + side * offset
+	
 	bullet.damage_type = damage_type
 	if "source_tower" in bullet:
 		bullet.source_tower = self
@@ -338,11 +360,11 @@ func shoot(target: Node2D):
 	if "target" in bullet:
 		bullet.target = target
 	else:
-		bullet.direction = (target.global_position - global_position).normalized()
-	
+		bullet.direction = dir
 	
 	get_tree().root.add_child(bullet)
 	play_throw_anim()
+	
 
 func shoot_at_mouse():
 	if not bullet_scene:
@@ -364,7 +386,7 @@ func _on_click_area_input_event(viewport, event, shape_idx):
 			for t in get_tree().get_nodes_in_group("lock_target"):
 				t.remove_from_group("lock_target")
 			add_to_group("lock_target")
-		var panel = get_tree().get_first_node_in_group("upgrade_panel")
+		var panel = get_tree().get_first_node_in_group(panel_group)
 		print("panel is: ", panel)
 		if panel:
 			panel.show_for(self)
@@ -398,6 +420,15 @@ func upgrade_range():
 	range_area.scale *= 1.2
 	total_spent += cost
 
+func upgrade_multishot():
+	if not multishot_capable or multishot_unlocked:
+		return
+	if not GameManager.spend_smiles(multishot_cost):
+		return
+	multishot_unlocked = true
+	total_spent += multishot_cost
+
+
 func sell():
 	GameManager.add_smiles(int(total_spent * 0.5))
 	queue_free()
@@ -407,6 +438,7 @@ func get_save_data():
 		"damage_level": damage_level,
 		"speed_level": speed_level,
 		"range_level": range_level,
+		"multishot": multishot_unlocked,
 		"damage_bonus": damange_bonus,
 		"total_spent": total_spent,
 		"range_scale": range_area.scale.x,
@@ -422,6 +454,7 @@ func apply_save_data(d):
 	range_level = int(d.get("range_level", 0))
 	damange_bonus = int(d.get("damage_bonus", 0))
 	total_spent = int(d.get("total_spent", base_cost))
+	multishot_unlocked = bool(d.get("multishot", false))
 	target_mode = int(d.get("target_mode", 0))
 	
 	var s = float(d.get("range_scale", range_area.scale.x))

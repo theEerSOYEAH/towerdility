@@ -25,7 +25,6 @@ animations = [{
 [node name="verity" type="CharacterBody2D" unique_id=136464191 groups=["enemies"]]
 collision_layer = 2
 script = ExtResource("1_6kb7q")
-is_metal = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=158663430]
 shape = SubResource("RectangleShape2D_h621j")

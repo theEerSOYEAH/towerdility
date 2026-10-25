@@ -192,6 +192,8 @@ func get_target():
 	
 
 func play_throw_anim():
+	if sprite == null:
+		return
 	if not sprite.sprite_frames or not sprite.sprite_frames.has_animation("empty"):
 		return
 	sprite.play("empty")

@@ -19,13 +19,18 @@
 [ext_resource type="PackedScene" uid="uid://dmouibs8wb3sx" path="res://scenes/ferity.tscn" id="9_txyw0"]
 [ext_resource type="PackedScene" uid="uid://g60cdt3m7om8" path="res://scenes/spike_tower.tscn" id="10_0ld40"]
 [ext_resource type="PackedScene" uid="uid://xrwmeq5tqfpo" path="res://scenes/freeze_tower.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://drbo25a57j71x" path="res://scenes/cyborg_verity.tscn" id="10_o7ddy"]
 [ext_resource type="PackedScene" uid="uid://cmmgdofqjr2b8" path="res://scenes/farm.tscn" id="10_yc10j"]
+[ext_resource type="PackedScene" uid="uid://cvgsyv2nffdea" path="res://scenes/cyborg_falsity.tscn" id="11_0loja"]
 [ext_resource type="PackedScene" uid="uid://4wgeqorwktoa" path="res://scenes/machinegunnertower.tscn" id="11_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="12_a8y0u"]
 [ext_resource type="Script" uid="uid://bs77p2qks1ga1" path="res://scripts/upgrade_panel.gd" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://bulb1npevmfso" path="res://scenes/cyborg_lovity.tscn" id="12_ids8r"]
 [ext_resource type="Texture2D" uid="uid://cyurwdac5oqnk" path="res://assets/basic green/button wider hover.png" id="12_jkv2x"]
 [ext_resource type="FontFile" uid="uid://btmeoec72ygkv" path="res://assets/LilitaOne-Regular.ttf" id="12_muem4"]
+[ext_resource type="PackedScene" uid="uid://dr0q16ek64hau" path="res://scenes/cyborg_moggity.tscn" id="13_dnhof"]
 [ext_resource type="Texture2D" uid="uid://c6mteh6nyjj57" path="res://assets/basic green/button wide clicked.png" id="13_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://ij4g8dg5hwsv" path="res://scenes/cyborg_cruelity.tscn" id="14_1v6qk"]
 [ext_resource type="Texture2D" uid="uid://coifemcqhk0ea" path="res://assets/basic green/pop up window.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://c5ljnrxdbdna3" path="res://assets/ttt-removebg-preview.png" id="17_5he1u"]
 [ext_resource type="Script" uid="uid://db5m0gc1gyg8x" path="res://scripts/sniper_upgrade_panel.gd" id="18_dp3eg"]
@@ -624,7 +629,7 @@ curve = SubResource("Curve2D_o5qli")
 
 [node name="EnemySpawner" parent="." unique_id=297624967 node_paths=PackedStringArray("path_2d") instance=ExtResource("2_0wfyh")]
 path_2d = NodePath("../Path2D")
-enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("4_vxglm"), ExtResource("5_2f3dj"), ExtResource("6_yq6so"), ExtResource("7_fv21b"), ExtResource("8_tel4y"), ExtResource("9_txyw0")])
+enemy_types = Array[PackedScene]([ExtResource("3_ya4ey"), ExtResource("4_vxglm"), ExtResource("5_2f3dj"), ExtResource("6_yq6so"), ExtResource("7_fv21b"), ExtResource("8_tel4y"), ExtResource("9_txyw0"), ExtResource("10_o7ddy"), ExtResource("11_0loja"), ExtResource("12_ids8r"), ExtResource("13_dnhof"), ExtResource("14_1v6qk")])
 auto_next_wave = true
 
 [node name="enemy spawn button" type="Button" parent="." unique_id=684955736]

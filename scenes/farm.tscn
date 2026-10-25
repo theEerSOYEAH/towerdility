@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6e0uwd84qnhl" path="res://scripts/farm.gd" id="1_kjpqf"]
 [ext_resource type="PackedScene" uid="uid://1ptaruej1auy" path="res://scenes/smilepickup.tscn" id="2_jjgid"]
 [ext_resource type="Texture2D" uid="uid://8p3dr33kildb" path="res://assets/farm-removebg-preview.png" id="2_kjpqf"]
-[ext_resource type="Texture2D" uid="uid://d32i3w8weh783" path="res://icon.svg" id="4_k3ns2"]
+[ext_resource type="Texture2D" uid="uid://du38fwfxlijbc" path="res://assets/ttt2-removebg-preview.png" id="4_k3ns2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jjgid"]
 atlas = ExtResource("2_kjpqf")
@@ -25,6 +25,21 @@ size = Vector2(22.5, 22.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjpqf"]
 size = Vector2(24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7byxm"]
+atlas = ExtResource("4_k3ns2")
+region = Rect2(0, 0, 492, 507)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_po753"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7byxm")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="farm" type="StaticBody2D" unique_id=520831333]
 collision_layer = 4
@@ -48,7 +63,7 @@ shape = SubResource("RectangleShape2D_k3ns2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=2002378773]
 shape = SubResource("RectangleShape2D_kjpqf")
 
-[node name="farmer" type="Sprite2D" parent="." unique_id=1134135503]
-position = Vector2(24, 1.0000038)
-scale = Vector2(0.1171875, 0.1171875)
-texture = ExtResource("4_k3ns2")
+[node name="farmer" type="AnimatedSprite2D" parent="." unique_id=530725569]
+position = Vector2(23, 1)
+scale = Vector2(0.055533513, 0.055533513)
+sprite_frames = SubResource("SpriteFrames_po753")

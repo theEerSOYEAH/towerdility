@@ -50,10 +50,11 @@ func _process(delta: float) -> void:
 		health_label.global_position = global_position + label_offset
 
 func take_damage(amount, damage_type = "sharp", source = null):
+	print("hit type=[", damage_type, "] metal=", is_metal, " from=", source)
 	if is_dying:
 		return
 		
-	if is_metal and damage_type == "sharp":
+	if is_metal and damage_type.strip_edges().to_lower() == "sharp":
 		return
 	
 	last_source = source

@@ -4,6 +4,8 @@ extends Button
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pressed.connect(_on_pressed)
+	$"../AudioStreamPlayer2D".play()
+	
 	
 func _process(delta: float) -> void:
 	var t = get_tree().get_first_node_in_group("selected_towers")

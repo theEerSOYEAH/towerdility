@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://7ohk7otklipn" path="res://assets/basic green/button wide idle.png" id="4_oa1go"]
 [ext_resource type="Texture2D" uid="uid://c6mteh6nyjj57" path="res://assets/basic green/button wide clicked.png" id="5_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://lnxruaxsr1n8" path="res://assets/basic green/button wide hover.png" id="6_oa1go"]
+[ext_resource type="AudioStream" uid="uid://bn2myeydfhbn0" path="res://assets/goody/goody/blossom.wav" id="9_jk1qb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6q6n"]
 texture = ExtResource("4_oa1go")
@@ -197,3 +198,7 @@ theme_override_font_sizes/font_size = 62
 text = "QUIT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1449901540]
+stream = ExtResource("9_jk1qb")
+autoplay = true

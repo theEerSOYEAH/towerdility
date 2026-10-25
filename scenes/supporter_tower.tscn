@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://chk1t5lxmdejb"]
 
 [ext_resource type="Script" uid="uid://ov6fu8af2k1f" path="res://scripts/supporter_tower.gd" id="1_8ywro"]
-[ext_resource type="Texture2D" uid="uid://42illptfpex1" path="res://xbow-removebg-preview.png" id="2_i7lgj"]
+[ext_resource type="Texture2D" uid="uid://binau8257nnhf" path="res://assets/support-removebg-preview.png" id="2_8ywro"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4q2h8"]
-atlas = ExtResource("2_i7lgj")
-region = Rect2(0, 0, 397, 498)
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7lgj"]
+atlas = ExtResource("2_8ywro")
+region = Rect2(0, 0, 434, 575)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0e10q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4q2h8")
+"texture": SubResource("AtlasTexture_i7lgj")
 }],
 "loop": 1,
 "name": &"default",
@@ -31,8 +31,8 @@ collision_layer = 4
 script = ExtResource("1_8ywro")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=235518348]
-position = Vector2(-3.999999, 1.999999)
-scale = Vector2(0.097607054, 0.097607054)
+position = Vector2(1, -1)
+scale = Vector2(0.06391684, 0.06391684)
 sprite_frames = SubResource("SpriteFrames_0e10q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1049225539]
@@ -42,6 +42,7 @@ shape = SubResource("RectangleShape2D_lkugm")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=1801280427]
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_doqqp")
 
 [node name="FireTimer" type="Timer" parent="." unique_id=1335812889]

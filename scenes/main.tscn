@@ -47,7 +47,7 @@
 [ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
 [ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
 [ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_nvyfr"]
-[ext_resource type="PackedScene" uid="uid://c4g56utpuwvx6" path="res://scenes/minion.tscn" id="48_ty1g6"]
+[ext_resource type="Script" uid="uid://kewuwfi7aiwk" path="res://scenes/button_2.gd" id="48_nvyfr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -1072,7 +1072,6 @@ real_tower_scene = ExtResource("45_vchkt")
 
 [node name="wizard" parent="." unique_id=190908816 instance=ExtResource("47_nvyfr")]
 position = Vector2(77, 92)
-minion_scene = ExtResource("48_ty1g6")
 
 [node name="wizard2" parent="." unique_id=1845536826 instance=ExtResource("47_nvyfr")]
 position = Vector2(152, 91)
@@ -1086,6 +1085,15 @@ position = Vector2(241, 90)
 [node name="wizard5" parent="." unique_id=922807842 instance=ExtResource("47_nvyfr")]
 position = Vector2(173, 16)
 
+[node name="hirefarmer" type="Button" parent="." unique_id=72035270]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("48_nvyfr")
+
+[node name="farm" parent="." unique_id=520831333 instance=ExtResource("10_yc10j")]
+position = Vector2(100, 164)
+farmer_range = 30
+
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Tower/spawntower" to="CanvasLayer/Sidebar/Control/Tower/spawntower" method="_on_pressed"]
@@ -1098,3 +1106,4 @@ position = Vector2(173, 16)
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
 [connection signal="pressed" from="first" to="first" method="_on_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="hirefarmer" to="hirefarmer" method="_on_pressed"]

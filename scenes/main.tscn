@@ -44,10 +44,10 @@
 [ext_resource type="Texture2D" uid="uid://pla2ivlbg5g8" path="res://assets/basic green/button square clicked.png" id="28_tel4y"]
 [ext_resource type="Texture2D" uid="uid://bcos4rfu4pnyg" path="res://assets/basic green/button square hover.png" id="29_qkpxi"]
 [ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="30_5q0nq"]
+[ext_resource type="Script" uid="uid://wnlt146njgq7" path="res://scripts/tung_upgrade_panel.gd" id="35_ty1g6"]
+[ext_resource type="Script" uid="uid://b8xqh66vei1uo" path="res://scripts/ace_upgrade_panel.gd" id="37_j2jfr"]
 [ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
 [ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
-[ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_nvyfr"]
-[ext_resource type="PackedScene" uid="uid://c4g56utpuwvx6" path="res://scenes/minion.tscn" id="48_ty1g6"]
 [ext_resource type="PackedScene" uid="uid://dmps8gxqjntxd" path="res://scenes/ace_tower.tscn" id="49_ty1g6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
@@ -860,6 +860,34 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="TungUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1674451937 groups=["tung_upgrade_panel"]]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("35_ty1g6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TungUpgradePanel" unique_id=537596357]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=150673139]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=808543015]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=2114122515]
+layout_mode = 2
+
+[node name="RangeButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=935031143]
+layout_mode = 2
+
+[node name="MultishotButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=1532964178]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=465032753]
+layout_mode = 2
+
 [node name="mg_upgrade_panel" type="PanelContainer" parent="CanvasLayer" unique_id=2137588827 groups=["mg_upgrade_panel"]]
 visible = false
 offset_right = 40.0
@@ -908,6 +936,32 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/SniperUpgradePanel/VBoxContainer" unique_id=636747153]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="AceUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=544689052 groups=["ace_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("37_j2jfr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AceUpgradePanel" unique_id=1464971798]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=502985092]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=1666807454]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=2002719425]
+layout_mode = 2
+
+[node name="TrackingButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=92256176]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=829669235]
 layout_mode = 2
 text = "CLOSE"
 
@@ -1047,14 +1101,6 @@ text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="machinegunnertower" parent="." unique_id=1908431128 instance=ExtResource("11_ya4ey")]
-visible = false
-position = Vector2(334, 105)
-
-[node name="xbow" parent="." unique_id=1722262639 instance=ExtResource("6_tefeu")]
-visible = false
-position = Vector2(164, 182)
-
 [node name="first" type="Button" parent="." unique_id=332458765]
 offset_left = 9.0
 offset_top = 186.0
@@ -1073,13 +1119,10 @@ script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("45_vchkt")
 
-[node name="wizard" parent="." unique_id=190908816 instance=ExtResource("47_nvyfr")]
-visible = false
-position = Vector2(77, 92)
-minion_scene = ExtResource("48_ty1g6")
-
 [node name="AceTower" parent="." unique_id=1551870440 instance=ExtResource("49_ty1g6")]
 position = Vector2(161, 153)
+darts_per_volley = 10
+dart_spread = 0.5
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]

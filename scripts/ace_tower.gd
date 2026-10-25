@@ -31,6 +31,9 @@ var tower_title = "Ace"
 var sprite_scale = Vector2.ONE
 var hover_tween: Tween
 
+var tracking_level = 0
+const TRACKING_POWER = [0.0, 1.5, 3.0, 5.0]
+
 const MAX_LEVEL = 3
 const UPGRADE_COST = [50, 100, 200]
 
@@ -88,7 +91,7 @@ func shoot_volley(target):
 		print("no dart scne on thr aceee")
 		return
 	
-	var base_dir = (target.global_position - plane.global_position).normalized()
+	var base_dir = Vector2.RIGHT.rotated(plane.rotation)
 	
 	for i in darts_per_volley:
 		var offset = 0.0
@@ -100,6 +103,8 @@ func shoot_volley(target):
 		dart.direction = base_dir.rotated(offset)
 		dart.damage_type = damage_type
 		dart.damage += damage_bonus
+		dart.tracking = TRACKING_POWER[tracking_level]
+		dart.can_see_camo = can_see_camo
 		if "max_distance" in dart:
 			dart.max_distance = range_radius + 80
 		get_tree().current_scene.add_child(dart)
@@ -107,7 +112,7 @@ func shoot_volley(target):
 
 func _on_click_area_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var panel = get_tree().get_first_node_in_group("sniper_upgrade_panel")
+		var panel = get_tree().get_first_node_in_group("ace_upgrade_panel")
 		if panel:
 			panel.show_for(self)
 
@@ -151,6 +156,13 @@ func upgrade_metal():
 	damage_type = "piercing"
 	total_spent += metal_cost
 
+func upgrade_tracking():
+	var cost = get_cost(tracking_level)
+	if cost == -1 or not GameManager.spend_smiles(cost):
+		return
+	tracking_level += 1
+	total_spent += cost
+
 func sell():
 	GameManager.add_smiles(int(total_spent * 0.5))
 	queue_free()
@@ -179,12 +191,14 @@ func get_save_data():
 		"speed_level": speed_level,
 		"damage_bonus": damage_bonus,
 		"metal_unlocked": metal_unlocked,
-		"total_spent": total_spent
+		"total_spent": total_spent,
+		"tracking_level": tracking_level
 	}
 
 func apply_save_data(d):
 	damage_level = int(d.get("damage_level", 0))
 	speed_level = int(d.get("speed_level", 0))
+	tracking_level = int(d.get("tracking_level", 0))
 	damage_bonus = int(d.get("damage_bonus", 0))
 	total_spent = int(d.get("total_spent", base_cost))
 	fire_timer.wait_time = fire_rate * pow(0.8, speed_level)

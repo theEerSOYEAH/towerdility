@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://c8he6sn7vw5au"]
 
 [ext_resource type="Script" uid="uid://c1mhh8gfecu06" path="res://scripts/tower.gd" id="1_nmnu7"]
-[ext_resource type="PackedScene" uid="uid://cm5l6lpro0j1j" path="res://scenes/bullet.tscn" id="2_5ipgv"]
+[ext_resource type="PackedScene" uid="uid://8sm1sll36uh8" path="res://scenes/flame.tscn" id="2_5ipgv"]
 [ext_resource type="PackedScene" uid="uid://c4g56utpuwvx6" path="res://scenes/minion.tscn" id="3_5ipgv"]
-[ext_resource type="Texture2D" uid="uid://d4kil1h55ddhn" path="res://ttt2-removebg-preview.png" id="3_8qlyk"]
-[ext_resource type="Texture2D" uid="uid://bmb8ln8m3uhvh" path="res://ttt-removebg-preview.png" id="4_4jkov"]
+[ext_resource type="Texture2D" uid="uid://c8d8c1ebxfiir" path="res://assets/wizard2-removebg-preview.png" id="4_8qlyk"]
+[ext_resource type="Texture2D" uid="uid://bhbi52ngmcavj" path="res://assets/wizard-removebg-preview.png" id="5_4jkov"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_85u2j"]
-atlas = ExtResource("3_8qlyk")
-region = Rect2(0, 0, 400, 507)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba5mt"]
+atlas = ExtResource("4_8qlyk")
+region = Rect2(0, 0, 350, 480)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xl0gn"]
-atlas = ExtResource("4_4jkov")
-region = Rect2(0, 0, 412, 490)
+[sub_resource type="AtlasTexture" id="AtlasTexture_var7a"]
+atlas = ExtResource("5_4jkov")
+region = Rect2(0, 0, 362, 474)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_h621j"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_po753"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_85u2j")
+"texture": SubResource("AtlasTexture_ba5mt")
 }],
 "loop": 1,
 "name": &"empty",
@@ -26,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xl0gn")
+"texture": SubResource("AtlasTexture_var7a")
 }],
 "loop": 1,
 "name": &"holding",
@@ -50,11 +50,11 @@ is_necromancer = true
 minion_scene = ExtResource("3_5ipgv")
 minion_leash = 300
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1890673458]
-position = Vector2(-3, 3)
-scale = Vector2(0.0782767, 0.07827671)
-sprite_frames = SubResource("SpriteFrames_h621j")
-animation = &"empty"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1866449274]
+position = Vector2(3, -1)
+scale = Vector2(0.07080883, 0.07080883)
+sprite_frames = SubResource("SpriteFrames_po753")
+animation = &"holding"
 autoplay = "holding"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105990232]

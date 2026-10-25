@@ -46,6 +46,7 @@ size = Vector2(24, 24)
 collision_layer = 4
 script = ExtResource("1_nmnu7")
 bullet_scene = ExtResource("2_5ipgv")
+damage_type = "magic"
 is_necromancer = true
 minion_scene = ExtResource("3_5ipgv")
 minion_leash = 300

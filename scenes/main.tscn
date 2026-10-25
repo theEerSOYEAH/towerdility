@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
 [ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_nvyfr"]
 [ext_resource type="PackedScene" uid="uid://c4g56utpuwvx6" path="res://scenes/minion.tscn" id="48_ty1g6"]
+[ext_resource type="PackedScene" uid="uid://dmps8gxqjntxd" path="res://scenes/ace_tower.tscn" id="49_ty1g6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -1076,6 +1077,9 @@ real_tower_scene = ExtResource("45_vchkt")
 visible = false
 position = Vector2(77, 92)
 minion_scene = ExtResource("48_ty1g6")
+
+[node name="AceTower" parent="." unique_id=1551870440 instance=ExtResource("49_ty1g6")]
+position = Vector2(161, 153)
 
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]

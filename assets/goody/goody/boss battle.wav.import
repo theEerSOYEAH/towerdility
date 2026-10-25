@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dymyu7xgbwnk2"
+path="res://.godot/imported/boss battle.wav-05d8d85e2726803e9dbe10eb05da5bb0.sample"
+
+[deps]
+
+source_file="res://assets/goody/goody/boss battle.wav"
+dest_files=["res://.godot/imported/boss battle.wav-05d8d85e2726803e9dbe10eb05da5bb0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

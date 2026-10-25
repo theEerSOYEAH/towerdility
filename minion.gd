@@ -20,6 +20,7 @@ var hit := 0
 var target = null
 
 func _ready() -> void:
+	rotation = PI
 	health = max_health
 	path_follow = get_parent()
 

@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var path_2d: Path2D
+@export var second_path : Path2D
 @export var enemy_types: Array[PackedScene]
 @export var time_between_waves = 3.0
 @export var auto_next_wave = false
@@ -25,7 +26,7 @@ var finished = false
 
 func _ready() -> void:
 	add_to_group("spawner")
-	path_2d.add_to_group("enemy_path")
+	(second_path if second_path else path_2d).add_to_group("enemy_path")
 	
 	waves = [
 		[group(VERITY, 5)],
@@ -93,6 +94,8 @@ func spawn_enemy(g):
 	enemy_instance.max_health = int(enemy_instance.max_health * hp_multiplier)
 	enemy_instance.is_camo = g["camo"]
 	enemy_instance.is_metal = g["metal"]
+	
+	enemy_instance.next_path = second_path
 	
 	new_path_follow.add_child(enemy_instance)
 	path_2d.add_child(new_path_follow)

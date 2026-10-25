@@ -86,7 +86,7 @@ func spawn_minion(pos: Vector2):
 		var path = get_tree().get_first_node_in_group("enemy_path")
 		var pf = PathFollow2D.new()
 		pf.loop = false
-		pf.rotates = false
+		pf.rotates = true
 		path.add_child(pf)
 		pf.progress = path.curve.get_baked_length()
 		pf.add_child(m)
@@ -146,7 +146,7 @@ func get_progress(e: Node2D):
 		return 0.0
 	var pf = e.get_parent()
 	if pf is PathFollow2D:
-		return float(pf.progress)
+		return float(pf.progress) + e.path_offset
 	return 0.0
 
 func get_health(e: Node2D) -> float:

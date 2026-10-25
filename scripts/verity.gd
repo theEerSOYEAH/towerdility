@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var next_path : Path2D = null
+var path_offset = 0.0
 
 @export var speed = 40
 @export var max_health = 10
@@ -65,7 +67,11 @@ func _update_slow(delta: float):
 			
 
 func reach_base():
+	print("1299990")
 	if is_dying:
+		return
+	if next_path:
+		switch_path()
 		return
 	is_dying = true
 	GameManager.lose_health(current_health)
@@ -77,3 +83,20 @@ func die():
 	if is_instance_valid(last_source) and last_source.has_method("on_enemy_killed"):
 		last_source.on_enemy_killed(global_position)
 	path_follow.queue_free()
+
+
+func switch_path():
+	var old_pf = path_follow
+	path_offset += old_pf.get_parent().curve.get_baked_length()
+	var np = next_path
+	next_path = null
+	
+	var new_pf = PathFollow2D.new()
+	new_pf.loop = false
+	new_pf.rotates = true
+	
+	old_pf.remove_child(self)
+	new_pf.add_child(self)
+	np.add_child(new_pf)
+	path_follow = new_pf
+	old_pf.queue_free()

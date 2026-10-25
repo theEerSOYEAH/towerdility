@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dmps8gxqjntxd"]
+
+[ext_resource type="Script" uid="uid://bugji45xc4ctk" path="res://scripts/ace_tower.gd" id="1_6gm84"]
+[ext_resource type="PackedScene" uid="uid://ljvnapj2b1fa" path="res://scenes/straight_bullet.tscn" id="2_0f12i"]
+[ext_resource type="Texture2D" uid="uid://bpa3spt1dhpa4" path="res://assets/pilot-removebg-preview.png" id="3_0f12i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6q6n"]
+size = Vector2(126, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhxti"]
+atlas = ExtResource("3_0f12i")
+region = Rect2(250, 0, 250, 476)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8fc75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhxti")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6q6n"]
+radius = 1032.9945
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fc75"]
+size = Vector2(130, 129)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4s0u"]
+atlas = ExtResource("3_0f12i")
+region = Rect2(0, 0, 258, 484)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e6q6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4s0u")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AceTower" type="StaticBody2D" unique_id=1551870440]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_6gm84")
+dart_scene = ExtResource("2_0f12i")
+can_see_camo = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1791287174]
+shape = SubResource("RectangleShape2D_e6q6n")
+
+[node name="Plane" type="Node2D" parent="." unique_id=927934617]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Plane" unique_id=1118411085]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_8fc75")
+
+[node name="RangeArea" type="Area2D" parent="." unique_id=331751947]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea" unique_id=983441667]
+shape = SubResource("CircleShape2D_e6q6n")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=696950755]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=2114898825]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_8fc75")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=1066565889]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1591254725]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_e6q6n")

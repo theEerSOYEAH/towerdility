@@ -44,15 +44,20 @@
 [ext_resource type="Texture2D" uid="uid://cj05l8eqpt7y" path="res://assets/basic green/icon panel small.png" id="23_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://cg4201ebtiltr" path="res://assets/xbow-removebg-preview.png" id="24_chjal"]
 [ext_resource type="Script" uid="uid://boktgprj2or6c" path="res://scripts/smile_counter.gd" id="24_y6deb"]
+[ext_resource type="Texture2D" uid="uid://bw3i0k36xfn8l" path="res://assets/furnace-removebg-preview.png" id="25_bjg73"]
 [ext_resource type="Script" uid="uid://n3tfpk2htqm1" path="res://scripts/game_over.gd" id="26_2wyq8"]
 [ext_resource type="Texture2D" uid="uid://bwimetobjlugt" path="res://assets/basic green/button square idle.png" id="27_fv21b"]
 [ext_resource type="Texture2D" uid="uid://pla2ivlbg5g8" path="res://assets/basic green/button square clicked.png" id="28_tel4y"]
 [ext_resource type="Texture2D" uid="uid://bcos4rfu4pnyg" path="res://assets/basic green/button square hover.png" id="29_qkpxi"]
 [ext_resource type="Texture2D" uid="uid://bxaub46b7ymqh" path="res://assets/basic green/ribbon.png" id="30_5q0nq"]
+[ext_resource type="Script" uid="uid://wnlt146njgq7" path="res://scripts/tung_upgrade_panel.gd" id="35_ty1g6"]
+[ext_resource type="Script" uid="uid://b8xqh66vei1uo" path="res://scripts/ace_upgrade_panel.gd" id="37_j2jfr"]
+[ext_resource type="Script" uid="uid://7lm6gwhs7pla" path="res://scripts/bomb_upgrade_panel.gd" id="39_ty1g6"]
 [ext_resource type="Script" uid="uid://bs60opcg4rn1c" path="res://scenes/first.gd" id="44_cjqg0"]
 [ext_resource type="PackedScene" uid="uid://chk1t5lxmdejb" path="res://scenes/supporter_tower.tscn" id="45_vchkt"]
-[ext_resource type="PackedScene" uid="uid://c8he6sn7vw5au" path="res://scenes/wizard.tscn" id="47_nvyfr"]
+[ext_resource type="Script" uid="uid://ccv5e0he16kmy" path="res://scripts/label.gd" id="48_bjg73"]
 [ext_resource type="Script" uid="uid://kewuwfi7aiwk" path="res://scenes/button_2.gd" id="48_nvyfr"]
+[ext_resource type="PackedScene" uid="uid://dmps8gxqjntxd" path="res://scenes/ace_tower.tscn" id="49_ty1g6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -450,6 +455,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu4jf"]
+atlas = ExtResource("25_bjg73")
+region = Rect2(0, 0, 519, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bu4jf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu4jf")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vc5cj"]
 atlas = ExtResource("22_2cjbq")
 region = Rect2(0, 0, 353, 497)
@@ -631,20 +651,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="spawnspiker" type="Button" parent="CanvasLayer/Sidebar/Control" unique_id=1432889511]
-visible = false
-layout_mode = 0
-offset_left = -29.0
-offset_top = 247.0
-offset_right = 28.0
-offset_bottom = 283.0
-text = "Spiker
-"
-script = ExtResource("5_tefeu")
-ghost_tower_scene = ExtResource("6_o6xl0")
-real_tower_scene = ExtResource("10_0ld40")
-hotkey = 56
-
 [node name="Tower" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=967264267]
 position = Vector2(25.99997, 65.25)
 scale = Vector2(0.2, 0.2)
@@ -780,6 +786,33 @@ ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("10_yc10j")
 hotkey = 54
 
+[node name="Spiker" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=507729026]
+position = Vector2(40, 337)
+scale = Vector2(0.21, 0.21)
+sprite_frames = SubResource("SpriteFrames_bu4jf")
+
+[node name="Label" type="Label" parent="CanvasLayer/Sidebar/Control/Spiker" unique_id=368600038]
+offset_left = -159.99998
+offset_top = 179.99998
+offset_right = 141.00002
+offset_bottom = 295.0
+theme_override_fonts/font = ExtResource("12_muem4")
+theme_override_font_sizes/font_size = 84
+text = "Cost: 100"
+
+[node name="spawnfarm" type="Button" parent="CanvasLayer/Sidebar/Control/Spiker" unique_id=753404864]
+offset_left = -232.0
+offset_top = -216.0
+offset_right = 219.0
+offset_bottom = 268.0
+mouse_filter = 1
+flat = true
+script = ExtResource("5_tefeu")
+cost = 100
+ghost_tower_scene = ExtResource("6_o6xl0")
+real_tower_scene = ExtResource("10_0ld40")
+hotkey = 54
+
 [node name="Bomber" type="AnimatedSprite2D" parent="CanvasLayer/Sidebar/Control" unique_id=16933746]
 position = Vector2(113.99997, 65.25)
 scale = Vector2(0.2, 0.2)
@@ -864,6 +897,35 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="TungUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1674451937 groups=["tung_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("35_ty1g6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TungUpgradePanel" unique_id=537596357]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=150673139]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=808543015]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=2114122515]
+layout_mode = 2
+
+[node name="RangeButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=935031143]
+layout_mode = 2
+
+[node name="MultishotButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=1532964178]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/TungUpgradePanel/VBoxContainer" unique_id=465032753]
+layout_mode = 2
+
 [node name="mg_upgrade_panel" type="PanelContainer" parent="CanvasLayer" unique_id=2137588827 groups=["mg_upgrade_panel"]]
 visible = false
 offset_right = 40.0
@@ -915,7 +977,63 @@ layout_mode = 2
 layout_mode = 2
 text = "CLOSE"
 
+[node name="AceUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=544689052 groups=["ace_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("37_j2jfr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AceUpgradePanel" unique_id=1464971798]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=502985092]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=1666807454]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=2002719425]
+layout_mode = 2
+
+[node name="TrackingButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=92256176]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/AceUpgradePanel/VBoxContainer" unique_id=829669235]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="BombUpgradePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1337962738 groups=["bomb_upgrade_panel"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_trceg")
+script = ExtResource("39_ty1g6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BombUpgradePanel" unique_id=1296202367]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=782615299]
+layout_mode = 2
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=862665001]
+layout_mode = 2
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=2141340805]
+layout_mode = 2
+
+[node name="RangeButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=1888099962]
+layout_mode = 2
+
+[node name="BounceButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=359228733]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/BombUpgradePanel/VBoxContainer" unique_id=1274542358]
+layout_mode = 2
+text = "CLOSE"
+
 [node name="Button" type="Button" parent="CanvasLayer" unique_id=1740655050]
+visible = false
 offset_left = 193.0
 offset_top = 98.0
 offset_right = 308.0
@@ -923,6 +1041,7 @@ offset_bottom = 118.0
 script = ExtResource("22_jscy8")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=704441761]
+visible = false
 offset_top = 1.0
 offset_right = 232.0
 offset_bottom = 69.0
@@ -1051,11 +1170,29 @@ text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="machinegunnertower" parent="." unique_id=1908431128 instance=ExtResource("11_ya4ey")]
-position = Vector2(334, 105)
+[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer" unique_id=602710014]
+offset_left = 28.0
+offset_right = 249.0
+offset_bottom = 56.0
+texture = ExtResource("23_pm3ni")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
 
-[node name="xbow" parent="." unique_id=1722262639 instance=ExtResource("6_tefeu")]
-position = Vector2(164, 182)
+[node name="Label" type="Label" parent="CanvasLayer/NinePatchRect2" unique_id=1030917922]
+layout_mode = 0
+offset_left = -52.0
+offset_top = 7.0
+offset_right = 275.0
+offset_bottom = 49.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("12_muem4")
+theme_override_font_sizes/font_size = 36
+text = "Base HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("48_bjg73")
 
 [node name="first" type="Button" parent="." unique_id=332458765]
 offset_left = 9.0
@@ -1075,21 +1212,6 @@ script = ExtResource("5_tefeu")
 ghost_tower_scene = ExtResource("6_o6xl0")
 real_tower_scene = ExtResource("45_vchkt")
 
-[node name="wizard" parent="." unique_id=190908816 instance=ExtResource("47_nvyfr")]
-position = Vector2(77, 92)
-
-[node name="wizard2" parent="." unique_id=1845536826 instance=ExtResource("47_nvyfr")]
-position = Vector2(152, 91)
-
-[node name="wizard3" parent="." unique_id=205156948 instance=ExtResource("47_nvyfr")]
-position = Vector2(182, 90)
-
-[node name="wizard4" parent="." unique_id=1594520634 instance=ExtResource("47_nvyfr")]
-position = Vector2(241, 90)
-
-[node name="wizard5" parent="." unique_id=922807842 instance=ExtResource("47_nvyfr")]
-position = Vector2(173, 16)
-
 [node name="hirefarmer" type="Button" parent="." unique_id=72035270]
 offset_right = 8.0
 offset_bottom = 8.0
@@ -1099,13 +1221,17 @@ script = ExtResource("48_nvyfr")
 position = Vector2(100, 164)
 farmer_range = 30
 
+[node name="AceTower" parent="." unique_id=1551870440 instance=ExtResource("49_ty1g6")]
+position = Vector2(163, 182.00002)
+scale = Vector2(0.063, 0.063)
+
 [connection signal="pressed" from="enemy spawn button" to="enemy spawn button" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/Sidebar/Control/spawnspiker" to="CanvasLayer/Sidebar/Control/spawnspiker" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Tower/spawntower" to="CanvasLayer/Sidebar/Control/Tower/spawntower" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Sniper/spawnsniper" to="CanvasLayer/Sidebar/Control/Sniper/spawnsniper" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Machine_gunner/spawnmachine" to="CanvasLayer/Sidebar/Control/Machine_gunner/spawnmachine" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Freezer/spawnfreezetower" to="CanvasLayer/Sidebar/Control/Freezer/spawnfreezetower" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Farm/spawnfarm" to="CanvasLayer/Sidebar/Control/Farm/spawnfarm" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sidebar/Control/Spiker/spawnfarm" to="CanvasLayer/Sidebar/Control/Spiker/spawnfarm" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" to="CanvasLayer/Sidebar/Control/Bomber/spawnbomber" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" to="CanvasLayer/Sidebar/Control/Xbow/spawnxbow" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

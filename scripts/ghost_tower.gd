@@ -70,12 +70,10 @@ func _draw():
 		
 		
 func place_tower():
-	if not GameManager.spend_smiles(cost):
-		return
 	var new_tower = real_tower_scene.instantiate()
+	get_tree().current_scene.add_child(new_tower)
 	new_tower.global_position = global_position
-	get_tree().root.add_child(new_tower)
-
+	new_tower.add_to_group("towers")
 	queue_free()
 	
 

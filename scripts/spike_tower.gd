@@ -36,7 +36,7 @@ func _ready() -> void:
 	sprite_scale = sprite.scale
 	click_area.mouse_entered.connect(_on_hover.bind(true))
 	click_area.mouse_exited.connect(_on_hover.bind(false))
-	play_place_animation
+	play_place_animation()
 	
 	fire_timer.wait_time = fire_rate
 	fire_timer.one_shot = false
@@ -142,3 +142,30 @@ func upgrade_metal():
 	metal_unlocked = true
 	damage_type = "piercing"
 	total_spent += metal_cost
+
+func get_save_data():
+	return {
+		"damage_level": damage_level,
+		"speed_level": speed_level,
+		"range_level": range_level,
+		"damage_bonus": damage_bonus,
+		"metal_unlocked": metal_unlocked,
+		"total_spent": total_spent,
+		"range_scale": range_area.scale.x
+	}
+
+func apply_save_data(d):
+	damage_level = int(d.get("damage_level", 0))
+	speed_level = int(d.get("speed_level", 0))
+	range_level = int(d.get("range_level", 0))
+	damage_bonus = int(d.get("damage_bonus", 0))
+	total_spent = int(d.get("total_spent", base_cost))
+	fire_timer.wait_time = fire_rate * pow(0.8, speed_level)
+	
+	var s = float(d.get("range_scale", range_area.scale.x))
+	range_area.scale = Vector2(s, s)
+	spike_radius = range_area.get_node("CollisionShape2D").shape.radius * s
+	
+	metal_unlocked = bool(d.get("metal_unlocked", false))
+	if metal_unlocked:
+		damage_type = "piercing"

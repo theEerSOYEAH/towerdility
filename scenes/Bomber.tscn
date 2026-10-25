@@ -30,8 +30,9 @@ size = Vector2(24, 24)
 [node name="Bomber" type="StaticBody2D" unique_id=1978504404]
 collision_layer = 4
 script = ExtResource("1_t2w1a")
-flip_when_left = false
+panel_group = "bomb_upgrade_panel"
 bullet_scene = ExtResource("2_aawvb")
+is_bomber = true
 damage_type = "explosive"
 sprite_offset_degrees = -90.0
 rotate_to_enemy = true

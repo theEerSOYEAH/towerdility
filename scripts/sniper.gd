@@ -141,3 +141,22 @@ func _on_hover(is_hovering):
 	
 	hover_tween.tween_property(sprite, "scale", target_scale, 0.1)
 	hover_tween.tween_property(sprite, "modulate", target_color, 0.1)
+
+func get_save_data():
+	return {
+		"damage_level": damage_level,
+		"speed_level": speed_level,
+		"damage_bonus": damage_bonus,
+		"metal_unlocked": metal_unlocked,
+		"total_spent": total_spent
+	}
+
+func apply_save_data(d):
+	damage_level = int(d.get("damage_level", 0))
+	speed_level = int(d.get("speed_level", 0))
+	damage_bonus = int(d.get("damage_bonus", 0))
+	total_spent = int(d.get("total_spent", base_cost))
+	fire_timer.wait_time = fire_rate * pow(0.8, speed_level)
+	metal_unlocked = bool(d.get("metal_unlocked", false))
+	if metal_unlocked:
+		damage_type = "piercing"

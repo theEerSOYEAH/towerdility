@@ -115,6 +115,34 @@ text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ContinueButton" type="Button" parent="." unique_id=1722608831]
+texture_filter = 1
+layout_mode = 0
+offset_left = 442.0
+offset_top = 434.0
+offset_right = 689.0
+offset_bottom = 516.0
+theme_override_constants/outline_size = 8
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxTexture_e6q6n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tbmy8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jk1qb")
+
+[node name="Label" type="Label" parent="ContinueButton" unique_id=1062610139]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 243.0
+offset_bottom = 78.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 50
+text = "CONTINUE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="EndlessButton" type="Button" parent="." unique_id=1217822454]
 texture_filter = 1
 layout_mode = 0
@@ -147,9 +175,9 @@ vertical_alignment = 1
 texture_filter = 1
 layout_mode = 0
 offset_left = 442.0
-offset_top = 437.0
+offset_top = 522.0
 offset_right = 689.0
-offset_bottom = 519.0
+offset_bottom = 604.0
 theme_override_constants/outline_size = 8
 theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("3_rtw2f")

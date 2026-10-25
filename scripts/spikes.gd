@@ -23,8 +23,3 @@ func _on_body_entered(body):
 	pierce -= 1
 	if pierce <= 0:
 		queue_free()
-
-func _draw() -> void: # Temp Since there is no art
-	for i in 3:
-		var x = -5 + i * 5
-		draw_colored_polygon(PackedVector2Array([Vector2(x - 2.5, 3), Vector2(x, -4), Vector2(x + 2.5, 3)]), Color(0.75, 0.75, 0.8))
